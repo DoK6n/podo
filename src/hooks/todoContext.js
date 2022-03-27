@@ -14,6 +14,11 @@ function reducer(state, action) {
       return state.map(todo => (todo.id === action.id ? { ...todo, done: !todo.done } : todo));
     case 'REMOVE_ITEM':
       return state.filter(todo => todo.id !== action.id);
+    case 'DRAG_ITEM':
+      const temp = [...state];
+      const draggingItem = temp.splice(action.draggingItemIndex, 1);
+      temp.splice(action.afterDragItemIndex, 0, draggingItem[0]);
+      return temp;
     default:
       throw Error('unhandled Action Type.');
   }

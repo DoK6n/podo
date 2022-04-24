@@ -1,6 +1,6 @@
 {
-  "name": "todolist",
-  "version": "0.1.0",
+  "name": "podoo",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:s3": "npm run build && aws s3 sync ./build s3://podo-list --profile=dok6n"
+    "deploy:s3": "npm run build && aws s3 sync ./build s3://podoo --profile=dok6n"
   },
   "eslintConfig": {
     "extends": [

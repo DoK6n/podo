@@ -32,7 +32,9 @@ export function TodoStateProvider({ children }) {
 
   return (
     <TodoContext.Provider value={state}>
-      <TodoDispatchContext.Provider value={dispatch}>{children}</TodoDispatchContext.Provider>
+      <TodoDispatchContext.Provider value={dispatch}>
+        {children}
+      </TodoDispatchContext.Provider>
     </TodoContext.Provider>
   );
 }

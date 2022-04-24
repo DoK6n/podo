@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:s3": "npm run build && aws s3 sync ./build s3://podoo --profile=dok6n"
+    "deploy:s3": "npm run build && aws s3 sync ./build s3://podote --profile=dok6n"
   },
   "eslintConfig": {
     "extends": [

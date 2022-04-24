@@ -7,15 +7,14 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 function TodoList() {
   const todos = useTodoState();
-  const dispatch = useTodoDispatch();
-
+  const todosDispatch = useTodoDispatch();
   const onDragEnd = result => {
     if (!result.destination) return;
 
     const draggingItemIndex = result.source.index;
     const afterDragItemIndex = result.destination.index;
 
-    dispatch({ type: 'DRAG_ITEM', draggingItemIndex, afterDragItemIndex });
+    todosDispatch({ type: 'DRAG_ITEM', draggingItemIndex, afterDragItemIndex });
   };
 
   return (

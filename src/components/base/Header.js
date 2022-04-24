@@ -1,8 +1,12 @@
 import React from 'react';
-import { HeaderBlock } from '../../styles/base';
+import { HeaderBlock, NavBlock } from '../../styles/base';
 
 function Header() {
-  return <HeaderBlock>PodoList</HeaderBlock>;
+  return (
+    <HeaderBlock>
+      <NavBlock></NavBlock>
+    </HeaderBlock>
+  );
 }
 
 export default React.memo(Header);

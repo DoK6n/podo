@@ -55,6 +55,17 @@ export const CheckIcon = styled.span`
   }
 `;
 
+export const EditIcon = styled.span`
+  opacity: 0.1;
+  color: #bfa8ff;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-in-out 0s;
+    transition: opacity 0.25s ease-in-out 0s;
+  }
+`;
+
 export const RemoveIcon = styled.span`
   opacity: 0.1;
   &:hover {

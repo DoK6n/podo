@@ -44,11 +44,12 @@ export const TodoItemBlock = styled.section`
   }
 `;
 
-export const DragHandleIcon = styled.span`
-  opacity: 0;
+export const CheckIcon = styled.span`
+  opacity: ${({ done }) => (done === false ? '1' : '0.1')};
+  color: #bfa8ff;
+  cursor: pointer;
+
   &:hover {
-    cursor: pointer;
-    opacity: 1;
     -webkit-transition: opacity 0.25s ease-in-out 0s;
     transition: opacity 0.25s ease-in-out 0s;
   }

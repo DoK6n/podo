@@ -1,7 +1,7 @@
 import React from 'react';
-import { DragHandleIcon, ItemText, RemoveIcon, TodoItemBlock } from '../../styles/todo';
+import { CheckIcon, ItemText, RemoveIcon, TodoItemBlock } from '../../styles/todo';
 import { FcEmptyTrash } from 'react-icons/fc';
-import { MdDragIndicator } from 'react-icons/md';
+import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { useTodoDispatch } from '../../hooks/todoContext';
 import { Draggable } from 'react-beautiful-dnd';
 
@@ -19,10 +19,10 @@ function TodoItem({ id, text, done, index }) {
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
         <TodoItemBlock done={done} ref={provided.innerRef} {...provided.draggableProps}>
-          <DragHandleIcon {...provided.dragHandleProps}>
-            <MdDragIndicator />
-          </DragHandleIcon>
-          <ItemText onClick={onToggleItem}>{text}</ItemText>
+          <CheckIcon onClick={onToggleItem} done={done}>
+            {done === false ? <IoWaterOutline size={30} /> : <IoWaterSharp size={30} />}
+          </CheckIcon>
+          <ItemText {...provided.dragHandleProps}>{text}</ItemText>
           <RemoveIcon onClick={onRemoveitem}>
             <FcEmptyTrash />
           </RemoveIcon>

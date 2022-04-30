@@ -5,7 +5,7 @@ fi
 
 
 # build
-react-scripts build
+npm run build
 
 # s3 upload
 aws s3 sync ./build s3://$S3_BUCKET_NAME --profile=$AWS_CLI_PROFILE

@@ -1,12 +1,13 @@
 import React from 'react';
 import { TodoAddItemInput } from '../../styles/todo';
-import { useTodoDispatch } from '../../hooks/todoContext';
+import { useTodoStore } from '../../hooks';
 
 function TodoAddItem() {
-  const dispatch = useTodoDispatch();
+  const { addItem } = useTodoStore();
+
   const onAddItem = e => {
     if (e.key === 'Enter' && e.target.value !== '') {
-      dispatch({ type: 'ADD_ITEM', text: e.target.value });
+      addItem({ text: e.target.value });
       e.target.value = '';
     }
   };

@@ -1,22 +1,21 @@
 import React from 'react';
 import { TodoItem } from '../todo';
 import { TodoListBlock } from '../../styles/todo';
-import { useTodoDispatch, useTodoState } from '../../hooks/todoContext';
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { useTodoStore } from '../../hooks';
 
 function TodoList() {
-  const todos = useTodoState();
-  const todosDispatch = useTodoDispatch();
+  const { todos, dragItem } = useTodoStore();
+
   const onDragEnd = result => {
     if (!result.destination) return;
 
     const draggingItemIndex = result.source.index;
     const afterDragItemIndex = result.destination.index;
 
-    todosDispatch({ type: 'DRAG_ITEM', draggingItemIndex, afterDragItemIndex });
+    dragItem({ draggingItemIndex, afterDragItemIndex });
   };
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list">

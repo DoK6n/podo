@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { css } from 'styled-components';
 
 export const TodoTemplateBlock = styled.main`
   display: flex;
@@ -26,7 +27,21 @@ export const TodoListBlock = styled.article`
   }
 `;
 
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      opacity: 0.2;
+    }
+  `;
+}
 export const TodoItemBlock = styled.section`
+  ${({ edited }) =>
+    edited &&
+    css`
+      animation: ${blinkingEffect} 1s linear infinite;
+      background: #483d6b;
+    `}
+
   height: auto;
   padding: 0 10px 0 10px;
   border: 1px solid ${({ done }) => (done === false ? '#9595d9' : '#5c4b8c95')};

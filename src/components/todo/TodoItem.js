@@ -26,7 +26,7 @@ function TodoItem({ id, text, done, index }) {
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
-        <TodoItemBlock done={done} ref={provided.innerRef} {...provided.draggableProps}>
+        <TodoItemBlock edited={edited} done={done} ref={provided.innerRef} {...provided.draggableProps}>
           <CheckIcon onClick={onToggleItem} done={done}>
             {done === false ? <IoWaterOutline size={30} /> : <IoWaterSharp size={30} />}
           </CheckIcon>

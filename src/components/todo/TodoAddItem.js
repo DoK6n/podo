@@ -12,7 +12,7 @@ function TodoAddItem() {
     }
   };
 
-  return <TodoAddItemInput placeholder="할 일을 입력 후 엔터를 눌러요" onKeyPress={onAddItem} />;
+  return <TodoAddItemInput placeholder="+ Todo" onKeyPress={onAddItem} />;
 }
 
 export default React.memo(TodoAddItem);

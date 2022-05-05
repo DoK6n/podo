@@ -1,6 +1,6 @@
 import React from 'react';
-import { TodoAddItemInput } from '../../styles/todo';
-import { useTodoStore } from '../../hooks';
+import { TodoAddItemInput } from '@styles/todo';
+import { useTodoStore } from '@hooks';
 
 function TodoAddItem() {
   const { addItem } = useTodoStore();

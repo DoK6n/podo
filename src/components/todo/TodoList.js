@@ -1,9 +1,9 @@
 import React from 'react';
-import { TodoItem } from '../todo';
-import { TodoListBlock } from '../../styles/todo';
+import { TodoItem } from '@components/todo';
+import { TodoListBlock } from '@styles/todo';
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useTodoStore } from '../../hooks';
+import { useTodoStore } from '@hooks';
 
 function TodoList() {
   const { todos, dragItem } = useTodoStore();

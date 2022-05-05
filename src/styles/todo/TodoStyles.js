@@ -35,8 +35,9 @@ function blinkingEffect() {
   `;
 }
 export const TodoItemBlock = styled.section`
-  ${({ edited }) =>
-    edited &&
+  ${({ edited, done }) =>
+    edited === true &&
+    done === false &&
     css`
       animation: ${blinkingEffect} 1s linear infinite;
       background: #483d6b;

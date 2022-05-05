@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { CheckIcon, EditIcon, ItemText, RemoveIcon, TodoItemBlock } from '../../styles/todo';
+import { CheckIcon, EditIcon, ItemText, RemoveIcon, TodoItemBlock } from '@styles/todo';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { BiEdit } from 'react-icons/bi';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 
 import { Draggable } from 'react-beautiful-dnd';
-import { useTodoStore } from '../../hooks';
+import { useTodoStore } from '@hooks';
 
 function TodoItem({ id, text, done, index }) {
   const [edited, setEdited] = useState(false);

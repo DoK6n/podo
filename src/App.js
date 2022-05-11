@@ -1,6 +1,7 @@
 import { GlobalStyle } from '@styles/global';
-import { TodoPage } from '@pages/todo';
+import { TodoPage } from '@pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { EditPage } from '@pages';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<TodoPage />}></Route>
+          <Route path="/test" element={<EditPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

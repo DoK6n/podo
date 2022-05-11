@@ -14,6 +14,11 @@ export const useTodoStore = create(set => ({
       todos: [...todos, { id: uuidv4(), text: action.text, done: false }],
     }));
   },
+  editItemText(action) {
+    set(({ todos }) => ({
+      todos: todos.map(todo => (todo.id === action.id ? { ...todo, text: action.text } : todo)),
+    }));
+  },
   toggleItem(action) {
     set(({ todos }) => ({
       todos: todos.map(todo => (todo.id === action.id ? { ...todo, done: !todo.done } : todo)),

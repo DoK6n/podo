@@ -1,17 +1,18 @@
 import React from 'react';
-import { TodoAddItemInput } from '../../styles/todo';
-import { useTodoDispatch } from '../../hooks/todoContext';
+import { TodoAddItemInput } from '@styles/todo';
+import { useTodoStore } from '@hooks';
 
 function TodoAddItem() {
-  const dispatch = useTodoDispatch();
+  const { addItem } = useTodoStore();
+
   const onAddItem = e => {
     if (e.key === 'Enter' && e.target.value !== '') {
-      dispatch({ type: 'ADD_ITEM', text: e.target.value });
+      addItem({ text: e.target.value });
       e.target.value = '';
     }
   };
 
-  return <TodoAddItemInput placeholder="할 일을 입력 후 엔터를 눌러요" onKeyPress={onAddItem} />;
+  return <TodoAddItemInput placeholder="+ Todo" onKeyPress={onAddItem} />;
 }
 
 export default React.memo(TodoAddItem);

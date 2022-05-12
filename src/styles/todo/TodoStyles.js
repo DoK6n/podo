@@ -1,17 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { css } from 'styled-components';
 
 export const TodoTemplateBlock = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 3vh;
+  padding-top: 2rem;
 `;
 
 export const TodoListBlock = styled.article`
-  width: 60%;
+  width: 80%;
   height: 70vh;
-  /* border: 1px solid #5c4b8c8e; */
   border-radius: 17px;
   overflow-y: auto;
   overflow: overlay;
@@ -26,13 +26,26 @@ export const TodoListBlock = styled.article`
   }
 `;
 
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      border: 1px dotted #483d6b;
+    }
+  `;
+}
 export const TodoItemBlock = styled.section`
+  ${({ edited, done }) =>
+    edited === true &&
+    done === false &&
+    css`
+      animation: ${blinkingEffect} 0.7s linear infinite;
+    `}
   height: auto;
   padding: 0 10px 0 10px;
   border: 1px solid ${({ done }) => (done === false ? '#9595d9' : '#5c4b8c95')};
   color: ${({ done }) => (done === false ? '#efeef3' : '#5c4b8c95')};
   border-radius: 17px;
-
+  overflow: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,7 +53,25 @@ export const TodoItemBlock = styled.section`
 
   cursor: pointer;
   &:hover {
-    background: #483d6b;
+    background: #846cc95a;
+  }
+`;
+
+export const ItemBlockLeftIconWrapper = styled.div`
+  display: flex;
+  align-items: stretch;
+`;
+
+export const DragHandleIcon = styled.span`
+  opacity: 0;
+  color: #efeef3;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-in-out 0s;
+    transition: opacity 0.25s ease-in-out 0s;
   }
 `;
 
@@ -50,6 +81,17 @@ export const CheckIcon = styled.span`
   cursor: pointer;
 
   &:hover {
+    -webkit-transition: opacity 0.25s ease-in-out 0s;
+    transition: opacity 0.25s ease-in-out 0s;
+  }
+`;
+
+export const EditIcon = styled.span`
+  opacity: 0.1;
+  color: #bfa8ff;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
     -webkit-transition: opacity 0.25s ease-in-out 0s;
     transition: opacity 0.25s ease-in-out 0s;
   }
@@ -66,9 +108,15 @@ export const RemoveIcon = styled.span`
 `;
 
 export const ItemText = styled.div`
+  display: ${({ edited }) => (edited ? 'inline-block' : 'none')};
   width: 100%;
   margin-left: 10px;
   padding: 10px 0 10px 0;
+`;
+
+export const MarkdownView = styled.div`
+  opacity: ${({ done }) => (done === false ? '1' : '0.1')};
+  display: ${({ edited }) => (edited ? 'none' : 'inline-block')};
 `;
 
 export const TodoAddItemInput = styled.input`

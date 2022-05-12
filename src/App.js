@@ -1,16 +1,18 @@
-import { GlobalStyle } from './styles/global';
-import { TodoTemplate } from './components/todo';
-import { Header } from './components/base';
-import { TodoStateProvider } from './hooks/todoContext';
+import { GlobalStyle } from '@styles/global';
+import { TodoPage } from '@pages';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { EditPage } from '@pages';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <TodoStateProvider>
-        <TodoTemplate />
-      </TodoStateProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TodoPage />}></Route>
+          <Route path="/test" element={<EditPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

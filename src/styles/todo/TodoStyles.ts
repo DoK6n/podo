@@ -1,5 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-import { css } from 'styled-components';
+import styled, { keyframes, css, TodoStylesProps } from 'styled-components';
 
 export const TodoTemplateBlock = styled.main`
   display: flex;
@@ -26,6 +25,8 @@ export const TodoListBlock = styled.article`
   }
 `;
 
+
+
 function blinkingEffect() {
   return keyframes`
     50% {
@@ -33,7 +34,7 @@ function blinkingEffect() {
     }
   `;
 }
-export const TodoItemBlock = styled.section`
+export const TodoItemBlock = styled.section<TodoStylesProps>`
   ${({ edited, done }) =>
     edited === true &&
     done === false &&
@@ -75,7 +76,7 @@ export const DragHandleIcon = styled.span`
   }
 `;
 
-export const CheckIcon = styled.span`
+export const CheckIcon = styled.span<TodoStylesProps>`
   opacity: ${({ done }) => (done === false ? '1' : '0.1')};
   color: #bfa8ff;
   cursor: pointer;
@@ -107,17 +108,14 @@ export const RemoveIcon = styled.span`
   }
 `;
 
-export const ItemText = styled.div`
+export const ItemText = styled.div<TodoStylesProps>`
   display: ${({ edited }) => (edited ? 'inline-block' : 'none')};
   width: 100%;
   margin-left: 10px;
   padding: 10px 0 10px 0;
 `;
 
-export const MarkdownView = styled.div`
-  opacity: ${({ done }) => (done === false ? '1' : '0.1')};
-  display: ${({ edited }) => (edited ? 'none' : 'inline-block')};
-`;
+
 
 export const TodoAddItemInput = styled.input`
   display: flex;

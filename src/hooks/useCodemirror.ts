@@ -6,7 +6,7 @@ import { defaultKeymap } from '@codemirror/commands';
 // import { bracketMatching } from '@codemirror/matchbrackets';
 
 // import { highlightActiveLineGutter, lineNumbers } from '@codemirror/gutter';
-import { defaultHighlightStyle, HighlightStyle, tags } from '@codemirror/highlight';
+// import { defaultHighlightStyle, HighlightStyle, tags } from '@codemirror/highlight';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 // import { oneDark } from '@codemirror/theme-one-dark';
 import { languages } from '@codemirror/language-data';
@@ -37,10 +37,22 @@ export const transparentTheme = EditorView.theme({
 //   },
 // ]);
 
-export const useCodemirror = ({ initialDoc, onChange, id, done }) => {
-  const [editorView, setEditorView] = useState();
+interface Props {
+  initialDoc: string;
+  onChange?: (state: EditorState, id: string, done: boolean) => void;
+  id: string;
+  done: boolean;
+}
 
-  const refContainer = useRef(null);
+export const useCodemirror = <T extends Element>({
+  initialDoc,
+  onChange,
+  id,
+  done,
+}: Props): [React.MutableRefObject<T | null>, EditorView?] => {
+  const [editorView, setEditorView] = useState<EditorView>();
+
+  const refContainer = useRef<T>(null);
 
   useEffect(() => {
     if (!refContainer.current) return;

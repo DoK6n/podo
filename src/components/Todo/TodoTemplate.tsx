@@ -1,6 +1,6 @@
 import React from 'react';
-import { TodoTemplateBlock } from '@styles/todo';
-import { TodoList, TodoAddItem } from '@components/todo';
+import { TodoTemplateBlock } from 'styles';
+import { TodoList, TodoAddItem } from 'components';
 
 function TodoTemplate() {
   return (

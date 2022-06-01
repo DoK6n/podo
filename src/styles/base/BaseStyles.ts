@@ -7,7 +7,6 @@ export const HeaderBlock = styled.header`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* border: 3px dotted #9595d9; */
 `;
 
 export const NavBlock = styled.nav`

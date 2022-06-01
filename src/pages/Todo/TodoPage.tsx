@@ -1,6 +1,5 @@
 import React from 'react';
-import { Header } from '@components/base';
-import { TodoTemplate } from '@components/todo';
+import { Header, TodoTemplate } from 'components';
 
 function TodoPage() {
   return (

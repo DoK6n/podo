@@ -7,17 +7,24 @@ import {
   ItemText,
   RemoveIcon,
   TodoItemBlock,
-} from '@styles/todo';
-import { MarkdownViewer, MarkdownEditor } from '@components/common';
+} from 'styles';
+import { MarkdownViewer, MarkdownEditor } from 'components';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { BiEdit } from 'react-icons/bi';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
-import { useTodoStore } from '@hooks';
+import { useTodoStore } from 'hooks';
 
-function TodoItem({ id, text, done, index }) {
-  const [edited, setEdited] = useState(false);
+interface Props {
+  id: string;
+  text: string;
+  done: boolean;
+  index: number;
+}
+
+function TodoItem({ id, text, done, index }: Props) {
+  const [edited, setEdited] = useState<boolean>(false);
   const { removeItem, toggleItem, editItemText } = useTodoStore();
 
   const onRemoveitem = () => {
@@ -32,8 +39,8 @@ function TodoItem({ id, text, done, index }) {
     setEdited(state => !state);
   };
 
-  const handleDocChange = useCallback((newDoc, id, done) => {
-    editItemText({ id, text: newDoc, done });
+  const handleDocChange = useCallback((newDoc: string, id: string, done: boolean) => {
+    editItemText({ id, text: newDoc });
   }, []);
 
   return (

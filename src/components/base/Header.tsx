@@ -1,6 +1,6 @@
 import React from 'react';
-import { HeaderBlock, NavBlock } from '@styles/base';
-import { ReactComponent as Logo } from '@assets/logo.svg';
+import { HeaderBlock, NavBlock } from 'styles';
+import { Logo } from 'assets';
 
 function Header() {
   return (

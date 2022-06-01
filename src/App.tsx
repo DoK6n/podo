@@ -1,7 +1,6 @@
-import { GlobalStyle } from '@styles/global';
-import { TodoPage } from '@pages';
+import { GlobalStyle } from 'styles';
+import { TodoPage, EditPage } from 'pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { EditPage } from '@pages';
 
 function App() {
   return (

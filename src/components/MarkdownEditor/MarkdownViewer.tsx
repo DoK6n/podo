@@ -5,16 +5,22 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeRaw from 'rehype-raw';
 
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { gruvboxDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { CopyToClipboardWrapper } from 'react-clipboard-button';
-import toast, { Toaster } from 'react-hot-toast';
 import 'github-markdown-css/github-markdown.css';
-import '@assets/css/preview.css';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import toast, { Toaster } from 'react-hot-toast';
 import { FiCopy } from 'react-icons/fi';
-import { MarkdownView } from '@styles/todo';
 
-function MarkdownViewr({ doc, done, edited }) {
+import 'styles/MarkdownEditor/editor.css';
+import { CopyToClipboardWrapper } from 'components';
+import { MarkdownView, gruvboxDark } from 'styles';
+
+interface Props {
+  doc: string;
+  done: boolean;
+  edited: boolean;
+}
+
+function MarkdownViewer({ doc, done, edited }: Props) {
   return (
     <div style={{ width: '100%', overflow: 'auto', display: !edited ? 'inline-block' : 'none' }}>
       <Toaster position="top-center" reverseOrder={false} />
@@ -51,7 +57,7 @@ function MarkdownViewr({ doc, done, edited }) {
                 >
                   <SyntaxHighlighter
                     children={String(children).replace(/\n$/, '')}
-                    style={gruvboxDark}
+                    style={gruvboxDark as any}
                     customStyle={{
                       margin: '-1rem',
                       fontWeight: 'bold',
@@ -75,4 +81,4 @@ function MarkdownViewr({ doc, done, edited }) {
   );
 }
 
-export default MarkdownViewr;
+export default MarkdownViewer;

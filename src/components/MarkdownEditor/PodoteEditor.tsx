@@ -170,7 +170,7 @@ function PodoteEditor() {
     new CalloutExtension({ defaultType: 'blank' }),
     new HistoryExtension(),
     new ImageExtension(),
-    new DropCursorExtension({ color: '#7963d2' }),
+    new DropCursorExtension({ color: '#7963d2', width: 4 }),
   ];
   const { manager, state, setState } = useRemirror({
     extensions: extensions,

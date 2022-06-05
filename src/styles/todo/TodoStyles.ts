@@ -25,8 +25,6 @@ export const TodoListBlock = styled.article`
   }
 `;
 
-
-
 function blinkingEffect() {
   return keyframes`
     50% {
@@ -52,9 +50,8 @@ export const TodoItemBlock = styled.section<TodoStylesProps>`
   justify-content: space-between;
   align-items: center;
 
-  cursor: pointer;
   &:hover {
-    background: #846cc95a;
+    background: #836cc90f;
   }
 `;
 
@@ -114,8 +111,6 @@ export const ItemText = styled.div<TodoStylesProps>`
   margin-left: 10px;
   padding: 10px 0 10px 0;
 `;
-
-
 
 export const TodoAddItemInput = styled.input`
   display: flex;

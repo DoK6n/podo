@@ -167,7 +167,7 @@ function PodoteEditor() {
     new ItalicExtension(),
     new UnderlineExtension(),
     new HeadingExtension(),
-    new CalloutExtension({ defaultType: 'warn' }),
+    new CalloutExtension({ defaultType: 'blank' }),
     new HistoryExtension(),
     new ImageExtension(),
     new DropCursorExtension({ color: '#7963d2' }),

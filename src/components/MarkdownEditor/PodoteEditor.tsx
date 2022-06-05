@@ -3,7 +3,6 @@ import {
   componentsStyledCss,
   coreStyledCss,
   extensionBlockquoteStyledCss,
-  extensionCalloutStyledCss,
   extensionCodeBlockStyledCss,
   extensionEmojiStyledCss,
   extensionFileStyledCss,
@@ -36,6 +35,45 @@ import styled, { css } from 'styled-components';
 const extensionCountStyledCss: ReturnType<typeof css> = css`
   .remirror-editor span.remirror-max-count-exceeded {
     background-color: var(--rmr-hue-red-4);
+  }
+`;
+
+export const extensionCalloutStyledCss: ReturnType<typeof css> = css`
+  .remirror-editor div[data-callout-type] {
+    display: flex;
+    margin-left: 0;
+    margin-right: 0;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-end: 40px;
+    padding: 10px;
+    border-left: 0.25em solid transparent;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+  .remirror-editor div[data-callout-type] > :not(.remirror-callout-emoji-wrapper) {
+    margin-left: 8px;
+    flex-grow: 1;
+  }
+  .remirror-editor div[data-callout-type='info'] {
+    background: #3298dc11;
+    border-left-color: #3298dc;
+  }
+  .remirror-editor div[data-callout-type='warning'] {
+    background: #ffdd5711;
+    border-left-color: #ffdd57;
+  }
+  .remirror-editor div[data-callout-type='error'] {
+    background: #f1466811;
+    border-left-color: #f14668;
+  }
+  .remirror-editor div[data-callout-type='success'] {
+    background: #48c77411;
+    border-left-color: #48c774;
+  }
+  .remirror-editor div[data-callout-type='blank'] {
+    background: #483d6b5c;
+    border-left-color: #483d6b;
   }
 `;
 

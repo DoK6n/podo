@@ -106,7 +106,7 @@ export const RemoveIcon = styled.span`
 `;
 
 export const ItemText = styled.div<TodoStylesProps>`
-  display: ${({ edited }) => (edited ? 'inline-block' : 'none')};
+  opacity: ${({ done }) => (done === false ? '1' : '0.1')};
   width: 100%;
   margin-left: 10px;
   padding: 10px 0 10px 0;

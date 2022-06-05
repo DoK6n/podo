@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   ItemBlockLeftIconWrapper,
   DragHandleIcon,
@@ -8,7 +8,7 @@ import {
   RemoveIcon,
   TodoItemBlock,
 } from 'styles';
-import { MarkdownViewer, MarkdownEditor } from 'components';
+import { PodoteEditor } from 'components';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { BiEdit } from 'react-icons/bi';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
@@ -18,14 +18,14 @@ import { useTodoStore } from 'hooks';
 
 interface Props {
   id: string;
-  text: string;
+  content: Object | any;
   done: boolean;
   index: number;
 }
 
-function TodoItem({ id, text, done, index }: Props) {
+function TodoItem({ id, content, done, index }: Props) {
   const [edited, setEdited] = useState<boolean>(false);
-  const { removeItem, toggleItem, editItemText } = useTodoStore();
+  const { removeItem, toggleItem } = useTodoStore();
 
   const onRemoveitem = () => {
     removeItem({ id });
@@ -39,10 +39,6 @@ function TodoItem({ id, text, done, index }: Props) {
     setEdited(state => !state);
   };
 
-  const handleDocChange = useCallback((newDoc: string, id: string, done: boolean) => {
-    editItemText({ id, text: newDoc });
-  }, []);
-
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
@@ -55,10 +51,9 @@ function TodoItem({ id, text, done, index }: Props) {
               {done === false ? <IoWaterOutline size={30} /> : <IoWaterSharp size={30} />}
             </CheckIcon>
           </ItemBlockLeftIconWrapper>
-          <ItemText edited={edited}>
-            <MarkdownEditor onChange={handleDocChange} id={id} text={text} done={done} />
+          <ItemText done={done}>
+            <PodoteEditor id={id} editable={edited} content={content} />
           </ItemText>
-          <MarkdownViewer doc={text} done={done} edited={edited} />
           <EditIcon onClick={onEditItem}>
             <BiEdit />
           </EditIcon>

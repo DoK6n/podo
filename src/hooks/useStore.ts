@@ -3,65 +3,272 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface State {
   id: string;
-  text: string;
+  content: Object | any; // TODO content: RemirrorJSON
   done: boolean;
 }
 
 interface TodoStore {
   todos: State[];
+  getContentNormalTextFormat(action: { text: string }): Object | any;
   addItem(action: { text: string }): void;
-  editItemText(action: { id: string; text: string }): void;
+  editItemText(action: { id: string; content: Object | any }): void;
   toggleItem(action: Partial<State>): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
   removeItem(action: Partial<State>): void;
 }
-// const foo = bar => bar++;
 
-// console.log(foo(5));
+const contentNormalTextFormat = (text: string) => ({
+  type: 'doc',
+  content: [
+    {
+      type: 'paragraph',
+      content: [{ type: 'text', text: text }],
+    },
+  ],
+});
 
-const text1 = `
-# Heading 1
-\`\`\`js
-const foo = bar => bar++;
-console.log(foo(5));
-\`\`\`
-`;
-
-const text2 = `
-\`podote\` using markdown editor
-`;
-
-const text3 = `
-## Tables
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | \`renders\` | **nicely**
-1 | 2 | 3
-`;
-
-const text4 = `
-## Youtube
-<iframe width="320" height="180" src="https://www.youtube.com/embed/EsCP2xLuUM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`;
+const content00 = {
+  type: 'doc',
+  content: [
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'done',
+        },
+      ],
+    },
+    {
+      type: 'callout',
+      attrs: {
+        type: 'blank',
+        emoji: '',
+      },
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'BLANK',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+const content01 = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Content01',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Simple ',
+        },
+        {
+          type: 'text',
+          marks: [{ type: 'italic' }],
+          text: 'Todo Memo App',
+        },
+      ],
+    },
+    {
+      type: 'callout',
+      attrs: {
+        type: 'info',
+        emoji: '',
+      },
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'INFO',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+const content02 = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Content02',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Simple ',
+        },
+        {
+          type: 'text',
+          marks: [{ type: 'italic' }],
+          text: 'Todo Memo App',
+        },
+      ],
+    },
+    {
+      type: 'callout',
+      attrs: {
+        type: 'warning',
+        emoji: '',
+      },
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'WARNING',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+const content03 = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Content03',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Simple ',
+        },
+        {
+          type: 'text',
+          marks: [{ type: 'italic' }],
+          text: 'Todo Memo App',
+        },
+      ],
+    },
+    {
+      type: 'callout',
+      attrs: {
+        type: 'error',
+        emoji: '',
+      },
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'ERROR',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+const content04 = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [
+        {
+          type: 'text',
+          text: 'Content04',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Simple ',
+        },
+        {
+          type: 'text',
+          marks: [{ type: 'italic' }],
+          text: 'Todo Memo App',
+        },
+      ],
+    },
+    {
+      type: 'callout',
+      attrs: {
+        type: 'success',
+        emoji: '',
+      },
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'SUCCESS',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 const initState: State[] = [
-  { id: uuidv4(), text: 'done', done: true },
-  { id: uuidv4(), text: text1, done: false },
-  { id: uuidv4(), text: text2, done: false },
-  { id: uuidv4(), text: text3, done: false },
-  { id: uuidv4(), text: text4, done: false },
+  { id: uuidv4(), content: content00, done: true },
+  { id: uuidv4(), content: content01, done: false },
+  { id: uuidv4(), content: content02, done: false },
+  { id: uuidv4(), content: content03, done: false },
+  { id: uuidv4(), content: content04, done: false },
 ];
 
 export const useTodoStore = create<TodoStore>(set => ({
   todos: initState,
+  getContentNormalTextFormat(action) {
+    return contentNormalTextFormat(action.text);
+  },
   addItem(action) {
     set(({ todos }) => ({
-      todos: [...todos, { id: uuidv4(), text: action.text, done: false }],
+      todos: [...todos, { id: uuidv4(), content: contentNormalTextFormat(action.text), done: false }],
     }));
   },
   editItemText(action) {
     set(({ todos }) => ({
-      todos: todos.map(todo => (todo.id === action.id ? { ...todo, text: action.text } : todo)),
+      todos: todos.map(todo => (todo.id === action.id ? { ...todo, content: action.content } : todo)),
     }));
   },
   toggleItem(action) {

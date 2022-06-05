@@ -22,7 +22,7 @@ function TodoList() {
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
             {todos.map((todo, index) => (
-              <TodoItem id={todo.id} text={todo.text} done={todo.done} index={index} key={todo.id} />
+              <TodoItem id={todo.id} content={todo.content} done={todo.done} index={index} key={todo.id} />
             ))}
             {provided.placeholder}
           </TodoListBlock>

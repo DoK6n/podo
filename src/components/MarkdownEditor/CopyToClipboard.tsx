@@ -1,11 +1,20 @@
 import ClipboardJS from 'clipboard';
 import { useEffect, useRef } from 'react';
+import styled, { css, FlattenInterpolation, Interpolation, ThemedStyledProps } from 'styled-components';
+
+interface StylesProps {
+  styledCss: FlattenInterpolation<ThemedStyledProps<object, any>> | Interpolation<ThemedStyledProps<object, any>>;
+}
+
+const StyledCopyToClipboardButton = styled.span<StylesProps>`
+  ${({ styledCss }) => styledCss}
+`;
 
 type CopyToClipboardProps = {
   text: string;
   onSuccess?: (e: ClipboardJS.Event) => void;
   onError?: (e: ClipboardJS.Event) => void;
-  style?: React.CSSProperties;
+  style?: FlattenInterpolation<ThemedStyledProps<object, any>>;
   className?: string;
   title?: string;
   children?: React.ReactNode;
@@ -32,27 +41,29 @@ export function CopyToClipboardButton(props: CopyToClipboardProps) {
   }, [ref.current]);
 
   return (
-    <span ref={ref} style={props.style} className={props.className} title={props.title}>
-      {props.children}
-    </span>
+    <StyledCopyToClipboardButton styledCss={props.style}>
+      <span ref={ref} className={props.className} title={props.title}>
+        {props.children}
+      </span>
+    </StyledCopyToClipboardButton>
   );
 }
+
 type CopyToClipboardWrapperProps = CopyToClipboardProps & {
   button?: React.ReactNode;
 };
 
 export function CopyToClipboardWrapper(props: CopyToClipboardWrapperProps) {
+  const buttonStyledCss: ReturnType<typeof css> = css`
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    ${props.style}
+  `;
+
   return (
     <div style={{ position: 'relative' }}>
-      <CopyToClipboardButton
-        {...props}
-        style={{
-          position: 'absolute',
-          top: '5px',
-          right: '5px',
-          ...props.style,
-        }}
-      >
+      <CopyToClipboardButton {...props} style={buttonStyledCss}>
         {props.button}
       </CopyToClipboardButton>
       {props.children}

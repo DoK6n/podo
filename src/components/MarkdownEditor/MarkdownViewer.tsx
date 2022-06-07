@@ -12,7 +12,7 @@ import { FiCopy } from 'react-icons/fi';
 
 import { CopyToClipboardWrapper } from 'components';
 import { gruvboxDark, markdownViewStyledCss } from 'styles';
-import styled, { TodoStylesProps } from 'styled-components';
+import styled, { css, TodoStylesProps } from 'styled-components';
 
 export const MarkdownViewTheme = styled.div<TodoStylesProps>`
   ${markdownViewStyledCss}
@@ -54,10 +54,13 @@ function MarkdownViewer({ doc, done, edited }: Props) {
                         },
                       });
                     }}
-                    style={{
-                      cursor: 'pointer',
-                      marginTop: '0.3rem',
-                    }}
+                    style={css`
+                      cursor: pointer;
+                      margin-top: 0.3rem;
+                      &:active {
+                        opacity: 0.1;
+                      }
+                    `}
                     button={<FiCopy size={16} />}
                   >
                     <SyntaxHighlighter

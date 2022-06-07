@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import { useCodemirror } from 'hooks';
-import 'styles/MarkdownEditor/editor.css';
 import { EditorState } from '@codemirror/state';
+import { markdownEditorStyledCss } from 'styles';
+import styled from 'styled-components';
+
+const MarkdownEditorTheme = styled.div`
+  ${markdownEditorStyledCss}
+`;
 
 interface Props {
   onChange: (doc: string, id: string, done: boolean) => void;
@@ -28,7 +33,11 @@ function MarkdownEditor({ onChange, id, text, done }: Props) {
       // TODO
     }
   }, [editorView]);
-  return <div className="editor-wrapper" ref={refContainer}></div>;
+  return (
+    <MarkdownEditorTheme>
+      <div className="editor-wrapper" ref={refContainer}></div>
+    </MarkdownEditorTheme>
+  );
 }
 
 export default React.memo(MarkdownEditor);

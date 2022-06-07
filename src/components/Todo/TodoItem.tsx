@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  ItemBlockLeftIconWrapper,
-  DragHandleIcon,
-  CheckIcon,
-  EditIcon,
-  ItemText,
-  RemoveIcon,
-  TodoItemBlock,
+  checkIconStyledCss,
+  dragHandleIconStyledCss,
+  editIconStyledCss,
+  itemBlockLeftIconWrapperStyledCss,
+  itemTextStyledCss,
+  removeIconStyledCss,
+  todoItemBlockStyledCss,
 } from 'styles';
 import { PodoteEditor } from 'components';
 import { FcEmptyTrash } from 'react-icons/fc';
@@ -15,6 +15,35 @@ import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
 import { useTodoStore } from 'hooks';
+import styled, { TodoStylesProps } from 'styled-components';
+
+const TodoItemBlock = styled.section<TodoStylesProps>`
+  ${todoItemBlockStyledCss}
+`;
+
+const ItemBlockLeftIconWrapper = styled.div`
+  ${itemBlockLeftIconWrapperStyledCss}
+`;
+
+const DragHandleIcon = styled.span`
+  ${dragHandleIconStyledCss}
+`;
+
+const CheckIcon = styled.span<TodoStylesProps>`
+  ${checkIconStyledCss}
+`;
+
+const EditIcon = styled.span`
+  ${editIconStyledCss}
+`;
+
+const RemoveIcon = styled.span`
+  ${removeIconStyledCss}
+`;
+
+const ItemText = styled.div<TodoStylesProps>`
+  ${itemTextStyledCss}
+`;
 
 interface Props {
   id: string;

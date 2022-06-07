@@ -1,31 +1,28 @@
 import React, { useState } from 'react';
 import { PodoteEditor } from 'components';
-import { TodoItemBlock, TodoListBlock, TodoTemplateBlock } from 'styles';
-import styled, { css, TodoStylesProps } from 'styled-components';
+import { buttonStyledCss, todoItemBlockStyledCss, todoListBlockStyledCss, todoTemplateStyledCss } from 'styles';
+import styled, { TodoStylesProps } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
-const ButtonStyledCss: ReturnType<typeof css> = css`
-  background: transparent;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 4px;
-  padding: 4px;
-  margin-left: 4px;
-  margin-right: 4px;
-  &:hover {
-    background-color: #57448da4;
-  }
-  &:active {
-    background-color: #57448d28;
-  }
+const TodoItemBlock = styled.section<TodoStylesProps>`
+  ${todoItemBlockStyledCss}
+`;
+
+const TodoListBlock = styled.article`
+  ${todoListBlockStyledCss}
+`;
+
+const TodoTemplateBlock = styled.main`
+  ${todoTemplateStyledCss}
 `;
 
 const EditableButton = styled.button<TodoStylesProps>`
-  ${ButtonStyledCss}
+  ${buttonStyledCss}
   color: ${props => (props.edited ? '#48c774' : '#abb2bf')};
 `;
+
 const ViewOnlyButton = styled.button<TodoStylesProps>`
-  ${ButtonStyledCss}
+  ${buttonStyledCss}
   color: ${props => (!props.edited ? '#48c774' : '#abb2bf')};
 `;
 

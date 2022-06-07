@@ -1,2 +1,3 @@
-export * from './MarkdownViewerStyles';
-export * from './PodoteEditorStyles';
+export * from './markdownEditorStyles';
+export * from './markdownViewerStyles';
+export * from './podoteEditorStyles';

@@ -1,6 +1,11 @@
 import React from 'react';
-import { TodoTemplateBlock } from 'styles';
+import { todoTemplateStyledCss } from 'styles';
 import { TodoList, TodoAddItem } from 'components';
+import styled from 'styled-components';
+
+const TodoTemplateBlock = styled.main`
+  ${todoTemplateStyledCss}
+`;
 
 function TodoTemplate() {
   return (

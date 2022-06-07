@@ -1,6 +1,11 @@
 import React, { KeyboardEvent } from 'react';
-import { TodoAddItemInput } from 'styles';
+import { todoAddItemInputStyledCss } from 'styles';
 import { useTodoStore } from 'hooks';
+import styled from 'styled-components';
+
+const TodoAddItemInput = styled.input`
+  ${todoAddItemInputStyledCss}
+`;
 
 function TodoAddItem() {
   const { addItem } = useTodoStore();

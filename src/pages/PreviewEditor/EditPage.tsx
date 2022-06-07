@@ -1,13 +1,8 @@
-import { useCodemirror } from 'hooks';
 import styled from 'styled-components';
-import React, { useCallback, useEffect, useState } from 'react';
-import { MarkdownViewer } from 'components';
+import React, { useCallback, useState } from 'react';
+import { MarkdownViewer, MarkdownEditor } from 'components';
 import { Toaster } from 'react-hot-toast';
 import 'github-markdown-css/github-markdown.css';
-import 'styles/MarkdownEditor/preview.css';
-import 'styles/MarkdownEditor/editor.css';
-
-import { EditorState } from '@codemirror/state';
 
 const markdown = `# PoDoTe Theme Test Page
 - __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
@@ -130,25 +125,11 @@ function EditPage() {
     setDoc(newDoc);
   }, []);
 
-  const handleChange = useCallback((state: EditorState) => handleDocChange(state.doc.toString()), [handleDocChange]);
-
-  const [refContainer, editorView] = useCodemirror<HTMLDivElement>({
-    initialDoc: doc,
-    onChange: handleChange,
-    id: '0',
-    done: false,
-  });
-
-  useEffect(() => {
-    if (editorView) {
-      // TODO
-    }
-  }, [editorView]);
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <EditerViewerTestBlock>
-        <div className="editor-wrapper" ref={refContainer}></div>
+        <MarkdownEditor onChange={handleDocChange} id={'0'} text={doc} done={false} />
         <MarkdownViewer doc={doc} done={false} edited={false} />
       </EditerViewerTestBlock>
     </>

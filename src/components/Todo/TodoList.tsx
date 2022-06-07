@@ -1,9 +1,14 @@
 import React from 'react';
 import { TodoItem } from 'components';
-import { TodoListBlock } from 'styles';
+import { todoListBlockStyledCss } from 'styles';
 import { Droppable, DropResult } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useTodoStore } from 'hooks';
+import styled from 'styled-components';
+
+const TodoListBlock = styled.article`
+  ${todoListBlockStyledCss}
+`;
 
 function TodoList() {
   const { todos, dragItem } = useTodoStore();

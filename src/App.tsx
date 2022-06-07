@@ -1,6 +1,11 @@
-import { GlobalStyle } from 'styles';
+import { globalStyledCss } from 'styles';
 import { TodoPage, EditPage, PodoteEditorPage } from 'pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+  ${globalStyledCss}
+`;
 
 function App() {
   return (

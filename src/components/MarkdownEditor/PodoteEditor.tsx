@@ -30,6 +30,7 @@ import {
   DropCursorExtension,
   StrikeExtension,
   HorizontalRuleExtension,
+  BlockquoteExtension,
 } from 'remirror/extensions';
 import styled from 'styled-components';
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
@@ -97,6 +98,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new ImageExtension(), // 이미지 삽입
     new DropCursorExtension({ color: '#7963d2', width: 4 }), // 드롭한 대상이 놓일 위치를 표시
     new HorizontalRuleExtension(), // 수평선 추가
+    new BlockquoteExtension(), // 인용문
   ];
 
   const initialContent = {

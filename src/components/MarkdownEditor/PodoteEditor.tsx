@@ -1,4 +1,5 @@
 import React from 'react';
+import { cx } from 'remirror';
 import {
   componentsStyledCss,
   coreStyledCss,
@@ -63,17 +64,25 @@ const Menu = () => {
   const chain = useChainedCommands();
   const active = useActive();
   return (
-    <button
-      onClick={() => {
-        chain //
-          .toggleBold()
-          .focus()
-          .run();
-      }}
-      style={{ fontWeight: active.bold() ? 'bold' : undefined }}
-    >
-      B
-    </button>
+    <>
+      <button
+        onClick={() => {
+          chain.toggleBold().focus().run();
+        }}
+        style={{ fontWeight: active.bold() ? 'bold' : undefined }}
+      >
+        B
+      </button>
+      <button
+        onMouseDown={event => event.preventDefault()}
+        onClick={() => {
+          chain.toggleBlockquote().focus().run();
+        }}
+        className={cx(active.blockquote() && 'active')}
+      >
+        Blockquote
+      </button>
+    </>
   );
 };
 

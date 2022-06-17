@@ -21,14 +21,14 @@ export const MarkdownViewTheme = styled.div<TodoStylesProps>`
 interface Props {
   doc: string;
   done: boolean;
-  edited: boolean;
+  editable: boolean;
 }
 
-function MarkdownViewer({ doc, done, edited }: Props) {
+function MarkdownViewer({ doc, done, editable }: Props) {
   return (
-    <div style={{ width: '100%', overflow: 'auto', display: !edited ? 'inline-block' : 'none' }}>
+    <div style={{ width: '100%', overflow: 'auto', display: !editable ? 'inline-block' : 'none' }}>
       <Toaster position="top-center" reverseOrder={false} />
-      <MarkdownViewTheme done={done} edited={edited}>
+      <MarkdownViewTheme done={done} editable={editable}>
         <div className="preview markdown-body">
           <ReactMarkdown
             children={doc}

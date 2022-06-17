@@ -1,5 +1,7 @@
-import React from 'react';
-import { cx } from 'remirror';
+import React, { useEffect, useRef, useState } from 'react';
+import { cx, ProsemirrorNode } from 'remirror';
+import { EditorView } from '@remirror/pm/view';
+import { IEmojiData } from 'emoji-picker-react';
 import {
   componentsStyledCss,
   coreStyledCss,
@@ -36,6 +38,7 @@ import {
 import styled from 'styled-components';
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
 import { useTodoStore } from 'hooks';
+import { EmojiPickerReact } from 'components';
 
 const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
   ${componentsStyledCss}
@@ -82,6 +85,41 @@ const Menu = () => {
       >
         Blockquote
       </button>
+      <button
+        onClick={() => {
+          chain.toggleCallout({ type: 'blank' }).focus().run();
+        }}
+      >
+        callout(blank)
+      </button>
+      <button
+        onClick={() => {
+          chain.toggleCallout({ type: 'info' }).focus().run();
+        }}
+      >
+        callout(info)
+      </button>
+      <button
+        onClick={() => {
+          chain.toggleCallout({ type: 'warning' }).focus().run();
+        }}
+      >
+        callout(warn)
+      </button>
+      <button
+        onClick={() => {
+          chain.toggleCallout({ type: 'error' }).focus().run();
+        }}
+      >
+        callout(error)
+      </button>
+      <button
+        onClick={() => {
+          chain.toggleCallout({ type: 'success' }).focus().run();
+        }}
+      >
+        callout(success)
+      </button>
     </>
   );
 };
@@ -94,7 +132,20 @@ interface Props {
 }
 
 function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) {
+  const [chosenEmoji, setChosenEmoji] = useState<IEmojiData | null>(null);
   const { editItemText } = useTodoStore();
+
+  const renderDialogEmoji = (node: ProsemirrorNode, view: EditorView, getPos: () => number) => {
+    const { emoji: prevEmoji } = node.attrs;
+    const emoji = document.createElement('span');
+    emoji.dataset.emojiContainer = '';
+    emoji.textContent = prevEmoji;
+    emoji.style.cursor = 'pointer';
+    emoji.dataset.id = id;
+    emoji.addEventListener('mousedown', e => e.preventDefault());
+
+    return emoji;
+  };
 
   const extensions = () => [
     new BoldExtension(), // 굵게
@@ -102,7 +153,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new StrikeExtension(), // 취소선
     new UnderlineExtension(), // 밑줄
     new HeadingExtension(), // 머리말 1 ~ 6
-    new CalloutExtension({ defaultType: 'blank' }), // 콜아웃
+    new CalloutExtension({ defaultType: 'blank', renderEmoji: renderDialogEmoji, defaultEmoji: '💡' }), // 콜아웃
     new HistoryExtension(), //실행 취소 및 다시 실행 명령을 제공하고 기록 관련 작업을 처리
     new ImageExtension(), // 이미지 삽입
     new DropCursorExtension({ color: '#7963d2', width: 4 }), // 드롭한 대상이 놓일 위치를 표시
@@ -145,6 +196,14 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
         <Remirror manager={manager} initialContent={state} onChange={onChangeState} editable={editable}>
           {editable ? <Menu /> : null}
           <EditorComponent />
+          {editable ? (
+            <EmojiPickerReact
+              itemId={id}
+              editable={editable}
+              chosenEmoji={chosenEmoji}
+              setChosenEmoji={setChosenEmoji}
+            />
+          ) : null}
         </Remirror>
       </ThemeProvider>
     </PodoteTheme>

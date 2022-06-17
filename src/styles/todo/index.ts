@@ -32,8 +32,8 @@ const blinkingEffect = () => keyframes`
 `;
 
 export const todoItemBlockStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
-  ${({ edited, done }) =>
-    edited === true &&
+  ${({ editable, done }) =>
+    editable === true &&
     done === false &&
     css`
       animation: ${blinkingEffect} 0.7s linear infinite;

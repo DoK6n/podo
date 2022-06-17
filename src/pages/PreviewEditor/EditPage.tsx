@@ -130,7 +130,7 @@ function EditPage() {
       <Toaster position="top-center" reverseOrder={false} />
       <EditerViewerTestBlock>
         <MarkdownEditor onChange={handleDocChange} id={'0'} text={doc} done={false} />
-        <MarkdownViewer doc={doc} done={false} edited={false} />
+        <MarkdownViewer doc={doc} done={false} editable={false} />
       </EditerViewerTestBlock>
     </>
   );

@@ -2,7 +2,7 @@ import { css, TodoStylesProps } from 'styled-components';
 
 export const markdownViewStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
   opacity: ${({ done }) => (done === false ? '1' : '0.1')};
-  display: ${({ edited }) => (edited ? 'none' : 'inline-block')};
+  display: ${({ editable }) => (editable ? 'none' : 'inline-block')};
 
   .preview.markdown-body {
     flex: 0 0 50%;

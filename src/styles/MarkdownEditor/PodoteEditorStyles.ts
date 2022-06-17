@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, TodoStylesProps } from 'styled-components';
 
 export const extensionCountStyledCss: ReturnType<typeof css> = css`
   .remirror-editor span.remirror-max-count-exceeded {
@@ -6,7 +6,7 @@ export const extensionCountStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
-export const extensionCalloutStyledCss: ReturnType<typeof css> = css`
+export const extensionCalloutStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
   .remirror-editor div[data-callout-type] {
     display: flex;
     margin-left: 0;

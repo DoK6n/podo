@@ -49,12 +49,12 @@ interface Props {
   id: string;
   content: Object | any;
   done: boolean;
+  editable: boolean;
   index: number;
 }
 
-function TodoItem({ id, content, done, index }: Props) {
-  const [edited, setEdited] = useState<boolean>(false);
-  const { removeItem, toggleItem } = useTodoStore();
+function TodoItem({ id, content, done, editable, index }: Props) {
+  const { removeItem, toggleItem, setEditableById } = useTodoStore();
 
   const onRemoveitem = () => {
     removeItem({ id });
@@ -65,13 +65,13 @@ function TodoItem({ id, content, done, index }: Props) {
   };
 
   const onEditItem = () => {
-    setEdited(state => !state);
+    setEditableById({ id });
   };
 
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
-        <TodoItemBlock edited={edited} done={done} ref={provided.innerRef} {...provided.draggableProps}>
+        <TodoItemBlock editable={editable} done={done} ref={provided.innerRef} {...provided.draggableProps}>
           <ItemBlockLeftIconWrapper>
             <DragHandleIcon {...provided.dragHandleProps}>
               <MdDragIndicator />
@@ -81,12 +81,12 @@ function TodoItem({ id, content, done, index }: Props) {
             </CheckIcon>
           </ItemBlockLeftIconWrapper>
           <ItemText done={done}>
-            <PodoteEditor id={id} editable={edited} content={content} />
+            <PodoteEditor id={id} editable={editable} content={content} />
           </ItemText>
           <EditIcon onClick={onEditItem}>
             <BiEdit />
           </EditIcon>
-          {edited ? (
+          {editable ? (
             <RemoveIcon onClick={onRemoveitem}>
               <FcEmptyTrash />
             </RemoveIcon>

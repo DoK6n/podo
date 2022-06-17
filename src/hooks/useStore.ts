@@ -1,10 +1,11 @@
 import create from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
-
+import { devtools, persist } from 'zustand/middleware';
 interface State {
   id: string;
   content: Object | any; // TODO content: RemirrorJSON
   done: boolean;
+  editable: boolean;
 }
 
 interface TodoStore {
@@ -12,6 +13,7 @@ interface TodoStore {
   getContentNormalTextFormat(action: { text: string }): Object | any;
   addItem(action: { text: string }): void;
   editItemText(action: { id: string; content: Object | any }): void;
+  setEditableById(action: { id: string }): void;
   toggleItem(action: Partial<State>): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
   removeItem(action: Partial<State>): void;
@@ -43,7 +45,7 @@ const content00 = {
       type: 'callout',
       attrs: {
         type: 'blank',
-        emoji: '',
+        emoji: '💡',
       },
       content: [
         {
@@ -90,7 +92,7 @@ const content01 = {
       type: 'callout',
       attrs: {
         type: 'info',
-        emoji: '',
+        emoji: '💡',
       },
       content: [
         {
@@ -137,7 +139,7 @@ const content02 = {
       type: 'callout',
       attrs: {
         type: 'warning',
-        emoji: '',
+        emoji: '💡',
       },
       content: [
         {
@@ -184,7 +186,7 @@ const content03 = {
       type: 'callout',
       attrs: {
         type: 'error',
-        emoji: '',
+        emoji: '💡',
       },
       content: [
         {
@@ -231,7 +233,7 @@ const content04 = {
       type: 'callout',
       attrs: {
         type: 'success',
-        emoji: '',
+        emoji: '💡',
       },
       content: [
         {
@@ -249,44 +251,58 @@ const content04 = {
 };
 
 const initState: State[] = [
-  { id: uuidv4(), content: content00, done: true },
-  { id: uuidv4(), content: content01, done: false },
-  { id: uuidv4(), content: content02, done: false },
-  { id: uuidv4(), content: content03, done: false },
-  { id: uuidv4(), content: content04, done: false },
+  { id: uuidv4(), content: content00, done: true, editable: false },
+  { id: uuidv4(), content: content01, done: false, editable: false },
+  { id: uuidv4(), content: content02, done: false, editable: false },
+  { id: uuidv4(), content: content03, done: false, editable: false },
+  { id: uuidv4(), content: content04, done: false, editable: false },
 ];
 
-export const useTodoStore = create<TodoStore>(set => ({
-  todos: initState,
-  getContentNormalTextFormat(action) {
-    return contentNormalTextFormat(action.text);
-  },
-  addItem(action) {
-    set(({ todos }) => ({
-      todos: [...todos, { id: uuidv4(), content: contentNormalTextFormat(action.text), done: false }],
-    }));
-  },
-  editItemText(action) {
-    set(({ todos }) => ({
-      todos: todos.map(todo => (todo.id === action.id ? { ...todo, content: action.content } : todo)),
-    }));
-  },
-  toggleItem(action) {
-    set(({ todos }) => ({
-      todos: todos.map(todo => (todo.id === action.id ? { ...todo, done: !todo.done } : todo)),
-    }));
-  },
-  dragItem(action) {
-    set(({ todos }) => {
-      const temp = [...todos];
-      const draggingItem = temp.splice(action.draggingItemIndex, 1);
-      temp.splice(action.afterDragItemIndex, 0, draggingItem[0]);
-      return { todos: temp };
-    });
-  },
-  removeItem(action) {
-    set(({ todos }) => ({
-      todos: todos.filter(todo => todo.id !== action.id),
-    }));
-  },
-}));
+export const useTodoStore = create<TodoStore>()(
+  devtools(
+    persist((set, get) => ({
+      todos: initState,
+      getContentNormalTextFormat(action) {
+        return contentNormalTextFormat(action.text);
+      },
+      addItem(action) {
+        set(({ todos }) => ({
+          todos: [
+            ...todos,
+            { id: uuidv4(), content: contentNormalTextFormat(action.text), done: false, editable: false },
+          ],
+        }));
+      },
+      editItemText(action) {
+        set(({ todos }) => ({
+          todos: todos.map(todo => (todo.id === action.id ? { ...todo, content: action.content } : todo)),
+        }));
+      },
+      setEditableById(action) {
+        set(({ todos }) => ({
+          todos: todos.map(todo =>
+            todo.id === action.id ? { ...todo, editable: !todo.editable } : { ...todo, editable: false },
+          ),
+        }));
+      },
+      toggleItem(action) {
+        set(({ todos }) => ({
+          todos: todos.map(todo => (todo.id === action.id ? { ...todo, done: !todo.done } : todo)),
+        }));
+      },
+      dragItem(action) {
+        set(({ todos }) => {
+          const temp = [...todos];
+          const draggingItem = temp.splice(action.draggingItemIndex, 1);
+          temp.splice(action.afterDragItemIndex, 0, draggingItem[0]);
+          return { todos: temp };
+        });
+      },
+      removeItem(action) {
+        set(({ todos }) => ({
+          todos: todos.filter(todo => todo.id !== action.id),
+        }));
+      },
+    })),
+  ),
+);

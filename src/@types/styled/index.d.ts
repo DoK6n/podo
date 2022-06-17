@@ -3,7 +3,7 @@ import 'react-syntax-highlighter';
 
 declare module 'styled-components' {
   interface TodoStylesProps {
-    edited?: boolean;
+    editable?: boolean;
     done?: boolean;
   }
 }

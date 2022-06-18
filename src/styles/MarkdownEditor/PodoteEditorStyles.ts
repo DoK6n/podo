@@ -52,6 +52,9 @@ export const extensionCalloutStyledCss: ReturnType<typeof css> = css<TodoStylesP
     overflow: hidden;
     padding: 0;
   }
+  .remirror-editor.ProseMirror blockquote {
+    padding-left: 20px;
+  }
 `;
 
 export const podoteThemeStyledCss: ReturnType<typeof css> = css`

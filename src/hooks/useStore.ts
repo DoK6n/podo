@@ -186,7 +186,7 @@ const content03 = {
       type: 'callout',
       attrs: {
         type: 'error',
-        emoji: '❗️',
+        emoji: '🚨',
       },
       content: [
         {

@@ -36,7 +36,7 @@ import {
   BlockquoteExtension,
 } from 'remirror/extensions';
 import styled from 'styled-components';
-import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
+import { extensionCalloutStyledCss, extensionCountStyledCss, menuButtonStyledCss, podoteThemeStyledCss } from 'styles';
 import { useTodoStore } from 'hooks';
 import { EmojiPickerReact } from 'components';
 
@@ -63,20 +63,24 @@ const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
   ${podoteThemeStyledCss}
 `;
 
+const MenuButton: ReturnType<typeof styled.button> = styled.button`
+  ${menuButtonStyledCss}
+`;
+
 const Menu = () => {
   const chain = useChainedCommands();
   const active = useActive();
   return (
     <>
-      <button
+      <MenuButton
         onClick={() => {
           chain.toggleBold().focus().run();
         }}
         style={{ fontWeight: active.bold() ? 'bold' : undefined }}
       >
         B
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onMouseDown={event => event.preventDefault()}
         onClick={() => {
           chain.toggleBlockquote().focus().run();
@@ -84,42 +88,42 @@ const Menu = () => {
         className={cx(active.blockquote() && 'active')}
       >
         Blockquote
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'blank' }).focus().run();
         }}
       >
         callout(blank)
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'info' }).focus().run();
         }}
       >
         callout(info)
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'warning' }).focus().run();
         }}
       >
         callout(warn)
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'error' }).focus().run();
         }}
       >
         callout(error)
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'success' }).focus().run();
         }}
       >
         callout(success)
-      </button>
+      </MenuButton>
     </>
   );
 };

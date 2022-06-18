@@ -15,3 +15,18 @@ export const buttonStyledCss: ReturnType<typeof css> = css`
     box-shadow: #2a204667 -5px -5px 10px 1px;
   }
 `;
+
+export const menuButtonStyledCss: ReturnType<typeof css> = css`
+  background: transparent;
+  color: #abb2bf;
+  border: none;
+  font-size: 1.2em;
+  padding: 4px;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #483d6b;
+  }
+`;

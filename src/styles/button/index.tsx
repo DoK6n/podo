@@ -28,5 +28,6 @@ export const menuButtonStyledCss: ReturnType<typeof css> = css`
 
   &:hover {
     background-color: #483d6b;
+    color: #c9d1d9;
   }
 `;

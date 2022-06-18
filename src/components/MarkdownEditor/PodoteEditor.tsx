@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { cx, ProsemirrorNode } from 'remirror';
+import { ProsemirrorNode } from 'remirror';
 import { EditorView } from '@remirror/pm/view';
 import { IEmojiData } from 'emoji-picker-react';
 import {
@@ -21,7 +21,7 @@ import {
   extensionYjsStyledCss,
   themeStyledCss,
 } from '@remirror/styles/styled-components';
-import { EditorComponent, Remirror, ThemeProvider, useActive, useChainedCommands, useRemirror } from '@remirror/react';
+import { EditorComponent, Remirror, ThemeProvider, useRemirror } from '@remirror/react';
 import {
   BoldExtension,
   CalloutExtension,
@@ -36,9 +36,10 @@ import {
   BlockquoteExtension,
 } from 'remirror/extensions';
 import styled from 'styled-components';
-import { extensionCalloutStyledCss, extensionCountStyledCss, menuButtonStyledCss, podoteThemeStyledCss } from 'styles';
+
+import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
 import { useTodoStore } from 'hooks';
-import { EmojiPickerReact } from 'components';
+import { EmojiPickerReact, PodoteEditorMenu } from 'components';
 
 const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
   ${componentsStyledCss}
@@ -62,71 +63,6 @@ const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
   ${themeStyledCss}
   ${podoteThemeStyledCss}
 `;
-
-const MenuButton: ReturnType<typeof styled.button> = styled.button`
-  ${menuButtonStyledCss}
-`;
-
-const Menu = () => {
-  const chain = useChainedCommands();
-  const active = useActive();
-  return (
-    <>
-      <MenuButton
-        onClick={() => {
-          chain.toggleBold().focus().run();
-        }}
-        style={{ fontWeight: active.bold() ? 'bold' : undefined }}
-      >
-        B
-      </MenuButton>
-      <MenuButton
-        onMouseDown={event => event.preventDefault()}
-        onClick={() => {
-          chain.toggleBlockquote().focus().run();
-        }}
-        className={cx(active.blockquote() && 'active')}
-      >
-        Blockquote
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleCallout({ type: 'blank' }).focus().run();
-        }}
-      >
-        callout(blank)
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleCallout({ type: 'info', emoji: '💡' }).focus().run();
-        }}
-      >
-        callout(info)
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleCallout({ type: 'warning', emoji: '⚠️' }).focus().run();
-        }}
-      >
-        callout(warn)
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleCallout({ type: 'error', emoji: '❗️' }).focus().run();
-        }}
-      >
-        callout(error)
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleCallout({ type: 'success', emoji: '✅' }).focus().run();
-        }}
-      >
-        callout(success)
-      </MenuButton>
-    </>
-  );
-};
 
 interface Props {
   id: string;
@@ -198,7 +134,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     <PodoteTheme id={'podote-theme'}>
       <ThemeProvider>
         <Remirror manager={manager} initialContent={state} onChange={onChangeState} editable={editable}>
-          {editable ? <Menu /> : null}
+          {editable ? <PodoteEditorMenu /> : null}
           <EditorComponent />
           {editable ? (
             <EmojiPickerReact

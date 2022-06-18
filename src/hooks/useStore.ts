@@ -139,7 +139,7 @@ const content02 = {
       type: 'callout',
       attrs: {
         type: 'warning',
-        emoji: '💡',
+        emoji: '⚠️',
       },
       content: [
         {
@@ -186,7 +186,7 @@ const content03 = {
       type: 'callout',
       attrs: {
         type: 'error',
-        emoji: '💡',
+        emoji: '❗️',
       },
       content: [
         {
@@ -233,7 +233,7 @@ const content04 = {
       type: 'callout',
       attrs: {
         type: 'success',
-        emoji: '💡',
+        emoji: '✅',
       },
       content: [
         {

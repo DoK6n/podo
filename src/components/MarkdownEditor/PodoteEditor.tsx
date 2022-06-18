@@ -98,28 +98,28 @@ const Menu = () => {
       </MenuButton>
       <MenuButton
         onClick={() => {
-          chain.toggleCallout({ type: 'info' }).focus().run();
+          chain.toggleCallout({ type: 'info', emoji: '💡' }).focus().run();
         }}
       >
         callout(info)
       </MenuButton>
       <MenuButton
         onClick={() => {
-          chain.toggleCallout({ type: 'warning' }).focus().run();
+          chain.toggleCallout({ type: 'warning', emoji: '⚠️' }).focus().run();
         }}
       >
         callout(warn)
       </MenuButton>
       <MenuButton
         onClick={() => {
-          chain.toggleCallout({ type: 'error' }).focus().run();
+          chain.toggleCallout({ type: 'error', emoji: '❗️' }).focus().run();
         }}
       >
         callout(error)
       </MenuButton>
       <MenuButton
         onClick={() => {
-          chain.toggleCallout({ type: 'success' }).focus().run();
+          chain.toggleCallout({ type: 'success', emoji: '✅' }).focus().run();
         }}
       >
         callout(success)

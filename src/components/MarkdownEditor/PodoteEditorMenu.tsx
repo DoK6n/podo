@@ -3,7 +3,7 @@ import { menuButtonStyledCss } from 'styles';
 import { useActive, useChainedCommands } from '@remirror/react';
 
 import { GrBlockQuote } from 'react-icons/gr';
-import { MdFormatBold, MdChatBubble } from 'react-icons/md';
+import { MdFormatBold, MdChatBubble, MdFormatItalic } from 'react-icons/md';
 
 interface MenuButtonStyledProps {
   isActive?: boolean;
@@ -27,6 +27,14 @@ function PodoteEditorMenu() {
         isActive={active.bold()}
       >
         <MdFormatBold />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.toggleItalic().focus().run();
+        }}
+        isActive={active.italic()}
+      >
+        <MdFormatItalic />
       </MenuButton>
       <MenuButton
         onClick={() => {

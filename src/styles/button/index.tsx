@@ -23,7 +23,8 @@ export const menuButtonStyledCss: ReturnType<typeof css> = css`
   font-size: 1.2em;
   padding: 4px;
   border-radius: 4px;
-
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
 
   &:hover {

@@ -1,14 +1,9 @@
-import styled from 'styled-components';
+import styled, { MenuButtonStyledProps } from 'styled-components';
 import { menuButtonStyledCss } from 'styles';
+import { HeadingButton } from 'components';
 import { useActive, useChainedCommands } from '@remirror/react';
-
 import { GrBlockQuote } from 'react-icons/gr';
 import { MdFormatBold, MdChatBubble, MdFormatItalic } from 'react-icons/md';
-
-interface MenuButtonStyledProps {
-  isActive?: boolean;
-  done?: boolean;
-}
 
 const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
@@ -20,6 +15,12 @@ function PodoteEditorMenu() {
   const active = useActive();
   return (
     <>
+      <HeadingButton level={1} />
+      <HeadingButton level={2} />
+      <HeadingButton level={3} />
+      <HeadingButton level={4} />
+      <HeadingButton level={5} />
+      <HeadingButton level={6} />
       <MenuButton
         onClick={() => {
           chain.toggleBold().focus().run();

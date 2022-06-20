@@ -111,4 +111,11 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     --rmr-color-selection-text: var(--podote-color-text);
     --rmr-color-selection-caret: inherit;
   }
+
+  .remirror-theme .remirror-editor-wrapper .remirror-editor code {
+    background: #483d6b;
+    padding: 0.2em 0.4em;
+    font-size: 85%;
+    border-radius: 6px;
+  }
 `;

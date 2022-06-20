@@ -34,6 +34,7 @@ import {
   StrikeExtension,
   HorizontalRuleExtension,
   BlockquoteExtension,
+  CodeExtension,
 } from 'remirror/extensions';
 import styled from 'styled-components';
 
@@ -99,6 +100,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new DropCursorExtension({ color: '#7963d2', width: 4 }), // 드롭한 대상이 놓일 위치를 표시
     new HorizontalRuleExtension(), // 수평선 추가
     new BlockquoteExtension(), // 인용문
+    new CodeExtension(), // Inline Code Blocks
   ];
 
   const initialContent = {

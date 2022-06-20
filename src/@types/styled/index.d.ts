@@ -6,6 +6,11 @@ declare module 'styled-components' {
     editable?: boolean;
     done?: boolean;
   }
+
+  interface MenuButtonStyledProps {
+    isActive?: boolean;
+    done?: boolean;
+  }
 }
 
 declare module 'react-syntax-highlighter' {

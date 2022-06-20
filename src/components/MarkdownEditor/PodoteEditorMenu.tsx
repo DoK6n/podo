@@ -20,7 +20,6 @@ function PodoteEditorMenu() {
       <HeadingButton level={3} />
       <HeadingButton level={4} />
       <HeadingButton level={5} />
-      <HeadingButton level={6} />
       <MenuButton
         onClick={() => {
           chain.toggleBold().focus().run();

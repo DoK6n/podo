@@ -4,6 +4,7 @@ import { HeadingButton } from 'components';
 import { useActive, useChainedCommands } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
 import { MdFormatBold, MdChatBubble, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
+import { AiOutlineStrikethrough } from 'react-icons/ai';
 
 const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
@@ -43,6 +44,14 @@ function PodoteEditorMenu() {
         isActive={active.underline()}
       >
         <MdFormatUnderlined />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.toggleStrike().focus().run();
+        }}
+        isActive={active.strike()}
+      >
+        <AiOutlineStrikethrough />
       </MenuButton>
       <MenuButton
         onClick={() => {

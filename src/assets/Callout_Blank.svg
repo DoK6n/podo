@@ -1,0 +1,88 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1em"
+  zoomAndPan="magnify"
+  viewBox="0 0 30 30.000001"
+  height="1em"
+  preserveAspectRatio="xMidYMid meet"
+  version="1.0"
+>
+  <path
+    stroke-linecap="round"
+    transform="matrix(2.177419, 0, 0, 2.177419, 3.387096, 3.991937)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500347 0.000114867 L 10.16632 0.000114867 "
+    stroke="#a6a6a6"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(2.177419, 0, 0, 2.177419, 3.387096, 14.29839)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500347 -0.000695705 L 10.16632 -0.000695705 "
+    stroke="#6e5ea3"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(2.177419, 0, 0, 2.177419, 3.387096, 18.995781)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500347 0.000143502 L 10.16632 0.000143502 "
+    stroke="#6e5ea3"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(0.000000000000000127, -2.069626, 2.177419, 0.000000000000000133, 4.47464, 20.083325)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500791 0.000882713 L 2.65811 0.000882713 "
+    stroke="#6e5ea3"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(0.000000000000000127, -2.069626, 2.177419, 0.000000000000000133, 25.523027, 20.083325)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500791 0.000188562 L 2.65811 0.000188562 "
+    stroke="#6e5ea3"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(2.177419, 0, 0, 2.177419, 3.387096, 9.217744)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500347 0.000462109 L 10.16632 0.000462109 "
+    stroke="#a6a6a6"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+  <path
+    stroke-linecap="round"
+    transform="matrix(2.177419, 0, 0, 2.177419, 3.387096, 25.040324)"
+    fill="none"
+    stroke-linejoin="miter"
+    d="M 0.500347 -0.000579497 L 10.16632 -0.000579497 "
+    stroke="#a6a6a6"
+    stroke-width="1"
+    stroke-opacity="1"
+    stroke-miterlimit="4"
+  />
+</svg>

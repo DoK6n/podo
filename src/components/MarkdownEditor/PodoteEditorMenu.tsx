@@ -3,8 +3,9 @@ import { menuButtonStyledCss } from 'styles';
 import { HeadingButton } from 'components';
 import { useActive, useChainedCommands } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
-import { MdFormatBold, MdChatBubble, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
+import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
 import { AiOutlineStrikethrough } from 'react-icons/ai';
+import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
 
 const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
@@ -67,7 +68,7 @@ function PodoteEditorMenu() {
         }}
         isActive={active.callout({ type: 'blank' })}
       >
-        <MdChatBubble style={{ fill: '#6e5ea3' }} />
+        <CalloutBlank />
       </MenuButton>
       <MenuButton
         onClick={() => {
@@ -75,7 +76,7 @@ function PodoteEditorMenu() {
         }}
         isActive={active.callout({ type: 'info' })}
       >
-        <MdChatBubble style={{ fill: '#3298dc' }} />
+        <CalloutInfo />
       </MenuButton>
       <MenuButton
         onClick={() => {
@@ -83,7 +84,7 @@ function PodoteEditorMenu() {
         }}
         isActive={active.callout({ type: 'warning' })}
       >
-        <MdChatBubble style={{ fill: '#ffdd57' }} />
+        <CalloutWarn />
       </MenuButton>
       <MenuButton
         onClick={() => {
@@ -91,7 +92,7 @@ function PodoteEditorMenu() {
         }}
         isActive={active.callout({ type: 'error' })}
       >
-        <MdChatBubble style={{ fill: '#f14668' }} />
+        <CalloutError />
       </MenuButton>
       <MenuButton
         onClick={() => {
@@ -99,7 +100,7 @@ function PodoteEditorMenu() {
         }}
         isActive={active.callout({ type: 'success' })}
       >
-        <MdChatBubble style={{ fill: '#48c774' }} />
+        <CalloutSuccess />
       </MenuButton>
       <MenuButton
         onClick={() => {

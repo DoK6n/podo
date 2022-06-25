@@ -119,3 +119,12 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     border-radius: 6px;
   }
 `;
+
+// Static HTML Rendering 스타일
+export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
+  .remirror-html-renderer-wrapper .remirror-html-renderer-editor img {
+    width: 100%;
+    min-width: 50px;
+    object-fit: contain;
+  }
+`;

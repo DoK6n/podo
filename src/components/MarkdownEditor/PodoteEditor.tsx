@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProsemirrorNode } from 'remirror';
+import { ProsemirrorNode, RemirrorJSON } from 'remirror';
 import { EditorView } from '@remirror/pm/view';
 import { IEmojiData } from 'emoji-picker-react';
 import {
@@ -36,13 +36,12 @@ import {
   BlockquoteExtension,
   CodeExtension,
 } from 'remirror/extensions';
-import styled from 'styled-components';
+import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
 import { useTodoStore } from 'hooks';
 import { EmojiPickerReact, PodoteEditorMenu } from 'components';
-
-const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
+const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}
   ${coreStyledCss}
   ${extensionBlockquoteStyledCss}
@@ -68,8 +67,8 @@ const PodoteTheme: ReturnType<typeof styled.div> = styled.div`
 interface Props {
   id: string;
   editable: boolean;
-  content?: string | any | Object;
-  setTestOnlyContentJSON?: any | Object;
+  content: RemirrorJSON;
+  setTestOnlyContentJSON?: React.Dispatch<React.SetStateAction<RemirrorJSON>>;
 }
 
 function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) {
@@ -103,23 +102,9 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new CodeExtension(), // Inline Code Blocks
   ];
 
-  const initialContent = {
-    type: 'doc',
-    content: [
-      { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'Hello world' }] },
-      {
-        type: 'paragraph',
-        content: [
-          { type: 'text', text: 'Hello ' },
-          { type: 'text', marks: [{ type: 'italic' }], text: 'word' },
-        ],
-      },
-    ],
-  };
-
   const { manager, state, setState } = useRemirror({
     extensions: extensions,
-    content: content ? content : initialContent,
+    content: content ? content : { type: 'doc' },
     selection: 'end',
   });
 
@@ -133,7 +118,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
   };
 
   return (
-    <PodoteTheme id={'podote-theme'}>
+    <PodoteTheme editable={editable}>
       <ThemeProvider>
         <Remirror manager={manager} initialContent={state} onChange={onChangeState} editable={editable}>
           {editable ? <PodoteEditorMenu /> : null}

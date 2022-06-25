@@ -1,25 +1,27 @@
 import create from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 import { devtools, persist } from 'zustand/middleware';
+import { RemirrorJSON } from 'remirror';
+
 interface State {
   id: string;
-  content: Object | any; // TODO content: RemirrorJSON
+  content: RemirrorJSON;
   done: boolean;
   editable: boolean;
 }
 
 interface TodoStore {
   todos: State[];
-  getContentNormalTextFormat(action: { text: string }): Object | any;
+  getContentNormalTextFormat(action: { text: string }): RemirrorJSON;
   addItem(action: { text: string }): void;
-  editItemText(action: { id: string; content: Object | any }): void;
+  editItemText(action: { id: string; content: RemirrorJSON }): void;
   setEditableById(action: { id: string }): void;
   toggleItem(action: Partial<State>): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
   removeItem(action: Partial<State>): void;
 }
 
-const contentNormalTextFormat = (text: string) => ({
+const contentNormalTextFormat = (text: string): RemirrorJSON => ({
   type: 'doc',
   content: [
     {
@@ -29,7 +31,7 @@ const contentNormalTextFormat = (text: string) => ({
   ],
 });
 
-const content00 = {
+const content00: RemirrorJSON = {
   type: 'doc',
   content: [
     {
@@ -61,7 +63,7 @@ const content00 = {
     },
   ],
 };
-const content01 = {
+const content01: RemirrorJSON = {
   type: 'doc',
   content: [
     {
@@ -108,7 +110,7 @@ const content01 = {
     },
   ],
 };
-const content02 = {
+const content02: RemirrorJSON = {
   type: 'doc',
   content: [
     {
@@ -155,7 +157,7 @@ const content02 = {
     },
   ],
 };
-const content03 = {
+const content03: RemirrorJSON = {
   type: 'doc',
   content: [
     {
@@ -202,7 +204,7 @@ const content03 = {
     },
   ],
 };
-const content04 = {
+const content04: RemirrorJSON = {
   type: 'doc',
   content: [
     {

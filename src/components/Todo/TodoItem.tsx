@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   checkIconStyledCss,
   dragHandleIconStyledCss,
@@ -16,6 +16,7 @@ import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
 import { useTodoStore } from 'hooks';
 import styled, { TodoStylesProps } from 'styled-components';
+import { RemirrorJSON } from 'remirror';
 
 const TodoItemBlock = styled.section<TodoStylesProps>`
   ${todoItemBlockStyledCss}
@@ -47,7 +48,7 @@ const ItemText = styled.div<TodoStylesProps>`
 
 interface Props {
   id: string;
-  content: Object | any;
+  content: RemirrorJSON;
   done: boolean;
   editable: boolean;
   index: number;

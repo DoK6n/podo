@@ -120,6 +120,14 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
+// 읽기모드 스타일
+export const readModeStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
+  & .remirror-editor .remirror-resizable-view :nth-child(n + 1):nth-child(-n + 2) {
+    display: ${({ editable }) => (editable === false ? 'none' : 'col-resize')} !important;
+    cursor: ${({ editable }) => (editable === false ? 'default' : 'col-resize')} !important;
+  }
+`;
+
 // Static HTML Rendering 스타일
 export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
   .remirror-html-renderer-wrapper .remirror-html-renderer-editor img {

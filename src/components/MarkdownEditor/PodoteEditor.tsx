@@ -95,7 +95,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new HeadingExtension(), // 머리말 1 ~ 6
     new CalloutExtension({ defaultType: 'blank', renderEmoji: renderDialogEmoji, defaultEmoji: '💡' }), // 콜아웃
     new HistoryExtension(), //실행 취소 및 다시 실행 명령을 제공하고 기록 관련 작업을 처리
-    new ImageExtension(), // 이미지 삽입
+    new ImageExtension({ enableResizing: true }), // 이미지 삽입
     new DropCursorExtension({ color: '#7963d2', width: 4 }), // 드롭한 대상이 놓일 위치를 표시
     new HorizontalRuleExtension(), // 수평선 추가
     new BlockquoteExtension(), // 인용문

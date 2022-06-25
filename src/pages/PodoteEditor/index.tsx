@@ -3,6 +3,7 @@ import { PodoteEditor } from 'components';
 import { buttonStyledCss, todoItemBlockStyledCss, todoListBlockStyledCss, todoTemplateStyledCss } from 'styles';
 import styled, { TodoStylesProps } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { RemirrorJSON } from 'remirror';
 
 const TodoItemBlock = styled.section<TodoStylesProps>`
   ${todoItemBlockStyledCss}
@@ -26,9 +27,44 @@ const ViewOnlyButton = styled.button<TodoStylesProps>`
   color: ${props => (!props.editable ? '#48c774' : '#abb2bf')};
 `;
 
+const imageSrc = 'https://dummyimage.com/2000x800/479e0c/fafafa';
+const proxySrc = `https://deelay.me/${1 * 1000}/${imageSrc}`;
+
+const initialContent: RemirrorJSON = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 1 },
+      content: [{ type: 'text', text: 'Hello ' }],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        { type: 'text', text: 'Hello ' },
+        { type: 'text', marks: [{ type: 'italic' }], text: 'word' },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'image',
+          attrs: {
+            height: 160,
+            width: 400,
+            src: proxySrc,
+          },
+        },
+      ],
+    },
+  ],
+};
+
 function PodoteEditorPage() {
   const [editable, setEditable] = useState<boolean>(true);
-  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<any>({});
+  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>(initialContent);
+
   return (
     <>
       <TodoTemplateBlock>
@@ -42,7 +78,12 @@ function PodoteEditorPage() {
         </TodoItemBlock>
         <TodoListBlock>
           <TodoItemBlock editable={false} done={false}>
-            <PodoteEditor id={uuidv4()} editable={editable} setTestOnlyContentJSON={setTestOnlyContentJSON} />
+            <PodoteEditor
+              id={uuidv4()}
+              editable={editable}
+              content={testOnlyContentJSON}
+              setTestOnlyContentJSON={setTestOnlyContentJSON}
+            />
             {/* <PodoteEditor editable={editable} /> */}
           </TodoItemBlock>
           <TodoItemBlock editable={false} done={false}>

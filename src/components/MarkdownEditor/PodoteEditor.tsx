@@ -42,7 +42,7 @@ import {
 import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
-import { useTodoStore } from 'hooks';
+import { useTodoStore, ToggleListItemExtension } from 'hooks';
 import { EmojiPickerReact, PodoteEditorMenu } from 'components';
 const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}
@@ -113,6 +113,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new BulletListExtension({ enableSpine: true }),
     new OrderedListExtension(),
     new TaskListExtension(),
+    new ToggleListItemExtension(),
   ];
 
   const { manager, state, setState } = useRemirror({

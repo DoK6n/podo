@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { ProsemirrorNode, RemirrorJSON } from 'remirror';
 import { EditorView } from '@remirror/pm/view';
 import { IEmojiData } from 'emoji-picker-react';
@@ -71,9 +71,16 @@ interface Props {
   setTestOnlyContentJSON?: React.Dispatch<React.SetStateAction<RemirrorJSON>>;
 }
 
+interface ChildForwardRefObjects {
+  handleClickEmoji: (e?: MouseEvent) => void;
+}
+
 function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) {
   const [chosenEmoji, setChosenEmoji] = useState<IEmojiData | null>(null);
   const { editItemText } = useTodoStore();
+  const childRef = useRef<ChildForwardRefObjects>({
+    handleClickEmoji: () => {},
+  });
 
   const renderDialogEmoji = (node: ProsemirrorNode, view: EditorView, getPos: () => number) => {
     const { emoji: prevEmoji } = node.attrs;
@@ -83,7 +90,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     emoji.style.cursor = 'pointer';
     emoji.dataset.id = id;
     emoji.addEventListener('mousedown', e => e.preventDefault());
-
+    emoji.addEventListener('click', childRef.current.handleClickEmoji);
     return emoji;
   };
 
@@ -129,6 +136,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
               editable={editable}
               chosenEmoji={chosenEmoji}
               setChosenEmoji={setChosenEmoji}
+              ref={childRef}
             />
           ) : null}
         </Remirror>

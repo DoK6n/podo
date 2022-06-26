@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import Picker, { IEmojiData } from 'emoji-picker-react';
 import { useCommands, useRemirrorContext } from '@remirror/react';
 import Dialog from 'components/common/Dialog';
@@ -16,7 +16,7 @@ interface Props {
   setChosenEmoji: any | Object;
 }
 
-function EmojiPickerReact({ itemId, editable, chosenEmoji, setChosenEmoji }: Props) {
+const EmojiPickerReact = forwardRef(({ itemId, editable, chosenEmoji, setChosenEmoji }: Props, ref) => {
   const { updateCallout } = useCommands();
   const { view } = useRemirrorContext();
   const dialogRef = useRef<any>();
@@ -46,15 +46,10 @@ function EmojiPickerReact({ itemId, editable, chosenEmoji, setChosenEmoji }: Pro
     [view],
   );
 
-  useEffect(() => {
-    // }
-    document.addEventListener('click', handleClickEmoji);
-    return () => {
-      document.removeEventListener('click', handleClickEmoji);
-      console.log('remove');
-    };
-  }, [handleClickEmoji]);
-
+  // 부모 컴포넌트에서 자식 컴포넌트의 함수 사용을 위함
+  useImperativeHandle(ref, () => ({
+    handleClickEmoji: handleClickEmoji,
+  }));
   return (
     <Dialog dialogRef={dialogRef} editable={editable}>
       <EmojiPickerPodoteTheme>
@@ -66,6 +61,6 @@ function EmojiPickerReact({ itemId, editable, chosenEmoji, setChosenEmoji }: Pro
       </EmojiPickerPodoteTheme>
     </Dialog>
   );
-}
+});
 
 export default EmojiPickerReact;

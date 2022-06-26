@@ -35,6 +35,9 @@ import {
   HorizontalRuleExtension,
   BlockquoteExtension,
   CodeExtension,
+  BulletListExtension,
+  OrderedListExtension,
+  TaskListExtension,
 } from 'remirror/extensions';
 import styled, { TodoStylesProps } from 'styled-components';
 
@@ -107,6 +110,9 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new HorizontalRuleExtension(), // 수평선 추가
     new BlockquoteExtension(), // 인용문
     new CodeExtension(), // Inline Code Blocks
+    new BulletListExtension({ enableSpine: true }),
+    new OrderedListExtension(),
+    new TaskListExtension(),
   ];
 
   const { manager, state, setState } = useRemirror({

@@ -35,14 +35,32 @@ const initialContent: RemirrorJSON = {
   content: [
     {
       type: 'heading',
-      attrs: { level: 1 },
-      content: [{ type: 'text', text: 'Hello ' }],
+      attrs: {
+        level: 1,
+      },
+      content: [
+        {
+          type: 'text',
+          text: 'Hello ',
+        },
+      ],
     },
     {
       type: 'paragraph',
       content: [
-        { type: 'text', text: 'Hello ' },
-        { type: 'text', marks: [{ type: 'italic' }], text: 'word' },
+        {
+          type: 'text',
+          text: 'Hello ',
+        },
+        {
+          type: 'text',
+          marks: [
+            {
+              type: 'italic',
+            },
+          ],
+          text: 'word',
+        },
       ],
     },
     {
@@ -51,10 +69,131 @@ const initialContent: RemirrorJSON = {
         {
           type: 'image',
           attrs: {
+            alt: '',
+            crop: null,
             height: 160,
             width: 400,
+            rotate: null,
             src: proxySrc,
+            title: '',
+            fileName: null,
+            resizable: false,
           },
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+    },
+    {
+      type: 'bulletList',
+      content: [
+        {
+          type: 'listItem',
+          attrs: {
+            closed: false,
+            nested: false,
+          },
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'A',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'listItem',
+          attrs: {
+            closed: false,
+            nested: false,
+          },
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'B',
+                },
+              ],
+            },
+            {
+              type: 'bulletList',
+              content: [
+                {
+                  type: 'listItem',
+                  attrs: {
+                    closed: false,
+                    nested: false,
+                  },
+                  content: [
+                    {
+                      type: 'paragraph',
+                      content: [
+                        {
+                          type: 'text',
+                          text: 'a',
+                        },
+                      ],
+                    },
+                    {
+                      type: 'bulletList',
+                      content: [
+                        {
+                          type: 'listItem',
+                          attrs: {
+                            closed: false,
+                            nested: false,
+                          },
+                          content: [
+                            {
+                              type: 'paragraph',
+                              content: [
+                                {
+                                  type: 'text',
+                                  text: 'b',
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+    },
+    {
+      type: 'taskList',
+      content: [
+        {
+          type: 'taskListItem',
+          attrs: {
+            checked: true,
+          },
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'check',
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -84,7 +223,6 @@ function PodoteEditorPage() {
               content={testOnlyContentJSON}
               setTestOnlyContentJSON={setTestOnlyContentJSON}
             />
-            {/* <PodoteEditor editable={editable} /> */}
           </TodoItemBlock>
           <TodoItemBlock editable={false} done={false}>
             <pre style={{ padding: '2em' }}>{JSON.stringify(testOnlyContentJSON, null, 4)}</pre>

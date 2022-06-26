@@ -57,9 +57,47 @@ export const extensionCalloutStyledCss: ReturnType<typeof css> = css<TodoStylesP
   }
 `;
 
+export const listItemStyledCss: ReturnType<typeof css> = css`
+  & .remirror-editor li.remirror-list-item-with-custom-mark {
+    &[data-checked] > label.remirror-list-item-marker-container + input[type='checkbox'] {
+      background: #9595d9;
+    }
+    & label.remirror-list-item-marker-container {
+      & > .remirror-collapsible-list-item-button {
+        background: var(--podote-color-bright);
+        &.disabled {
+          background: var(--podote-color-dark);
+        }
+      }
+    }
+    & div > ul > div.remirror-list-spine {
+      border-left-color: #483d6b;
+    }
+  }
+`;
+
+// 읽기모드 스타일
+export const readModeStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
+  & .remirror-editor .remirror-resizable-view :nth-child(n + 1):nth-child(-n + 2) {
+    display: ${({ editable }) => (editable === false ? 'none' : 'col-resize')} !important;
+    cursor: ${({ editable }) => (editable === false ? 'default' : 'col-resize')} !important;
+  }
+`;
+
+// Static HTML Rendering 스타일
+export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
+  .remirror-html-renderer-wrapper .remirror-html-renderer-editor img {
+    width: 100%;
+    min-width: 50px;
+    object-fit: contain;
+  }
+`;
+
 export const podoteThemeStyledCss: ReturnType<typeof css> = css`
   --podote-color-heading-text: #c9d1d9;
   --podote-color-normal-text: #abb2bf;
+  --podote-color-bright: #9480d979;
+  --podote-color-dark: #5a4d857b;
 
   width: 100%;
   padding: 15px 0 15px 0;
@@ -118,21 +156,5 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     font-size: 85%;
     border-radius: 6px;
   }
-`;
-
-// 읽기모드 스타일
-export const readModeStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
-  & .remirror-editor .remirror-resizable-view :nth-child(n + 1):nth-child(-n + 2) {
-    display: ${({ editable }) => (editable === false ? 'none' : 'col-resize')} !important;
-    cursor: ${({ editable }) => (editable === false ? 'default' : 'col-resize')} !important;
-  }
-`;
-
-// Static HTML Rendering 스타일
-export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
-  .remirror-html-renderer-wrapper .remirror-html-renderer-editor img {
-    width: 100%;
-    min-width: 50px;
-    object-fit: contain;
-  }
+  ${listItemStyledCss}
 `;

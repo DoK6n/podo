@@ -1,8 +1,8 @@
 import { css } from 'styled-components';
-import reset from 'styled-reset';
+import { resetStyledCss } from './reset';
 
 export const globalStyledCss: ReturnType<typeof css> = css`
-  ${reset}
+  ${resetStyledCss}
   body {
     background: #3b305a;
     color: #e9ecef;

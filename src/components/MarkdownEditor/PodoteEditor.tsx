@@ -110,10 +110,10 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new HorizontalRuleExtension(), // 수평선 추가
     new BlockquoteExtension(), // 인용문
     new CodeExtension(), // Inline Code Blocks
-    new BulletListExtension({ enableSpine: true }),
-    new OrderedListExtension(),
-    new TaskListExtension(),
-    new ToggleListItemExtension(),
+    new BulletListExtension({ enableSpine: true }), // 리스트
+    new OrderedListExtension(), // 숫자 리스트
+    new TaskListExtension(), // 체크박스
+    new ToggleListItemExtension(), // toggling list ( Ctrl/cmd + Enter )
   ];
 
   const { manager, state, setState } = useRemirror({

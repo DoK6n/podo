@@ -157,4 +157,5 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     border-radius: 6px;
   }
   ${listItemStyledCss}
+  ${readModeStyledCss}
 `;

@@ -200,9 +200,27 @@ const initialContent: RemirrorJSON = {
   ],
 };
 
+const codemirrorContent: RemirrorJSON = {
+  type: 'doc',
+  content: [
+    {
+      type: 'codeMirror',
+      attrs: {
+        language: 'tsx',
+      },
+      content: [
+        {
+          type: 'text',
+          text: "import React from 'react';\nimport { todoTemplateStyledCss } from 'styles';\nimport { TodoList, TodoAddItem } from 'components';\nimport styled from 'styled-components';\nimport { Toaster } from 'react-hot-toast';\n\nconst TodoTemplateBlock = styled.main`\n  ${todoTemplateStyledCss}\n`;\n\nfunction TodoTemplate() {\n  return (\n    <TodoTemplateBlock>\n      <Toaster position=\"top-center\" reverseOrder={false} />\n      <TodoList />\n      <TodoAddItem />\n    </TodoTemplateBlock>\n  );\n}\n\nexport default TodoTemplate;",
+        },
+      ],
+    },
+  ],
+};
+
 function PodoteEditorPage() {
   const [editable, setEditable] = useState<boolean>(true);
-  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>(initialContent);
+  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>(codemirrorContent);
 
   return (
     <>

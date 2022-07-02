@@ -1,7 +1,9 @@
 {
   // "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "es5",
+    "experimentalDecorators": true,
+    "target": "es6",
+    "downlevelIteration": true,
     "baseUrl": "src",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

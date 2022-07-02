@@ -136,11 +136,11 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     const viewDomList = getContext()?.view.dom.children;
     if (viewDomList !== undefined) {
       for (const cmEditor of viewDomList) {
-        if (cmEditor.className === 'cm-editor ͼ1 ͼ3 ͼo') {
+        if (cmEditor.classList.contains('cm-editor')) {
           for (const cmScroller of cmEditor.children) {
-            if (cmScroller.className === 'cm-scroller') {
+            if (cmScroller.classList.contains('cm-scroller')) {
               for (const cmContent of cmScroller.children) {
-                if (cmContent.className === 'cm-content') {
+                if (cmContent.classList.contains('cm-content')) {
                   const cmContentTypeCast = cmContent as HTMLElement;
                   cmContentTypeCast.contentEditable = `${editable}`;
                 }

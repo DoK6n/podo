@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ProsemirrorNode, RemirrorJSON } from 'remirror';
 import { EditorView } from '@remirror/pm/view';
 import { IEmojiData } from 'emoji-picker-react';
@@ -41,9 +41,11 @@ import {
 } from 'remirror/extensions';
 import styled, { TodoStylesProps } from 'styled-components';
 
-import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss } from 'styles';
-import { useTodoStore, ToggleListItemExtension } from 'hooks';
+import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
+import { useTodoStore, ToggleListItemExtension, CodeMirror6Extension } from 'hooks';
 import { EmojiPickerReact, PodoteEditorMenu } from 'components';
+import { languages } from '@codemirror/language-data';
+
 const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}
   ${coreStyledCss}
@@ -114,13 +116,41 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new OrderedListExtension(), // 숫자 리스트
     new TaskListExtension(), // 체크박스
     new ToggleListItemExtension(), // toggling list ( Ctrl/cmd + Enter )
+    new CodeMirror6Extension({ languages, extensions: [gruvBox] }), // codemirror 6 (Ctrl+Enter escapes the cursor from a code block to a new line)
   ];
 
-  const { manager, state, setState } = useRemirror({
+  const { manager, state, setState, getContext } = useRemirror({
     extensions: extensions,
     content: content ? content : { type: 'doc' },
     selection: 'end',
   });
+
+  useEffect(() => {
+    /**
+     * `cmContentTypeCast`
+     * 타입 추론에 의한 Element interface에는
+     * ContentEditable 속성 관련 interface가 상속 되어 있지 않아
+     * ContentEditable이 상속된 HTMLElement로 강제 타입 캐스팅
+     */
+
+    const viewDomList = getContext()?.view.dom.children;
+    if (viewDomList !== undefined) {
+      for (const cmEditor of viewDomList) {
+        if (cmEditor.className === 'cm-editor ͼ1 ͼ3 ͼo') {
+          for (const cmScroller of cmEditor.children) {
+            if (cmScroller.className === 'cm-scroller') {
+              for (const cmContent of cmScroller.children) {
+                if (cmContent.className === 'cm-content') {
+                  const cmContentTypeCast = cmContent as HTMLElement;
+                  cmContentTypeCast.contentEditable = `${editable}`;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }, [editable]);
 
   const onChangeState = (parameter: any) => {
     // Update the state to the latest value.

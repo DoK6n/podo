@@ -116,7 +116,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new OrderedListExtension(), // 숫자 리스트
     new TaskListExtension(), // 체크박스
     new ToggleListItemExtension(), // toggling list ( Ctrl/cmd + Enter )
-    new CodeMirror6Extension({ languages, extensions: [gruvBox] }), // codemirror 6 (Ctrl+Enter escapes the cursor from a code block to a new line)
+    new CodeMirror6Extension({ languages, extensions: [gruvBox] }), // 코드블록 ( Shift-Ctrl-Enter : 블록 이전에 새줄 )
   ];
 
   const { manager, state, setState, getContext } = useRemirror({

@@ -31,7 +31,7 @@ const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
       backgroundColor: gruvboxDark.background,
       borderRadius: '6px',
       padding: '1em',
-      margin: '0.5em',
+      margin: '0.5em 0.5em 0.5em 0',
       fontFamily: '"Fira Code", Consolas, Monaco, "Andale Mono", monospace',
     },
     '.cm-content': {

@@ -22,7 +22,7 @@ const gruvboxDark = {
   cursor: '#9595d9',
 };
 /**
-The editor theme styles for Grub Box by Dok6n.
+The editor theme styles for GruvBox by Dok6n.
 */
 const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
   {

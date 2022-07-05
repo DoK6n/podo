@@ -15,6 +15,7 @@ import { assertGet, isPromise, replaceNodeAtPosition } from '@remirror/core';
 import type { EditorSchema, EditorView, NodeView, ProsemirrorNode } from '@remirror/pm';
 import { exitCode } from '@remirror/pm/commands';
 import { Selection, TextSelection } from '@remirror/pm/state';
+import { exitCodeBefore } from './codemirror6Utils';
 
 type LoadLanguage = (lang: string) => Promise<LanguageSupport> | LanguageSupport | void;
 
@@ -160,11 +161,6 @@ export class CodeMirror6NodeView implements NodeView {
     this.cm.destroy();
   }
 
-  setContentDom(): HTMLElement {
-    console.log(this.cm.contentDOM);
-    return this.cm.contentDOM;
-  }
-
   /**
    * When the code editor is focused, we can keep the selection of the outer
    * editor synchronized with the inner one, so that any commands executed on
@@ -206,6 +202,16 @@ export class CodeMirror6NodeView implements NodeView {
    */
   private codeMirrorKeymap(): CodeMirrorKeyBinding[] {
     return [
+      {
+        key: 'Shift-Ctrl-Enter',
+        run: () => {
+          if (exitCodeBefore(this.view.state, this.view.dispatch)) {
+            this.view.focus();
+            return true;
+          }
+          return false;
+        },
+      },
       {
         key: 'ArrowUp',
         run: this.maybeEscape('line', -1),
@@ -310,7 +316,6 @@ export class CodeMirror6NodeView implements NodeView {
       const anchor = state.selection.main.anchor;
       const line = state.doc.lineAt(anchor);
       const lineOffset = anchor - line.from;
-      // console.log(state);
 
       if (
         line.number !== (dir < 0 ? 1 : state.doc.lines) ||
@@ -320,7 +325,6 @@ export class CodeMirror6NodeView implements NodeView {
       }
 
       const targetPos = this.getPos() + (dir < 0 ? 0 : this.node.nodeSize);
-
       const selection = Selection.near(this.view.state.doc.resolve(targetPos), dir);
       this.view.dispatch(this.view.state.tr.setSelection(selection).scrollIntoView());
       this.view.focus();

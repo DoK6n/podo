@@ -1,5 +1,7 @@
 import { CommandFunction } from '@remirror/core';
-import { Selection } from '@remirror/pm/state';
+import { EditorState, Selection, Transaction } from '@remirror/pm/state';
+import { exitCode } from '@remirror/pm/commands';
+import { Schema } from '@remirror/pm/model';
 
 /**
  * Handling cursor motion from the outer to the inner editor must be done with a
@@ -31,4 +33,45 @@ export function arrowHandler(dir: 'left' | 'right' | 'up' | 'down'): CommandFunc
 
     return false;
   };
+}
+
+// :: (EditorState, ?(tr: Transaction)) → bool
+// When the selection is in a node with a truthy
+// [`code`](#model.NodeSpec.code) property in its spec, create a
+// default block after the code block, and move the cursor there.
+function defaultBlockAt(match: any) {
+  for (let i = 0; i < match.edgeCount; i++) {
+    let { type } = match.edge(i);
+    if (type.isTextblock && !type.hasRequiredAttrs()) return type;
+  }
+  return null;
+}
+
+/**
+ *
+ * When the selection is in a node with a truthy
+ * [`code`](#model.NodeSpec.code) property in its spec, create a
+ * default block before the code block, and move the cursor there
+ *
+ * 선택 항목이 true인 노드에 있을 때
+ * 해당 사양의 [`code`](#model.NodeSpec.code) 속성은
+ * 코드 블록 앞의 기본 블록, 커서를 그곳으로 이동
+ */
+export function exitCodeBefore<S extends Schema = any>(
+  state: EditorState<S>,
+  dispatch?: ((tr: Transaction<S>) => void) | undefined,
+): boolean {
+  let { $head, $anchor } = state.selection;
+  if (!$head.parent.type.spec.code || !$head.sameParent($anchor)) return false;
+  let above = $head.node(-1),
+    after = $head.indexAfter(-1),
+    type = defaultBlockAt(above.contentMatchAt(after));
+  if (!above.canReplaceWith(after, after, type)) return false;
+  if (dispatch) {
+    let pos = $head.start() - 1;
+    let tr = state.tr.replaceWith(pos, pos, type.createAndFill());
+    tr.setSelection(Selection.near(tr.doc.resolve(pos), 1));
+    dispatch(tr.scrollIntoView());
+  }
+  return true;
 }

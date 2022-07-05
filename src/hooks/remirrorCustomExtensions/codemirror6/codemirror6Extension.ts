@@ -18,7 +18,6 @@ import {
   ProsemirrorNode,
 } from '@remirror/core';
 import { TextSelection } from '@remirror/pm/state';
-import { CompletionContext } from '@codemirror/autocomplete';
 
 import { CodeMirror6NodeView } from './codemirror6NodeView';
 import { CodeMirrorExtensionOptions } from './codemirror6Types';

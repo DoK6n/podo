@@ -17,9 +17,11 @@ const gruvboxDark = {
   darkBackground: '#483d6b',
   highlightBackground: '#483d6b',
   background: '#483d6b',
-  tooltipBackground: '#353a42',
-  selection: '#3E4451',
-  cursor: '#9595d9',
+  tooltipBackground: '#2f264a',
+  tooltipBorder: '#5e5282',
+  tooltipSelectionBackground: '#403561a6',
+  selection: '#5d5188',
+  cursor: '#c9d1d9',
 };
 /**
 The editor theme styles for GruvBox by Dok6n.
@@ -30,8 +32,9 @@ const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
       color: gruvboxDark.violet,
       backgroundColor: gruvboxDark.background,
       borderRadius: '6px',
-      padding: '1em',
+      padding: '1em 2em 1em 0.3em',
       margin: '0.5em 0.5em 0.5em 0',
+      tabSize: '2',
       fontFamily: '"Fira Code", Consolas, Monaco, "Andale Mono", monospace',
     },
     '.cm-content': {
@@ -57,8 +60,9 @@ const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
     '.cm-activeLine': { backgroundColor: gruvboxDark.highlightBackground },
     '.cm-selectionMatch': { backgroundColor: '#aafe661a' },
     '&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket': {
-      backgroundColor: '#bad0f847',
-      outline: '1px solid #515a6b',
+      backgroundColor: '#7b6da0',
+      borderRadius: '4px',
+      outline: '1px solid #6c5f8f',
     },
     '.cm-gutters': {
       backgroundColor: gruvboxDark.background,
@@ -66,20 +70,33 @@ const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
       border: 'none',
     },
     '.cm-activeLineGutter': {
-      backgroundColor: gruvboxDark.highlightBackground,
+      backgroundColor: 'transparent',
+      color: gruvboxDark.invalid,
     },
     '.cm-foldPlaceholder': {
       backgroundColor: 'transparent',
       border: 'none',
       color: '#ddd',
     },
+    '.cm-lineNumbers': {
+      'min-width': '5ch',
+    },
+    '.cm-foldGutter .cm-gutterElement': {
+      transition: 'color 0.25s ease',
+      fontFamily: 'Material Icons',
+      paddingInline: '5px',
+      '&:hover': {
+        color: gruvboxDark.invalid,
+      },
+    },
     '.cm-tooltip': {
-      border: 'none',
+      border: `1px solid ${gruvboxDark.tooltipBorder}`,
       backgroundColor: gruvboxDark.tooltipBackground,
+      color: gruvboxDark.invalid,
     },
     '.cm-tooltip .cm-tooltip-arrow:before': {
-      borderTopColor: 'transparent',
-      borderBottomColor: 'transparent',
+      borderTopColor: gruvboxDark.tooltipSelectionBackground,
+      borderBottomColor: gruvboxDark.tooltipSelectionBackground,
     },
     '.cm-tooltip .cm-tooltip-arrow:after': {
       borderTopColor: gruvboxDark.tooltipBackground,
@@ -87,8 +104,8 @@ const gruvBoxTheme = /*@__PURE__*/ EditorView.theme(
     },
     '.cm-tooltip-autocomplete': {
       '& > ul > li[aria-selected]': {
-        backgroundColor: gruvboxDark.highlightBackground,
-        color: gruvboxDark.ivory,
+        backgroundColor: gruvboxDark.tooltipSelectionBackground,
+        color: gruvboxDark.stone,
       },
     },
   },

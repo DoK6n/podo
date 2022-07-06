@@ -45,6 +45,18 @@ import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCs
 import { useTodoStore, ToggleListItemExtension, CodeMirror6Extension } from 'hooks';
 import { EmojiPickerReact, PodoteEditorMenu } from 'components';
 import { languages } from '@codemirror/language-data';
+import { history, historyKeymap } from '@codemirror/commands';
+import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
+import { defaultKeymap, indentMore, indentLess } from '@codemirror/commands';
+
+import {
+  drawSelection,
+  highlightActiveLineGutter,
+  highlightSpecialChars,
+  rectangularSelection,
+} from '@codemirror/view';
+import { EditorState as CodeMirrorEditorState } from '@codemirror/state';
+import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
 
 const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}
@@ -116,7 +128,40 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new OrderedListExtension(), // 숫자 리스트
     new TaskListExtension(), // 체크박스
     new ToggleListItemExtension(), // toggling list ( Ctrl/cmd + Enter )
-    new CodeMirror6Extension({ languages, extensions: [gruvBox] }), // 코드블록 ( Shift-Ctrl-Enter : 블록 이전에 새줄 )
+    new CodeMirror6Extension({
+      languages,
+      extensions: [
+        gruvBox,
+        history(),
+        foldGutter({
+          openText: 'expand_more',
+          closedText: 'chevron_right',
+        }),
+        highlightActiveLineGutter(),
+        highlightSpecialChars(),
+        drawSelection(),
+        CodeMirrorEditorState.allowMultipleSelections.of(true),
+        rectangularSelection(),
+        bracketMatching(),
+        autocompletion(),
+      ],
+      keymaps: [
+        ...historyKeymap,
+        ...foldKeymap,
+        ...defaultKeymap,
+        ...completionKeymap,
+        {
+          key: 'Tab',
+          preventDefault: true,
+          run: indentMore,
+        },
+        {
+          key: 'Shift-Tab',
+          preventDefault: true,
+          run: indentLess,
+        },
+      ],
+    }), // 코드블록 ( Shift-Ctrl-Enter : 블록 이전에 새줄 )
   ];
 
   const { manager, state, setState, getContext } = useRemirror({

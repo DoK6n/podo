@@ -93,11 +93,15 @@ export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
-export const podoteThemeStyledCss: ReturnType<typeof css> = css`
+export const podoteColorsStyledCss: ReturnType<typeof css> = css`
   --podote-color-heading-text: #c9d1d9;
   --podote-color-normal-text: #abb2bf;
   --podote-color-bright: #9480d979;
   --podote-color-dark: #5a4d857b;
+`;
+
+export const podoteThemeStyledCss: ReturnType<typeof css> = css`
+  ${podoteColorsStyledCss}
 
   width: 100%;
   padding: 15px 0 15px 0;

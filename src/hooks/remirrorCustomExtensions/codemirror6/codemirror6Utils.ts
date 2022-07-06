@@ -1,6 +1,5 @@
 import { CommandFunction } from '@remirror/core';
 import { EditorState, Selection, Transaction } from '@remirror/pm/state';
-import { exitCode } from '@remirror/pm/commands';
 import { Schema } from '@remirror/pm/model';
 
 /**

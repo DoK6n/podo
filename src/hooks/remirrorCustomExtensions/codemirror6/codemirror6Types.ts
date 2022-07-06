@@ -1,5 +1,6 @@
 import type { LanguageDescription } from '@codemirror/language';
 import { Extension as CodeMirrorExtension } from '@codemirror/state';
+import { KeyBinding } from '@codemirror/view';
 
 export interface CodeMirrorExtensionOptions {
   /**
@@ -17,6 +18,7 @@ export interface CodeMirrorExtensionOptions {
    */
   extensions?: CodeMirrorExtension[] | null;
 
+  keymaps?: KeyBinding[] | null;
   /**
    * The CodeMirror languages to use.
    *

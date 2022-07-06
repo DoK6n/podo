@@ -26,10 +26,15 @@ import { arrowHandler } from './codemirror6Utils';
 @extension<CodeMirrorExtensionOptions>({
   defaultOptions: {
     extensions: null,
+    keymaps: null,
     languages: null,
     toggleName: 'paragraph',
   },
 })
+/**
+ * Ctrl + Enter : escape after code block
+ * Shift + Ctrl + Enter : escape before code block
+ */
 export class CodeMirror6Extension extends NodeExtension<CodeMirrorExtensionOptions> {
   get name() {
     return 'codeMirror' as const;
@@ -70,6 +75,7 @@ export class CodeMirror6Extension extends NodeExtension<CodeMirrorExtensionOptio
         view,
         getPos: getPos as () => number,
         extensions: this.options.extensions,
+        keymaps: this.options.keymaps,
         loadLanguage: this.loadLanguage.bind(this),
         toggleName: this.options.toggleName,
       });

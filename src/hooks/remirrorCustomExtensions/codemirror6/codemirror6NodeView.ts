@@ -1,4 +1,4 @@
-import type { LanguageSupport } from '@codemirror/language';
+import { LanguageSupport } from '@codemirror/language';
 import {
   Compartment,
   EditorState as CodeMirrorEditorState,
@@ -38,6 +38,7 @@ export class CodeMirror6NodeView implements NodeView {
     view,
     getPos,
     extensions,
+    keymaps,
     loadLanguage,
     toggleName,
   }: {
@@ -45,6 +46,7 @@ export class CodeMirror6NodeView implements NodeView {
     view: EditorView;
     getPos: () => number;
     extensions: CodeMirrorExtension[] | null;
+    keymaps: CodeMirrorKeyBinding[] | null;
     loadLanguage: LoadLanguage;
     toggleName: string;
   }) {
@@ -68,7 +70,12 @@ export class CodeMirror6NodeView implements NodeView {
     // Create the initial CodeMirror state
     const startState = CodeMirrorEditorState.create({
       doc: this.node.textContent,
-      extensions: [keymap.of(this.codeMirrorKeymap()), changeFilter, this.languageConf.of([]), ...(extensions ?? [])],
+      extensions: [
+        keymap.of([...this.codeMirrorKeymap(), ...(keymaps ?? [])]),
+        changeFilter,
+        this.languageConf.of([]),
+        ...(extensions ?? []),
+      ],
     });
 
     // Create a CodeMirror instance

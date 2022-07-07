@@ -3,6 +3,7 @@ import { menuButtonStyledCss } from 'styles';
 import { HeadingButton } from 'components';
 import { useActive, useChainedCommands } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
+import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
 import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
 import { AiOutlineStrikethrough } from 'react-icons/ai';
 import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
@@ -61,6 +62,30 @@ function PodoteEditorMenu() {
         isActive={active.blockquote()}
       >
         <GrBlockQuote />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.toggleBulletList().focus().run();
+        }}
+        isActive={active.bulletList()}
+      >
+        <TbList />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.toggleOrderedList().focus().run();
+        }}
+        isActive={active.orderedList()}
+      >
+        <TbListNumbers />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.toggleTaskList().focus().run();
+        }}
+        isActive={active.taskList()}
+      >
+        <TbListCheck />
       </MenuButton>
       <MenuButton
         onClick={() => {

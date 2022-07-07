@@ -38,7 +38,6 @@ export class CodeMirror6NodeView implements NodeView {
     view,
     getPos,
     extensions,
-    keymaps,
     loadLanguage,
     toggleName,
   }: {
@@ -46,7 +45,6 @@ export class CodeMirror6NodeView implements NodeView {
     view: EditorView;
     getPos: () => number;
     extensions: CodeMirrorExtension[] | null;
-    keymaps: CodeMirrorKeyBinding[] | null;
     loadLanguage: LoadLanguage;
     toggleName: string;
   }) {
@@ -71,7 +69,7 @@ export class CodeMirror6NodeView implements NodeView {
     const startState = CodeMirrorEditorState.create({
       doc: this.node.textContent,
       extensions: [
-        keymap.of([...this.codeMirrorKeymap(), ...(keymaps ?? [])]),
+        keymap.of([...this.codeMirrorKeymap()]),
         changeFilter,
         this.languageConf.of([]),
         ...(extensions ?? []),

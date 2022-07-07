@@ -26,7 +26,6 @@ import { arrowHandler } from './codemirror6Utils';
 @extension<CodeMirrorExtensionOptions>({
   defaultOptions: {
     extensions: null,
-    keymaps: null,
     languages: null,
     toggleName: 'paragraph',
   },
@@ -75,7 +74,6 @@ export class CodeMirror6Extension extends NodeExtension<CodeMirrorExtensionOptio
         view,
         getPos: getPos as () => number,
         extensions: this.options.extensions,
-        keymaps: this.options.keymaps,
         loadLanguage: this.loadLanguage.bind(this),
         toggleName: this.options.toggleName,
       });

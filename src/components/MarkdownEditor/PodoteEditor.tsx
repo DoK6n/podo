@@ -53,6 +53,7 @@ import {
   drawSelection,
   highlightActiveLineGutter,
   highlightSpecialChars,
+  keymap,
   rectangularSelection,
 } from '@codemirror/view';
 import { EditorState as CodeMirrorEditorState } from '@codemirror/state';
@@ -144,22 +145,22 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
         rectangularSelection(),
         bracketMatching(),
         autocompletion(),
-      ],
-      keymaps: [
-        ...historyKeymap,
-        ...foldKeymap,
-        ...defaultKeymap,
-        ...completionKeymap,
-        {
-          key: 'Tab',
-          preventDefault: true,
-          run: indentMore,
-        },
-        {
-          key: 'Shift-Tab',
-          preventDefault: true,
-          run: indentLess,
-        },
+        keymap.of([
+          ...historyKeymap,
+          ...foldKeymap,
+          ...defaultKeymap,
+          ...completionKeymap,
+          {
+            key: 'Tab',
+            preventDefault: true,
+            run: indentMore,
+          },
+          {
+            key: 'Shift-Tab',
+            preventDefault: true,
+            run: indentLess,
+          },
+        ]),
       ],
     }), // 코드블록 ( Shift-Ctrl-Enter : 블록 이전에 새줄 )
   ];

@@ -18,7 +18,6 @@ export interface CodeMirrorExtensionOptions {
    */
   extensions?: CodeMirrorExtension[] | null;
 
-  keymaps?: KeyBinding[] | null;
   /**
    * The CodeMirror languages to use.
    *

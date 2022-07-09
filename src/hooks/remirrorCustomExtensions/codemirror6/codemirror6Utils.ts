@@ -1,5 +1,7 @@
 import { CommandFunction } from '@remirror/core';
-import { EditorState, Selection, Transaction } from '@remirror/pm/state';
+// import { EditorState, Selection, Transaction } from '@remirror/pm/state';
+import { EditorState, Transaction, Selection } from 'prosemirror-state';
+
 import { Schema } from '@remirror/pm/model';
 
 /**
@@ -56,10 +58,7 @@ function defaultBlockAt(match: any) {
  * 해당 사양의 [`code`](#model.NodeSpec.code) 속성은
  * 코드 블록 앞의 기본 블록, 커서를 그곳으로 이동
  */
-export function exitCodeBefore<S extends Schema = any>(
-  state: EditorState<S>,
-  dispatch?: ((tr: Transaction<S>) => void) | undefined,
-): boolean {
+export function exitCodeBefore(state: EditorState, dispatch?: ((tr: Transaction) => void) | undefined): boolean {
   let { $head, $anchor } = state.selection;
   if (!$head.parent.type.spec.code || !$head.sameParent($anchor)) return false;
   let above = $head.node(-1),

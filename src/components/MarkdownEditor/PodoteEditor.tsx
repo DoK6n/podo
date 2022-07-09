@@ -39,13 +39,16 @@ import {
   OrderedListExtension,
   TaskListExtension,
   IframeExtension,
+  createMarkPositioner,
+  LinkExtension,
+  ShortcutHandlerProps,
   // TrailingNodeExtension,
 } from 'remirror/extensions';
 import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
 import { useTodoStore, ToggleListItemExtension, CodeMirror6Extension } from 'hooks';
-import { EmojiPickerReact, PodoteEditorMenu } from 'components';
+import { EmojiPickerReact, PodoteEditorMenu, FloatingLinkToolbar } from 'components';
 import { languages } from '@codemirror/language-data';
 import { history, historyKeymap } from '@codemirror/commands';
 import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
@@ -133,6 +136,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     new ToggleListItemExtension(), // toggling list ( Ctrl/cmd + Enter )
     // new TrailingNodeExtension(), // 마지막에 항상 한줄 띔
     new IframeExtension({ enableResizing: true }),
+    new LinkExtension({ autoLink: true }),
     new CodeMirror6Extension({
       languages,
       extensions: [
@@ -232,6 +236,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
               ref={childRef}
             />
           ) : null}
+          <FloatingLinkToolbar />
         </Remirror>
       </ThemeProvider>
     </PodoteTheme>

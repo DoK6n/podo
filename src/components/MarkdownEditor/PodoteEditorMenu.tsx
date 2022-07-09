@@ -1,7 +1,8 @@
+import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useCallback, useState } from 'react';
 import styled, { MenuButtonStyledProps } from 'styled-components';
 import { menuButtonStyledCss } from 'styles';
 import { HeadingButton } from 'components';
-import { useActive, useChainedCommands, useRemirrorContext } from '@remirror/react';
+import { useActive, useChainedCommands, useCommands, useRemirrorContext } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
 import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
 import { RiCodeBoxLine } from 'react-icons/ri';
@@ -14,6 +15,36 @@ const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
   background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
 `;
+
+const AddIframeButton = () => {
+  const { addIframe } = useCommands();
+  const [href, setHref] = useState<string>('https://remirror.io');
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
+    setHref(e.target.value);
+  }, []);
+
+  const handleMouseDown: MouseEventHandler<HTMLButtonElement> = useCallback(e => {
+    e.preventDefault();
+  }, []);
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
+    e => {
+      e.preventDefault();
+      addIframe({ src: href, height: 250, width: 500 });
+      setHref('');
+    },
+    [addIframe, href],
+  );
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="url" placeholder="Enter link..." value={href} onChange={handleChange} required />
+      <button type="submit" onMouseDown={handleMouseDown}>
+        Add iframe
+      </button>
+    </form>
+  );
+};
 
 const CreateCodeMirrorButton = ({ language }: { language: string }) => {
   const { commands } = useRemirrorContext<CodeMirror6Extension>({ autoUpdate: true });
@@ -150,6 +181,7 @@ function PodoteEditorMenu() {
         <MdCode />
       </MenuButton>
       <CreateCodeMirrorButton language="javascript" />
+      <AddIframeButton />
     </>
   );
 }

@@ -83,127 +83,6 @@ const initialContent: RemirrorJSON = {
       ],
     },
     {
-      type: 'paragraph',
-    },
-    {
-      type: 'bulletList',
-      content: [
-        {
-          type: 'listItem',
-          attrs: {
-            closed: false,
-            nested: false,
-          },
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: 'A',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: 'listItem',
-          attrs: {
-            closed: false,
-            nested: false,
-          },
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: 'B',
-                },
-              ],
-            },
-            {
-              type: 'bulletList',
-              content: [
-                {
-                  type: 'listItem',
-                  attrs: {
-                    closed: false,
-                    nested: false,
-                  },
-                  content: [
-                    {
-                      type: 'paragraph',
-                      content: [
-                        {
-                          type: 'text',
-                          text: 'a',
-                        },
-                      ],
-                    },
-                    {
-                      type: 'bulletList',
-                      content: [
-                        {
-                          type: 'listItem',
-                          attrs: {
-                            closed: false,
-                            nested: false,
-                          },
-                          content: [
-                            {
-                              type: 'paragraph',
-                              content: [
-                                {
-                                  type: 'text',
-                                  text: 'b',
-                                },
-                              ],
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'paragraph',
-    },
-    {
-      type: 'taskList',
-      content: [
-        {
-          type: 'taskListItem',
-          attrs: {
-            checked: true,
-          },
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: 'check',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
-
-const codemirrorContent: RemirrorJSON = {
-  type: 'doc',
-  content: [
-    {
       type: 'codeMirror',
       attrs: {
         language: 'tsx',
@@ -220,7 +99,7 @@ const codemirrorContent: RemirrorJSON = {
 
 function PodoteEditorPage() {
   const [editable, setEditable] = useState<boolean>(true);
-  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>(codemirrorContent);
+  const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>(initialContent);
 
   return (
     <>

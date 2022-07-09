@@ -16,11 +16,13 @@ import {
   NodeViewMethod,
   PrioritizedKeyBindings,
   ProsemirrorNode,
+  setBlockType,
 } from '@remirror/core';
 import { TextSelection } from '@remirror/pm/state';
+import { command, CommandFunction, findParentNodeOfType, isEqual } from 'remirror';
 
 import { CodeMirror6NodeView } from './codemirror6NodeView';
-import { CodeMirrorExtensionOptions } from './codemirror6Types';
+import { CodeMirrorExtensionAttributes, CodeMirrorExtensionOptions } from './codemirror6Types';
 import { arrowHandler } from './codemirror6Utils';
 
 @extension<CodeMirrorExtensionOptions>({
@@ -184,5 +186,48 @@ export class CodeMirror6Extension extends NodeExtension<CodeMirrorExtensionOptio
     }
 
     return language.support || language.load();
+  }
+
+  /**
+   * Creates a CodeMirror block at the current position.
+   *
+   * ```ts
+   * commands.createCodeMirror({ language: 'js' });
+   * ```
+   */
+  @command()
+  createCodeMirror(attributes: CodeMirrorExtensionAttributes): CommandFunction {
+    return setBlockType(this.type, attributes);
+  }
+
+  /**
+   * Update the code block at the current position. Primarily this is used
+   * to change the language.
+   *
+   * ```ts
+   * if (commands.updateCodeMirror.isEnabled()) {
+   *   commands.updateCodeMirror({ language: 'markdown' });
+   * }
+   * ```
+   */
+  @command()
+  updateCodeMirror(attributes: CodeMirrorExtensionAttributes): CommandFunction {
+    const type = this.type;
+    return ({ state, dispatch, tr }) => {
+      const parent = findParentNodeOfType({ types: type, selection: state.selection });
+
+      if (!parent || isEqual(attributes, parent.node.attrs)) {
+        // Do nothing since the attrs are the same
+        return false;
+      }
+
+      tr.setNodeMarkup(parent.pos, type, { ...parent.node.attrs, ...attributes });
+
+      if (dispatch) {
+        dispatch(tr);
+      }
+
+      return true;
+    };
   }
 }

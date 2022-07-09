@@ -1,17 +1,31 @@
 import styled, { MenuButtonStyledProps } from 'styled-components';
 import { menuButtonStyledCss } from 'styles';
 import { HeadingButton } from 'components';
-import { useActive, useChainedCommands } from '@remirror/react';
+import { useActive, useChainedCommands, useRemirrorContext } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
 import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
+import { RiCodeBoxLine } from 'react-icons/ri';
 import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
 import { AiOutlineStrikethrough } from 'react-icons/ai';
 import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
+import { CodeMirror6Extension } from 'hooks';
 
 const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
   background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
 `;
+
+const CreateCodeMirrorButton = ({ language }: { language: string }) => {
+  const { commands } = useRemirrorContext<CodeMirror6Extension>({ autoUpdate: true });
+  const { createCodeMirror } = commands;
+  const enabled = createCodeMirror.enabled({ language });
+
+  return (
+    <MenuButton onClick={() => createCodeMirror({ language })} isActive={!enabled}>
+      <RiCodeBoxLine />
+    </MenuButton>
+  );
+};
 
 function PodoteEditorMenu() {
   const chain = useChainedCommands();
@@ -135,6 +149,7 @@ function PodoteEditorMenu() {
       >
         <MdCode />
       </MenuButton>
+      <CreateCodeMirrorButton language="javascript" />
     </>
   );
 }

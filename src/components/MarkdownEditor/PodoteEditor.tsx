@@ -212,7 +212,13 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
   return (
     <PodoteTheme editable={editable}>
       <ThemeProvider>
-        <Remirror manager={manager} initialContent={state} onChange={onChangeState} editable={editable}>
+        <Remirror
+          manager={manager}
+          initialContent={state}
+          autoFocus={'end'}
+          onChange={onChangeState}
+          editable={editable}
+        >
           {editable ? <PodoteEditorMenu /> : null}
           <EditorComponent />
           {editable ? (

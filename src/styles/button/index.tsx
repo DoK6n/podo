@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { podoteColorsStyledCss } from 'styles';
 
 export const buttonStyledCss: ReturnType<typeof css> = css`
   background: #3e2f6767;
@@ -17,6 +18,7 @@ export const buttonStyledCss: ReturnType<typeof css> = css`
 `;
 
 export const menuButtonStyledCss: ReturnType<typeof css> = css`
+  ${podoteColorsStyledCss}
   background: transparent;
   color: #abb2bf;
   border: none;
@@ -28,7 +30,19 @@ export const menuButtonStyledCss: ReturnType<typeof css> = css`
   cursor: pointer;
 
   &:hover {
-    background-color: #483d6b;
-    color: #c9d1d9;
+    background-color: var(--podote-color-dark-4);
+    color: var(--podote-color-heading-text);
   }
+`;
+
+export const menuFormStyledCss: ReturnType<typeof css> = css`
+  display: flex;
+  align-items: center;
+`;
+
+export const menuBar: ReturnType<typeof css> = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `;

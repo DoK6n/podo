@@ -41,10 +41,10 @@ export const extensionCalloutStyledCss: ReturnType<typeof css> = css<TodoStylesP
   }
   .remirror-editor div[data-callout-type='blank'] {
     background: #483d6b5c;
-    border-left-color: #483d6b;
+    border-left-color: var(--podote-color-dark-4);
   }
   .remirror-editor.ProseMirror hr {
-    background-color: #483d6b;
+    background-color: var(--podote-color-dark-4);
     border: 0;
     box-sizing: content-box;
     height: 0.25em;
@@ -64,14 +64,14 @@ export const listItemStyledCss: ReturnType<typeof css> = css`
     }
     & label.remirror-list-item-marker-container {
       & > .remirror-collapsible-list-item-button {
-        background: var(--podote-color-bright);
+        background: var(--podote-color-dark-1);
         &.disabled {
-          background: var(--podote-color-dark);
+          background: var(--podote-color-dark-3);
         }
       }
     }
     & div > ul > div.remirror-list-spine {
-      border-left-color: #483d6b;
+      border-left-color: var(--podote-color-dark-4);
     }
   }
 `;
@@ -93,11 +93,49 @@ export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
+export const inputStyledCss: ReturnType<typeof css> = css`
+  outline-style: none;
+  border-radius: 5px;
+  background-color: var(--podote-color-dark-2);
+  border: 1px solid var(--podote-color-light-1);
+  color: var(--podote-color-heading-text);
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  &::placeholder {
+    color: var(--podote-color-normal-text);
+  }
+`;
+
+export const floatingLinkToolbarStyledCss: ReturnType<typeof css> = css`
+  .remirror-floating-popover {
+    z-index: 10;
+    & > input {
+      ${inputStyledCss}
+    }
+  }
+  .remirror-role {
+    color: var(--podote-color-heading-text);
+    background-color: transparent;
+  }
+  .remirror-button.remirror-tabbable {
+    border: 1px solid var(--podote-color-heading-text);
+    /* background-color: teal; */
+    background-color: var(--podote-color-normal-1);
+  }
+  .remirror-group {
+    background-color: transparent;
+  }
+`;
+
 export const podoteColorsStyledCss: ReturnType<typeof css> = css`
   --podote-color-heading-text: #c9d1d9;
   --podote-color-normal-text: #abb2bf;
-  --podote-color-bright: #9480d979;
-  --podote-color-dark: #5a4d857b;
+
+  --podote-color-light-1: #9595d9;
+  --podote-color-normal-1: #5f45c9d4;
+  --podote-color-dark-1: #9480d979;
+  --podote-color-dark-2: #605679;
+  --podote-color-dark-3: #5a4d857b;
+  --podote-color-dark-4: #483d6b;
 `;
 
 export const podoteThemeStyledCss: ReturnType<typeof css> = css`
@@ -119,8 +157,10 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
   i {
     font-style: italic;
   }
+  a {
+    color: var(--podote-color-light-1);
+  }
   .remirror-editor .ProseMirror-selectednode {
-    /* outline: 2px solid #9595d9; */
     outline: none;
   }
   .remirror-theme .ProseMirror {
@@ -155,11 +195,12 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
   }
 
   .remirror-theme .remirror-editor-wrapper .remirror-editor code {
-    background: #483d6b;
+    background: var(--podote-color-dark-4);
     padding: 0.2em 0.4em;
     font-size: 85%;
     border-radius: 6px;
   }
   ${listItemStyledCss}
   ${readModeStyledCss}
+  ${floatingLinkToolbarStyledCss}
 `;

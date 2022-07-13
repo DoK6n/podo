@@ -1,12 +1,12 @@
 import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useCallback, useState } from 'react';
 import styled, { MenuButtonStyledProps } from 'styled-components';
-import { menuButtonStyledCss } from 'styles';
+import { inputStyledCss, menuBar, menuButtonStyledCss, menuFormStyledCss } from 'styles';
 import { HeadingButton } from 'components';
 import { useActive, useChainedCommands, useCommands, useRemirrorContext } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
 import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
 import { RiCodeBoxLine } from 'react-icons/ri';
-import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
+import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined, MdImageSearch } from 'react-icons/md';
 import { AiOutlineStrikethrough } from 'react-icons/ai';
 import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
 import { CodeMirror6Extension } from 'hooks';
@@ -14,6 +14,18 @@ import { CodeMirror6Extension } from 'hooks';
 const MenuButton = styled.button<MenuButtonStyledProps>`
   ${menuButtonStyledCss}
   background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
+`;
+
+const MenuInput = styled.input`
+  ${inputStyledCss}
+`;
+
+const MenuBar = styled.div`
+  ${menuBar}
+`;
+
+const MenuForm = styled.form`
+  ${menuFormStyledCss};
 `;
 
 const AddIframeButton = () => {
@@ -37,12 +49,12 @@ const AddIframeButton = () => {
     [addIframe, href],
   );
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="url" placeholder="Enter link..." value={href} onChange={handleChange} required />
-      <button type="submit" onMouseDown={handleMouseDown}>
-        Add iframe
-      </button>
-    </form>
+    <MenuForm onSubmit={handleSubmit}>
+      <MenuInput type="url" placeholder="Enter URL..." value={href} onChange={handleChange} required />
+      <MenuButton type="submit" onMouseDown={handleMouseDown}>
+        <MdImageSearch />
+      </MenuButton>
+    </MenuForm>
   );
 };
 
@@ -62,7 +74,7 @@ function PodoteEditorMenu() {
   const chain = useChainedCommands();
   const active = useActive();
   return (
-    <>
+    <MenuBar>
       <HeadingButton level={1} />
       <HeadingButton level={2} />
       <HeadingButton level={3} />
@@ -182,7 +194,7 @@ function PodoteEditorMenu() {
       </MenuButton>
       <CreateCodeMirrorButton language="javascript" />
       <AddIframeButton />
-    </>
+    </MenuBar>
   );
 }
 

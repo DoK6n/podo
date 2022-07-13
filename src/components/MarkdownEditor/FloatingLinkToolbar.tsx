@@ -3,18 +3,14 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import { createMarkPositioner, LinkExtension, ShortcutHandlerProps } from 'remirror/extensions';
 import {
   ComponentItem,
-  EditorComponent,
   FloatingToolbar,
   FloatingWrapper,
-  Remirror,
-  ThemeProvider,
   ToolbarItemUnion,
   useActive,
   useAttrs,
   useChainedCommands,
   useCurrentSelection,
   useExtensionEvent,
-  useRemirror,
   useUpdateReason,
 } from '@remirror/react';
 

@@ -39,9 +39,7 @@ import {
   OrderedListExtension,
   TaskListExtension,
   IframeExtension,
-  createMarkPositioner,
   LinkExtension,
-  ShortcutHandlerProps,
   // TrailingNodeExtension,
 } from 'remirror/extensions';
 import styled, { TodoStylesProps } from 'styled-components';

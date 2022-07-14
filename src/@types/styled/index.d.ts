@@ -10,6 +10,7 @@ declare module 'styled-components' {
   interface MenuButtonStyledProps {
     isActive?: boolean;
     done?: boolean;
+    isToggle?: boolean;
   }
 }
 

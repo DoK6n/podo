@@ -1,4 +1,5 @@
 import { css, TodoStylesProps } from 'styled-components';
+import { inputStyledCss, podoteColorsStyledCss } from 'styles';
 
 export const extensionCountStyledCss: ReturnType<typeof css> = css`
   .remirror-editor span.remirror-max-count-exceeded {
@@ -93,18 +94,6 @@ export const remirrorHTMLrendererStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
-export const inputStyledCss: ReturnType<typeof css> = css`
-  outline-style: none;
-  border-radius: 5px;
-  background-color: var(--podote-color-dark-2);
-  border: 1px solid var(--podote-color-light-1);
-  color: var(--podote-color-heading-text);
-  padding: 0.2em 0.5em 0.2em 0.5em;
-  &::placeholder {
-    color: var(--podote-color-normal-text);
-  }
-`;
-
 export const floatingLinkToolbarStyledCss: ReturnType<typeof css> = css`
   .remirror-floating-popover {
     z-index: 10;
@@ -126,16 +115,17 @@ export const floatingLinkToolbarStyledCss: ReturnType<typeof css> = css`
   }
 `;
 
-export const podoteColorsStyledCss: ReturnType<typeof css> = css`
-  --podote-color-heading-text: #c9d1d9;
-  --podote-color-normal-text: #abb2bf;
+// 메뉴
+export const menuFormStyledCss: ReturnType<typeof css> = css`
+  display: flex;
+  align-items: center;
+`;
 
-  --podote-color-light-1: #9595d9;
-  --podote-color-normal-1: #5f45c9d4;
-  --podote-color-dark-1: #9480d979;
-  --podote-color-dark-2: #605679;
-  --podote-color-dark-3: #5a4d857b;
-  --podote-color-dark-4: #483d6b;
+export const menuBar: ReturnType<typeof css> = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const podoteThemeStyledCss: ReturnType<typeof css> = css`

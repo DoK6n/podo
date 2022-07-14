@@ -34,15 +34,3 @@ export const menuButtonStyledCss: ReturnType<typeof css> = css`
     color: var(--podote-color-heading-text);
   }
 `;
-
-export const menuFormStyledCss: ReturnType<typeof css> = css`
-  display: flex;
-  align-items: center;
-`;
-
-export const menuBar: ReturnType<typeof css> = css`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-`;

@@ -23,5 +23,5 @@ export const toggleInputStyledCss: ReturnType<typeof css> = css<MenuButtonStyled
   transition: ${props =>
     props.isToggle
       ? 'all 0.5s ease, opacity 0s, padding 0s, border-width 0s'
-      : 'all 0.5s ease, opacity 0.6s ease, padding 0.2s linear 0.4s, border-width 0.2s linear 0.4s'};
+      : 'all 0.5s ease, opacity 0.6s ease, padding 0.2s linear 0.3s, border-width 0.2s linear 0.3s'};
 `;

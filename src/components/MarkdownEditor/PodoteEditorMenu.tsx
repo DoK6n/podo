@@ -1,6 +1,14 @@
-import { ChangeEventHandler, FormEventHandler, MouseEventHandler, useCallback, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import styled, { MenuButtonStyledProps } from 'styled-components';
-import { inputStyledCss, menuBar, menuButtonStyledCss, menuFormStyledCss } from 'styles';
+import { menuBar, menuButtonStyledCss, menuFormStyledCss, toggleInputStyledCss } from 'styles';
 import { HeadingButton } from 'components';
 import { useActive, useChainedCommands, useCommands, useRemirrorContext } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
@@ -16,8 +24,8 @@ const MenuButton = styled.button<MenuButtonStyledProps>`
   background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
 `;
 
-const MenuInput = styled.input`
-  ${inputStyledCss}
+const MenuInput = styled.input<MenuButtonStyledProps>`
+  ${toggleInputStyledCss}
 `;
 
 const MenuBar = styled.div`
@@ -31,14 +39,21 @@ const MenuForm = styled.form`
 const AddIframeButton = () => {
   const { addIframe } = useCommands();
   const [href, setHref] = useState<string>('https://remirror.io');
+  const [isToggle, setIsToggle] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const submitButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     setHref(e.target.value);
   }, []);
 
-  const handleMouseDown: MouseEventHandler<HTMLButtonElement> = useCallback(e => {
-    e.preventDefault();
-  }, []);
+  const handleKeyboard: KeyboardEventHandler<HTMLInputElement> = e => {
+    if (e.key === 'Enter') {
+      inputRef.current?.blur();
+      setIsToggle(!isToggle);
+      submitButtonRef.current?.click();
+    }
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
     e => {
@@ -48,12 +63,28 @@ const AddIframeButton = () => {
     },
     [addIframe, href],
   );
+
+  const toggleInput: MouseEventHandler<HTMLButtonElement> = e => {
+    e.preventDefault();
+    setIsToggle(!isToggle);
+  };
+
   return (
     <MenuForm onSubmit={handleSubmit}>
-      <MenuInput type="url" placeholder="Enter URL..." value={href} onChange={handleChange} required />
-      <MenuButton type="submit" onMouseDown={handleMouseDown}>
+      <MenuInput
+        type="url"
+        placeholder="Enter URL..."
+        ref={inputRef}
+        isToggle={isToggle}
+        value={href}
+        onChange={handleChange}
+        onKeyDown={handleKeyboard}
+        required
+      />
+      <MenuButton onClick={toggleInput}>
         <MdImageSearch />
       </MenuButton>
+      <button type="submit" ref={submitButtonRef} style={{ display: 'none' }} />
     </MenuForm>
   );
 };

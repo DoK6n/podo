@@ -4,7 +4,6 @@ import {
   KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from 'react';

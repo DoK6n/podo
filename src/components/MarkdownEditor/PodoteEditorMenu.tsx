@@ -4,6 +4,7 @@ import {
   KeyboardEventHandler,
   MouseEventHandler,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -38,7 +39,7 @@ const MenuForm = styled.form`
 
 const AddIframeButton = () => {
   const { addIframe } = useCommands();
-  const [href, setHref] = useState<string>('https://remirror.io');
+  const [href, setHref] = useState<string>('');
   const [isToggle, setIsToggle] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const submitButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -66,7 +67,11 @@ const AddIframeButton = () => {
 
   const toggleInput: MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
-    setIsToggle(!isToggle);
+    // form url 경고메시지 기능을 살리면서 포커싱
+    setIsToggle(prevIsToggle => {
+      !prevIsToggle ? inputRef.current?.focus() : inputRef.current?.blur();
+      return !prevIsToggle;
+    });
   };
 
   return (

@@ -9,7 +9,7 @@ import {
 } from 'react';
 import styled, { MenuButtonStyledProps } from 'styled-components';
 import { menuBar, menuButtonStyledCss, menuFormStyledCss, toggleInputStyledCss } from 'styles';
-import { HeadingButton } from 'components';
+import { HeadingButton, Tooltip } from 'components';
 import { useActive, useChainedCommands, useCommands, useRemirrorContext } from '@remirror/react';
 import { GrBlockQuote } from 'react-icons/gr';
 import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
@@ -74,22 +74,24 @@ const AddIframeButton = () => {
   };
 
   return (
-    <MenuForm onSubmit={handleSubmit}>
-      <MenuInput
-        type="url"
-        placeholder="Enter URL..."
-        ref={inputRef}
-        isToggle={isToggle}
-        value={href}
-        onChange={handleChange}
-        onKeyDown={handleKeyboard}
-        required
-      />
-      <MenuButton onClick={toggleInput}>
-        <MdImageSearch />
-      </MenuButton>
-      <button type="submit" ref={submitButtonRef} style={{ display: 'none' }} />
-    </MenuForm>
+    <Tooltip>
+      <MenuForm onSubmit={handleSubmit}>
+        <MenuInput
+          type="url"
+          placeholder="Enter URL..."
+          ref={inputRef}
+          isToggle={isToggle}
+          value={href}
+          onChange={handleChange}
+          onKeyDown={handleKeyboard}
+          required
+        />
+        <MenuButton onClick={toggleInput}>
+          <MdImageSearch />
+        </MenuButton>
+        <button type="submit" ref={submitButtonRef} style={{ display: 'none' }} />
+      </MenuForm>
+    </Tooltip>
   );
 };
 
@@ -99,9 +101,11 @@ const CreateCodeMirrorButton = ({ language }: { language: string }) => {
   const enabled = createCodeMirror.enabled({ language });
 
   return (
-    <MenuButton onClick={() => createCodeMirror({ language })} isActive={!enabled}>
-      <RiCodeBoxLine />
-    </MenuButton>
+    <Tooltip>
+      <MenuButton onClick={() => createCodeMirror({ language })} isActive={!enabled}>
+        <RiCodeBoxLine />
+      </MenuButton>
+    </Tooltip>
   );
 };
 
@@ -115,70 +119,86 @@ function PodoteEditorMenu() {
       <HeadingButton level={3} />
       <HeadingButton level={4} />
       <HeadingButton level={5} />
-      <MenuButton
-        onClick={() => {
-          chain.toggleBold().focus().run();
-        }}
-        isActive={active.bold()}
-      >
-        <MdFormatBold />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleItalic().focus().run();
-        }}
-        isActive={active.italic()}
-      >
-        <MdFormatItalic />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleUnderline().focus().run();
-        }}
-        isActive={active.underline()}
-      >
-        <MdFormatUnderlined />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleStrike().focus().run();
-        }}
-        isActive={active.strike()}
-      >
-        <AiOutlineStrikethrough />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleBlockquote().focus().run();
-        }}
-        isActive={active.blockquote()}
-      >
-        <GrBlockQuote />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleBulletList().focus().run();
-        }}
-        isActive={active.bulletList()}
-      >
-        <TbList />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleOrderedList().focus().run();
-        }}
-        isActive={active.orderedList()}
-      >
-        <TbListNumbers />
-      </MenuButton>
-      <MenuButton
-        onClick={() => {
-          chain.toggleTaskList().focus().run();
-        }}
-        isActive={active.taskList()}
-      >
-        <TbListCheck />
-      </MenuButton>
+      <Tooltip discription={'CMD + B'}>
+        <MenuButton
+          onClick={() => {
+            chain.toggleBold().focus().run();
+          }}
+          isActive={active.bold()}
+        >
+          <MdFormatBold />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleItalic().focus().run();
+          }}
+          isActive={active.italic()}
+        >
+          <MdFormatItalic />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleUnderline().focus().run();
+          }}
+          isActive={active.underline()}
+        >
+          <MdFormatUnderlined />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleStrike().focus().run();
+          }}
+          isActive={active.strike()}
+        >
+          <AiOutlineStrikethrough />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleBlockquote().focus().run();
+          }}
+          isActive={active.blockquote()}
+        >
+          <GrBlockQuote />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleBulletList().focus().run();
+          }}
+          isActive={active.bulletList()}
+        >
+          <TbList />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleOrderedList().focus().run();
+          }}
+          isActive={active.orderedList()}
+        >
+          <TbListNumbers />
+        </MenuButton>
+      </Tooltip>
+      <Tooltip>
+        <MenuButton
+          onClick={() => {
+            chain.toggleTaskList().focus().run();
+          }}
+          isActive={active.taskList()}
+        >
+          <TbListCheck />
+        </MenuButton>
+      </Tooltip>
       <MenuButton
         onClick={() => {
           chain.toggleCallout({ type: 'blank' }).focus().run();

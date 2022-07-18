@@ -46,7 +46,7 @@ import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
 import { useTodoStore, ToggleListItemExtension, CodeMirror6Extension } from 'hooks';
-import { EmojiPickerReact, PodoteEditorMenu, FloatingLinkToolbar } from 'components';
+import { EmojiPickerReact, MenuBar, FloatingLinkToolbar } from 'components';
 import { languages } from '@codemirror/language-data';
 import { history, historyKeymap } from '@codemirror/commands';
 import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
@@ -223,7 +223,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
           onChange={onChangeState}
           editable={editable}
         >
-          {editable ? <PodoteEditorMenu /> : null}
+          {editable ? <MenuBar /> : null}
           <EditorComponent />
           {editable ? (
             <EmojiPickerReact

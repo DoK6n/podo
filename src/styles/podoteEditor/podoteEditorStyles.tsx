@@ -107,7 +107,6 @@ export const floatingLinkToolbarStyledCss: ReturnType<typeof css> = css`
   }
   .remirror-button.remirror-tabbable {
     border: 1px solid var(--podote-color-heading-text);
-    /* background-color: teal; */
     background-color: var(--podote-color-normal-1);
   }
   .remirror-group {
@@ -121,7 +120,7 @@ export const menuFormStyledCss: ReturnType<typeof css> = css`
   align-items: center;
 `;
 
-export const menuBar: ReturnType<typeof css> = css`
+export const menuBarStyledCss: ReturnType<typeof css> = css`
   display: flex;
   flex-direction: row;
   align-items: center;

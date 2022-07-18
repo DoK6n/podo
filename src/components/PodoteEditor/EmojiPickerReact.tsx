@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import Picker, { IEmojiData } from 'emoji-picker-react';
 import { useCommands, useRemirrorContext } from '@remirror/react';
-import Dialog from 'components/common/Dialog';
+import { Dialog } from 'components';
 import { emojiPickerPodoteThemeStyledCss } from 'styles';
 import styled from 'styled-components';
 

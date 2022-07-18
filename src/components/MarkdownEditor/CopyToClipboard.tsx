@@ -1,5 +1,5 @@
 import ClipboardJS from 'clipboard';
-import { useEffect, useRef } from 'react';
+import { PropsWithChildren, useEffect, useRef } from 'react';
 import styled, { css, FlattenInterpolation, Interpolation, ThemedStyledProps } from 'styled-components';
 
 interface StylesProps {
@@ -17,10 +17,10 @@ type CopyToClipboardProps = {
   style?: FlattenInterpolation<ThemedStyledProps<object, any>>;
   className?: string;
   title?: string;
-  children?: React.ReactNode;
+  // children?: React.ReactNode;
 };
 
-export function CopyToClipboardButton(props: CopyToClipboardProps) {
+export function CopyToClipboardButton(props: PropsWithChildren<CopyToClipboardProps>) {
   const ref = useRef() as React.MutableRefObject<HTMLSpanElement>;
 
   useEffect(() => {
@@ -53,7 +53,7 @@ type CopyToClipboardWrapperProps = CopyToClipboardProps & {
   button?: React.ReactNode;
 };
 
-export function CopyToClipboardWrapper(props: CopyToClipboardWrapperProps) {
+export function CopyToClipboardWrapper(props: PropsWithChildren<CopyToClipboardWrapperProps>) {
   const buttonStyledCss: ReturnType<typeof css> = css`
     position: absolute;
     top: 5px;

@@ -1,18 +1,16 @@
 import React from 'react';
 import { useActive, useChainedCommands } from '@remirror/react';
-import styled, { MenuButtonStyledProps } from 'styled-components';
-import { menuButtonStyledCss } from 'styles';
 import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from 'assets';
-import { Tooltip } from 'components';
+import { MenuButton } from 'components';
 
 interface Props {
   level: number;
 }
 
-const MenuButton = styled.button<MenuButtonStyledProps>`
-  ${menuButtonStyledCss}
-  background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
-`;
+// const MenuButton = styled.button<MenuButtonStyledProps>`
+//   ${menuButtonStyledCss}
+//   background-color: ${({ isActive }) => (isActive ? '#483d6b' : undefined)};
+// `;
 
 function HeadingButton({ level }: Props) {
   const chain = useChainedCommands();
@@ -35,16 +33,14 @@ function HeadingButton({ level }: Props) {
     }
   };
   return (
-    <Tooltip>
-      <MenuButton
-        onClick={() => {
-          chain.toggleHeading({ level: level }).focus().run();
-        }}
-        isActive={active.heading({ level: level })}
-      >
-        {switchRenderHeading(level)}
-      </MenuButton>
-    </Tooltip>
+    <MenuButton
+      onClick={() => {
+        chain.toggleHeading({ level: level }).focus().run();
+      }}
+      isActive={active.heading({ level: level })}
+    >
+      {switchRenderHeading(level)}
+    </MenuButton>
   );
 }
 

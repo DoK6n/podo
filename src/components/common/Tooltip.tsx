@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 interface Props {
   children: React.ReactElement<any, any>;
-  discription?: string;
+  tooltipTitle?: string;
 }
 
 const CustomTooltip = styled(props => <MuiToolTip classes={{ popper: props.className }} {...props} />)`
@@ -17,10 +17,10 @@ const CustomTooltip = styled(props => <MuiToolTip classes={{ popper: props.class
   }
 `;
 
-function Tooltip({ children, discription }: Props) {
+function Tooltip({ children, tooltipTitle }: Props) {
   return (
     <CustomTooltip
-      title={discription ? discription : 'Description does not exist.'}
+      title={tooltipTitle ? tooltipTitle : 'Description does not exist.'}
       children={children}
       TransitionComponent={Zoom}
       arrow

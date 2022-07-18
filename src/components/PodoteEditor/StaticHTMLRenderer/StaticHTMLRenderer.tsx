@@ -13,7 +13,7 @@ interface Props {
   content: RemirrorJSON;
 }
 
-function PodoteRenderer({ content }: Props) {
+function StaticHTMLRenderer({ content }: Props) {
   /**
    * Static HTML Renderer 사용을 위해서 몇가지 작업이 필요합니다.
    *
@@ -55,4 +55,4 @@ function PodoteRenderer({ content }: Props) {
   );
 }
 
-export default PodoteRenderer;
+export default StaticHTMLRenderer;

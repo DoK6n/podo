@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { MutableRefObject, useCallback } from 'react';
-import { useRemirrorContext } from '@remirror/react';
+import { MutableRefObject, PropsWithChildren } from 'react';
 
 const DialogStyled = styled.dialog`
   border: none;
@@ -24,10 +23,9 @@ const DialogStyled = styled.dialog`
 interface Props {
   dialogRef: MutableRefObject<any>;
   editable: boolean;
-  children: React.ReactNode;
 }
 
-function Dialog({ dialogRef, editable, children }: Props) {
+function Dialog({ dialogRef, editable, children }: PropsWithChildren<Props>) {
   const handleOutsideClick = (e: any) => {
     if (e.target === dialogRef.current) {
       dialogRef.current.close();

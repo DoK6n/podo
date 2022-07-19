@@ -40,6 +40,7 @@ import {
   TaskListExtension,
   IframeExtension,
   LinkExtension,
+  TableExtension,
   // TrailingNodeExtension,
 } from 'remirror/extensions';
 import styled, { TodoStylesProps } from 'styled-components';
@@ -135,6 +136,7 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     // new TrailingNodeExtension(), // 마지막에 항상 한줄 띔
     new IframeExtension({ enableResizing: true }),
     new LinkExtension({ autoLink: true }),
+    new TableExtension(),
     new CodeMirror6Extension({
       languages,
       extensions: [

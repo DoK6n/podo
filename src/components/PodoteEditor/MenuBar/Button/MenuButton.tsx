@@ -14,7 +14,7 @@ interface Props {
   titleOption: TooltipDescriptionOptionProps;
 }
 
-function MenuButton({ children, onClick, isActive, titleOption }: PropsWithChildren<Props>) {
+function MenuButton({ children, onClick, isActive = false, titleOption }: PropsWithChildren<Props>) {
   return (
     <Tooltip options={titleOption}>
       <MenuButtonWrapper onClick={onClick} isActive={isActive}>

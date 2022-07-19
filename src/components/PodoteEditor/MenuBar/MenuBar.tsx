@@ -8,6 +8,15 @@ import { TbList, TbListNumbers, TbListCheck } from 'react-icons/tb';
 import { RiCodeBoxLine } from 'react-icons/ri';
 import { MdFormatBold, MdFormatItalic, MdCode, MdFormatUnderlined } from 'react-icons/md';
 import { AiOutlineStrikethrough } from 'react-icons/ai';
+import { BsTable } from 'react-icons/bs';
+import {
+  RiInsertColumnRight,
+  RiInsertColumnLeft,
+  RiInsertRowTop,
+  RiInsertRowBottom,
+  RiDeleteColumn,
+  RiDeleteRow,
+} from 'react-icons/ri';
 import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
 import { CodeMirror6Extension } from 'hooks';
 
@@ -169,6 +178,63 @@ function MenuBar() {
       </MenuButton>
       <CreateCodeMirrorButton language="javascript" />
       <AddIframeButton />
+      <MenuButton
+        onClick={() => {
+          !active.table() ? chain.createTable().focus().run() : chain.deleteTable().focus().run();
+        }}
+        isActive={active.table()}
+        titleOption={{ title: 'Table', commandName: 'toggleTable' }}
+      >
+        <BsTable />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.addTableColumnAfter().focus().run();
+        }}
+        titleOption={{ title: 'addTableColumnAfter' }}
+      >
+        <RiInsertColumnRight />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.addTableColumnBefore().focus().run();
+        }}
+        titleOption={{ title: 'addTableColumnBefore', commandName: 'toggleTable' }}
+      >
+        <RiInsertColumnLeft />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.addTableRowBefore().focus().run();
+        }}
+        titleOption={{ title: 'addTableRowBefore', commandName: 'toggleTable' }}
+      >
+        <RiInsertRowTop />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.addTableRowAfter().focus().run();
+        }}
+        titleOption={{ title: 'addTableRowAfter', commandName: 'toggleTable' }}
+      >
+        <RiInsertRowBottom />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.deleteTableColumn().focus().run();
+        }}
+        titleOption={{ title: 'deleteTableColumn', commandName: 'deleteTableColumn' }}
+      >
+        <RiDeleteColumn />
+      </MenuButton>
+      <MenuButton
+        onClick={() => {
+          chain.deleteTableRow().focus().run();
+        }}
+        titleOption={{ title: 'deleteTableRow', commandName: 'deleteTableRow' }}
+      >
+        <RiDeleteRow />
+      </MenuButton>
     </MenuBarWrapper>
   );
 }

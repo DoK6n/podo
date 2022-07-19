@@ -21,7 +21,11 @@ const CreateCodeMirrorButton = ({ language }: { language: string }) => {
   const enabled = createCodeMirror.enabled({ language });
 
   return (
-    <MenuButton onClick={() => createCodeMirror({ language })} isActive={!enabled}>
+    <MenuButton
+      onClick={() => createCodeMirror({ language: language })}
+      isActive={!enabled}
+      titleOption={{ title: 'CodeBlock (```' + language + ')' }}
+    >
       <RiCodeBoxLine />
     </MenuButton>
   );
@@ -42,6 +46,7 @@ function MenuBar() {
           chain.toggleBold().focus().run();
         }}
         isActive={active.bold()}
+        titleOption={{ title: 'Bold', commandName: 'toggleBold' }}
       >
         <MdFormatBold />
       </MenuButton>
@@ -50,6 +55,7 @@ function MenuBar() {
           chain.toggleItalic().focus().run();
         }}
         isActive={active.italic()}
+        titleOption={{ title: 'Italic', commandName: 'toggleItalic' }}
       >
         <MdFormatItalic />
       </MenuButton>
@@ -58,6 +64,7 @@ function MenuBar() {
           chain.toggleUnderline().focus().run();
         }}
         isActive={active.underline()}
+        titleOption={{ title: 'Underline', commandName: 'toggleUnderline' }}
       >
         <MdFormatUnderlined />
       </MenuButton>
@@ -66,6 +73,7 @@ function MenuBar() {
           chain.toggleStrike().focus().run();
         }}
         isActive={active.strike()}
+        titleOption={{ title: 'Strike', commandName: 'toggleStrike' }}
       >
         <AiOutlineStrikethrough />
       </MenuButton>
@@ -74,6 +82,7 @@ function MenuBar() {
           chain.toggleBlockquote().focus().run();
         }}
         isActive={active.blockquote()}
+        titleOption={{ title: 'Blockquote', commandName: 'toggleBlockquote' }}
       >
         <GrBlockQuote />
       </MenuButton>
@@ -82,6 +91,7 @@ function MenuBar() {
           chain.toggleBulletList().focus().run();
         }}
         isActive={active.bulletList()}
+        titleOption={{ title: 'BulletList', commandName: 'toggleBulletList' }}
       >
         <TbList />
       </MenuButton>
@@ -90,6 +100,7 @@ function MenuBar() {
           chain.toggleOrderedList().focus().run();
         }}
         isActive={active.orderedList()}
+        titleOption={{ title: 'OrderedList', commandName: 'toggleOrderedList' }}
       >
         <TbListNumbers />
       </MenuButton>
@@ -98,6 +109,7 @@ function MenuBar() {
           chain.toggleTaskList().focus().run();
         }}
         isActive={active.taskList()}
+        titleOption={{ title: 'TaskList', commandName: 'toggleTaskList' }}
       >
         <TbListCheck />
       </MenuButton>
@@ -106,6 +118,7 @@ function MenuBar() {
           chain.toggleCallout({ type: 'blank' }).focus().run();
         }}
         isActive={active.callout({ type: 'blank' })}
+        titleOption={{ title: 'Callout', commandName: 'toggleCallout' }}
       >
         <CalloutBlank />
       </MenuButton>
@@ -114,6 +127,7 @@ function MenuBar() {
           chain.toggleCallout({ type: 'info', emoji: '💡' }).focus().run();
         }}
         isActive={active.callout({ type: 'info' })}
+        titleOption={{ title: 'Callout-info', commandName: '' }}
       >
         <CalloutInfo />
       </MenuButton>
@@ -122,6 +136,7 @@ function MenuBar() {
           chain.toggleCallout({ type: 'warning', emoji: '⚠️' }).focus().run();
         }}
         isActive={active.callout({ type: 'warning' })}
+        titleOption={{ title: 'Callout-warn', commandName: '' }}
       >
         <CalloutWarn />
       </MenuButton>
@@ -130,6 +145,7 @@ function MenuBar() {
           chain.toggleCallout({ type: 'error', emoji: '🚨' }).focus().run();
         }}
         isActive={active.callout({ type: 'error' })}
+        titleOption={{ title: 'Callout-error', commandName: '' }}
       >
         <CalloutError />
       </MenuButton>
@@ -138,6 +154,7 @@ function MenuBar() {
           chain.toggleCallout({ type: 'success', emoji: '✅' }).focus().run();
         }}
         isActive={active.callout({ type: 'success' })}
+        titleOption={{ title: 'Callout-success', commandName: '' }}
       >
         <CalloutSuccess />
       </MenuButton>
@@ -146,6 +163,7 @@ function MenuBar() {
           chain.toggleCode().focus().run();
         }}
         isActive={active.code()}
+        titleOption={{ title: 'Code', commandName: 'toggleCode' }}
       >
         <MdCode />
       </MenuButton>

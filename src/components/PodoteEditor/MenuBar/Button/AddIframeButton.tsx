@@ -61,7 +61,7 @@ function AddIframeButton() {
         onKeyDown={handleKeyboard}
         required
       />
-      <MenuButton onClick={toggleInput}>
+      <MenuButton onClick={toggleInput} titleOption={{ title: 'site embed' }}>
         <MdImageSearch />
       </MenuButton>
       <button type="submit" ref={submitButtonRef} style={{ display: 'none' }} />

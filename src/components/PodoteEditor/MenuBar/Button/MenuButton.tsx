@@ -1,4 +1,4 @@
-import { Tooltip } from 'components';
+import { Tooltip, TooltipDescriptionOptionProps } from 'components';
 import React, { PropsWithChildren } from 'react';
 import styled, { MenuButtonStyledProps } from 'styled-components';
 import { menuButtonStyledCss } from 'styles';
@@ -11,11 +11,12 @@ const MenuButtonWrapper = styled.button<MenuButtonStyledProps>`
 interface Props {
   onClick?: (e?: any) => void;
   isActive?: boolean;
+  titleOption: TooltipDescriptionOptionProps;
 }
 
-function MenuButton({ children, onClick, isActive }: PropsWithChildren<Props>) {
+function MenuButton({ children, onClick, isActive, titleOption }: PropsWithChildren<Props>) {
   return (
-    <Tooltip>
+    <Tooltip options={titleOption}>
       <MenuButtonWrapper onClick={onClick} isActive={isActive}>
         {children}
       </MenuButtonWrapper>

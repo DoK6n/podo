@@ -38,6 +38,7 @@ function HeadingButton({ level }: Props) {
         chain.toggleHeading({ level: level }).focus().run();
       }}
       isActive={active.heading({ level: level })}
+      titleOption={{ title: 'Heading', commandName: 'toggleHeading', attrs: { level: level } }}
     >
       {switchRenderHeading(level)}
     </MenuButton>

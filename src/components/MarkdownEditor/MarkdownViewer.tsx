@@ -7,11 +7,12 @@ import rehypeRaw from 'rehype-raw';
 
 import 'github-markdown-css/github-markdown.css';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { gruvboxDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import toast, { Toaster } from 'react-hot-toast';
 import { FiCopy } from 'react-icons/fi';
 
 import { CopyToClipboardWrapper } from 'components';
-import { gruvboxDark, markdownViewStyledCss } from 'styles';
+import { markdownViewStyledCss } from 'styles';
 import styled, { css, TodoStylesProps } from 'styled-components';
 
 export const MarkdownViewTheme = styled.div<TodoStylesProps>`

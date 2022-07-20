@@ -113,7 +113,9 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     emoji.style.cursor = 'pointer';
     emoji.dataset.id = id;
     emoji.addEventListener('mousedown', e => e.preventDefault());
-    emoji.addEventListener('click', childRef.current.handleClickEmoji);
+    if (childRef.current) {
+      emoji.addEventListener('click', childRef.current.handleClickEmoji);
+    }
     return emoji;
   };
 

@@ -7,3 +7,4 @@ export * from './todo';
 export * from './markdownEditor';
 export * from './podoteEditor';
 export * from './lib';
+export * from './accordion';

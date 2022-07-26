@@ -280,11 +280,17 @@ export const useTodoStore = create<TodoStore>()(
         },
         addItem(action) {
           set(({ todos }) => {
-            todos.push({
-              id: uuidv4(),
+            const newItemId = uuidv4();
+            todos.unshift({
+              id: newItemId,
               content: contentNormalTextFormat(action.text),
               done: false,
-              editable: false,
+              editable: true,
+            });
+            todos.forEach(todo => {
+              if (todo.id !== newItemId) {
+                todo.editable = false;
+              }
             });
           });
         },

@@ -1,9 +1,10 @@
 import create from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 import { devtools, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 import { RemirrorJSON } from 'remirror';
 
-interface State {
+interface Todo {
   id: string;
   content: RemirrorJSON;
   done: boolean;
@@ -11,14 +12,14 @@ interface State {
 }
 
 interface TodoStore {
-  todos: State[];
+  todos: Todo[];
   getContentNormalTextFormat(action: { text: string }): RemirrorJSON;
   addItem(action: { text: string }): void;
   editItemText(action: { id: string; content: RemirrorJSON }): void;
   setEditableById(action: { id: string }): void;
-  toggleItem(action: Partial<State>): void;
+  toggleItem(action: Partial<Todo>): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
-  removeItem(action: Partial<State>): void;
+  removeItem(action: Partial<Todo>): void;
 }
 
 const contentNormalTextFormat = (text: string): RemirrorJSON => ({
@@ -252,7 +253,7 @@ const content04: RemirrorJSON = {
   ],
 };
 
-const initState: State[] = [
+const initState: Todo[] = [
   { id: uuidv4(), content: content00, done: true, editable: false },
   { id: uuidv4(), content: content01, done: false, editable: false },
   { id: uuidv4(), content: content02, done: false, editable: false },
@@ -260,51 +261,63 @@ const initState: State[] = [
   { id: uuidv4(), content: content04, done: false, editable: false },
 ];
 
+/**
+ * ## zustand 상태관리 라이브러리
+ * - zustand middleware
+ *    - devtools : 크롬 Redux DevTools에 적용
+ *    - persist : 로컬 스토리지에 저장
+ *    - immer : react 배열/객체 업데이트시 불변성 관리
+ *
+ * Todo Contents 상태값 관리
+ */
 export const useTodoStore = create<TodoStore>()(
   devtools(
-    persist((set, get) => ({
-      todos: initState,
-      getContentNormalTextFormat(action) {
-        return contentNormalTextFormat(action.text);
-      },
-      addItem(action) {
-        set(({ todos }) => ({
-          todos: [
-            ...todos,
-            { id: uuidv4(), content: contentNormalTextFormat(action.text), done: false, editable: false },
-          ],
-        }));
-      },
-      editItemText(action) {
-        set(({ todos }) => ({
-          todos: todos.map(todo => (todo.id === action.id ? { ...todo, content: action.content } : todo)),
-        }));
-      },
-      setEditableById(action) {
-        set(({ todos }) => ({
-          todos: todos.map(todo =>
-            todo.id === action.id ? { ...todo, editable: !todo.editable } : { ...todo, editable: false },
-          ),
-        }));
-      },
-      toggleItem(action) {
-        set(({ todos }) => ({
-          todos: todos.map(todo => (todo.id === action.id ? { ...todo, done: !todo.done } : todo)),
-        }));
-      },
-      dragItem(action) {
-        set(({ todos }) => {
-          const temp = [...todos];
-          const draggingItem = temp.splice(action.draggingItemIndex, 1);
-          temp.splice(action.afterDragItemIndex, 0, draggingItem[0]);
-          return { todos: temp };
-        });
-      },
-      removeItem(action) {
-        set(({ todos }) => ({
-          todos: todos.filter(todo => todo.id !== action.id),
-        }));
-      },
-    })),
+    persist(
+      immer((set, get) => ({
+        todos: initState,
+        getContentNormalTextFormat(action) {
+          return contentNormalTextFormat(action.text);
+        },
+        addItem(action) {
+          set(({ todos }) => {
+            todos.push({
+              id: uuidv4(),
+              content: contentNormalTextFormat(action.text),
+              done: false,
+              editable: false,
+            });
+          });
+        },
+        editItemText(action) {
+          set(({ todos }) => {
+            const todo = todos.find(todo => todo.id === action.id);
+            todo!.content = action.content; // 해당 피연산자가 null, undeifned가 아니라고 단언
+          });
+        },
+        setEditableById(action) {
+          set(({ todos }) => {
+            todos.forEach(todo => (todo.id === action.id ? (todo.editable = !todo.editable) : (todo.editable = false)));
+          });
+        },
+        toggleItem(action) {
+          set(({ todos }) => {
+            const todo = todos.find(todo => todo.id === action.id);
+            todo!.done = !todo?.done;
+          });
+        },
+        dragItem(action) {
+          set(({ todos }) => {
+            const draggingItem = todos.splice(action.draggingItemIndex, 1);
+            todos.splice(action.afterDragItemIndex, 0, draggingItem[0]);
+          });
+        },
+        removeItem(action) {
+          set(({ todos }) => {
+            const index = todos.findIndex(todo => todo.id === action.id);
+            todos.splice(index, 1);
+          });
+        },
+      })),
+    ),
   ),
 );

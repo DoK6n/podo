@@ -279,6 +279,7 @@ export const useTodoStore = create<TodoStore>()(
           return contentNormalTextFormat(action.text);
         },
         addItem(action) {
+          // 할일 추가
           set(({ todos }) => {
             const newItemId = uuidv4();
             todos.unshift({
@@ -295,17 +296,20 @@ export const useTodoStore = create<TodoStore>()(
           });
         },
         editItemText(action) {
+          // 할일 내용 수정
           set(({ todos }) => {
             const todo = todos.find(todo => todo.id === action.id);
             todo!.content = action.content; // 해당 피연산자가 null, undeifned가 아니라고 단언
           });
         },
         setEditableById(action) {
+          // 할일 수정모드 설정
           set(({ todos }) => {
             todos.forEach(todo => (todo.id === action.id ? (todo.editable = !todo.editable) : (todo.editable = false)));
           });
         },
         toggleItem(action) {
+          // 할일/완료 토글, 완료된 할일은 목록의 최하단으로 이동
           set(({ todos }) => {
             const findById = (todo: WritableDraft<Todo>) => todo.id === action.id;
 
@@ -321,12 +325,14 @@ export const useTodoStore = create<TodoStore>()(
           });
         },
         dragItem(action) {
+          // 할일 드래그 앤 드롭
           set(({ todos }) => {
             const draggingItem = todos.splice(action.draggingItemIndex, 1);
             todos.splice(action.afterDragItemIndex, 0, draggingItem[0]);
           });
         },
         removeItem(action) {
+          // 목록에서 할일 제거
           set(({ todos }) => {
             const index = todos.findIndex(todo => todo.id === action.id);
             todos.splice(index, 1);

@@ -19,7 +19,7 @@ interface TodoStore {
   setEditableById(action: { id: string }): void;
   toggleItem(action: { id: string }): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
-  removeItem(action: Partial<Todo>): void;
+  removeItem(action: { id: string }): void;
 }
 
 const contentNormalTextFormat = (text: string): RemirrorJSON => ({

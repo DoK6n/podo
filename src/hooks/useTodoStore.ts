@@ -26,8 +26,14 @@ const contentNormalTextFormat = (text: string): RemirrorJSON => ({
   type: 'doc',
   content: [
     {
-      type: 'paragraph',
-      content: [{ type: 'text', text: text }],
+      type: 'heading',
+      attrs: { level: 2 },
+      content: [
+        {
+          type: 'text',
+          text: text,
+        },
+      ],
     },
   ],
 });

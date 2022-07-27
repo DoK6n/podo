@@ -119,13 +119,10 @@ export const todoAddItemInputStyledCss: ReturnType<typeof css> = css`
   align-items: center;
   color: #efeef3;
 
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-color: #9595d9;
+  border: none;
   outline: none;
   background-color: transparent;
-  font-size: 1.5em;
+  font-size: 1.2em;
   padding: 0 0 5px 20px;
   margin: 0 40px 0 40px;
 

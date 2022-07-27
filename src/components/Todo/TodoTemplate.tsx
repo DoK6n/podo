@@ -12,8 +12,8 @@ function TodoTemplate() {
   return (
     <TodoTemplateBlock>
       <Toaster position="top-center" reverseOrder={false} />
-      <TodoList />
       <TodoAddItem />
+      <TodoList />
     </TodoTemplateBlock>
   );
 }

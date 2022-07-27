@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { RemirrorJSON } from 'remirror';
-
+import { WritableDraft } from 'immer/dist/internal';
 interface Todo {
   id: string;
   content: RemirrorJSON;
@@ -17,7 +17,7 @@ interface TodoStore {
   addItem(action: { text: string }): void;
   editItemText(action: { id: string; content: RemirrorJSON }): void;
   setEditableById(action: { id: string }): void;
-  toggleItem(action: Partial<Todo>): void;
+  toggleItem(action: { id: string }): void;
   dragItem(action: { draggingItemIndex: number; afterDragItemIndex: number }): void;
   removeItem(action: Partial<Todo>): void;
 }
@@ -307,8 +307,17 @@ export const useTodoStore = create<TodoStore>()(
         },
         toggleItem(action) {
           set(({ todos }) => {
-            const todo = todos.find(todo => todo.id === action.id);
+            const findById = (todo: WritableDraft<Todo>) => todo.id === action.id;
+
+            const todo = todos.find(findById);
             todo!.done = !todo?.done;
+
+            const index = todos.findIndex(findById);
+            if (todo?.done === true) {
+              // todo 배열에서 토글된 item 제거 후 배열의 맨 뒤로 이동
+              const todoWithDoneRemoved = todos.splice(index, 1); // splice의 return 값은 삭제한 값 array
+              todos.splice(todos.length, 0, todoWithDoneRemoved[0]); // 3번쨰 인자값을 1번째 인자값 위치로 이동
+            }
           });
         },
         dragItem(action) {

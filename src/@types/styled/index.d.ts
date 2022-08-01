@@ -5,6 +5,7 @@ declare module 'styled-components' {
   interface TodoStylesProps {
     editable?: boolean;
     done?: boolean;
+    isRemoved?: boolean;
   }
 
   interface MenuButtonStyledProps {

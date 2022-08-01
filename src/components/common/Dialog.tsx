@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { MutableRefObject, PropsWithChildren } from 'react';
 
-const DialogStyled = styled.dialog`
+interface DialogStyledProps {
+  background?: string;
+  width?: string;
+}
+
+const DialogStyled = styled.dialog<DialogStyledProps>`
   border: none;
   border-radius: 10px;
-
+  background: ${props => (props.background ? props.background : null)};
+  width: ${props => (props.width ? props.width : null)};
   & > .dialog-contents {
     margin: -1em;
     border: 1px solid;
@@ -23,9 +29,10 @@ const DialogStyled = styled.dialog`
 interface Props {
   dialogRef: MutableRefObject<any>;
   editable: boolean;
+  styleOptions?: DialogStyledProps;
 }
 
-function Dialog({ dialogRef, editable, children }: PropsWithChildren<Props>) {
+function Dialog({ dialogRef, editable, styleOptions, children }: PropsWithChildren<Props>) {
   const handleOutsideClick = (e: any) => {
     if (e.target === dialogRef.current) {
       dialogRef.current.close();
@@ -33,7 +40,7 @@ function Dialog({ dialogRef, editable, children }: PropsWithChildren<Props>) {
   };
 
   return (
-    <DialogStyled ref={dialogRef} onClick={handleOutsideClick}>
+    <DialogStyled ref={dialogRef} onClick={handleOutsideClick} {...styleOptions}>
       <div className={'dialog-contents'}>{children}</div>
     </DialogStyled>
   );

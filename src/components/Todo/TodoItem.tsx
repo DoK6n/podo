@@ -14,7 +14,7 @@ import { BiEdit } from 'react-icons/bi';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
-import { useTodoStore } from 'hooks';
+import { useTodoStore, useTodoTrashBinStore } from 'hooks';
 import styled, { TodoStylesProps } from 'styled-components';
 import { RemirrorJSON } from 'remirror';
 
@@ -55,9 +55,11 @@ interface Props {
 }
 
 function TodoItem({ id, content, done, editable, index }: Props) {
-  const { removeItem, toggleItem, setEditableById } = useTodoStore();
+  const { removeItem, toggleItem, setEditableById, findItemById } = useTodoStore();
+  const { addRemovedTodos } = useTodoTrashBinStore();
 
   const onRemoveitem = () => {
+    addRemovedTodos({ todo: findItemById({ id }) });
     removeItem({ id });
   };
 
@@ -81,8 +83,8 @@ function TodoItem({ id, content, done, editable, index }: Props) {
               {done === false ? <IoWaterOutline size={30} /> : <IoWaterSharp size={30} />}
             </CheckIcon>
           </ItemBlockLeftIconWrapper>
-          <ItemText done={done}>
-            <PodoteEditor id={id} editable={editable} content={content} />
+          <ItemText done={done} editable={editable}>
+            <PodoteEditor id={id} editable={editable} content={content} editorType={'TODO_ITEM'} />
           </ItemText>
           <EditIcon onClick={onEditItem}>
             <BiEdit />

@@ -4,17 +4,21 @@ import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { RemirrorJSON } from 'remirror';
 import { WritableDraft } from 'immer/dist/internal';
-interface Todo {
+
+export interface Todo {
   id: string;
   content: RemirrorJSON;
   done: boolean;
   editable: boolean;
+  removedDt?: string;
 }
 
 interface TodoStore {
   todos: Todo[];
   getContentNormalTextFormat(action: { text: string }): RemirrorJSON;
   addItem(action: { text: string }): void;
+  recycleItem(action: { todo: Todo }): void;
+  findItemById(action: { id: string }): Todo;
   editItemText(action: { id: string; content: RemirrorJSON }): void;
   setEditableById(action: { id: string }): void;
   toggleItem(action: { id: string }): void;
@@ -301,6 +305,16 @@ export const useTodoStore = create<TodoStore>()(
             });
           });
         },
+        recycleItem(action) {
+          set(({ todos }) => {
+            todos.push(action.todo);
+          });
+        },
+        findItemById(action) {
+          // id값으로 할일 조회
+          const todo = get().todos.find(todo => todo.id === action.id)!;
+          return todo;
+        },
         editItemText(action) {
           // 할일 내용 수정
           set(({ todos }) => {
@@ -345,6 +359,7 @@ export const useTodoStore = create<TodoStore>()(
           });
         },
       })),
+      { name: 'todo-storage' },
     ),
   ),
 );

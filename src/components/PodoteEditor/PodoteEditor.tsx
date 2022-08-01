@@ -63,6 +63,7 @@ import {
 } from '@codemirror/view';
 import { EditorState as CodeMirrorEditorState } from '@codemirror/state';
 import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
+import { UseEditorType } from 'podote';
 
 const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}
@@ -91,6 +92,7 @@ interface Props {
   id: string;
   editable: boolean;
   content: RemirrorJSON;
+  editorType: UseEditorType;
   setTestOnlyContentJSON?: React.Dispatch<React.SetStateAction<RemirrorJSON>>;
 }
 
@@ -98,7 +100,7 @@ interface ChildForwardRefObjects {
   handleClickEmoji: (e?: MouseEvent) => void;
 }
 
-function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) {
+function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSON }: Props) {
   const [chosenEmoji, setChosenEmoji] = useState<IEmojiData | null>(null);
   const { editItemText } = useTodoStore();
   const childRef = useRef<ChildForwardRefObjects>({
@@ -214,9 +216,17 @@ function PodoteEditor({ id, editable, content, setTestOnlyContentJSON }: Props) 
     // Update the state to the latest value.
     setState(parameter.state);
 
-    // editor testing page only
-    if (setTestOnlyContentJSON) setTestOnlyContentJSON(parameter.state.doc);
-    else editItemText({ id, content: parameter.state.doc }); // main page update content object
+    switch (editorType) {
+      case 'TODO_ITEM':
+        editItemText({ id, content: parameter.state.doc }); // main page update content object
+        break;
+      case 'TRASH_VIEW':
+        break;
+      case 'TEST_PAGE':
+        // editor testing page only
+        if (setTestOnlyContentJSON) setTestOnlyContentJSON(parameter.state.doc);
+        break;
+    }
   };
 
   return (

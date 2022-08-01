@@ -38,10 +38,16 @@ export const todoItemBlockStyledCss: ReturnType<typeof css> = css<TodoStylesProp
     css`
       animation: ${blinkingEffect} 0.7s linear infinite;
     `}
+  ${({ isRemoved }) =>
+    isRemoved === true &&
+    css`
+      height: 0;
+      transition: 'all 1s ease';
+    `}
   height: auto;
   padding: 0 10px 0 10px;
   border: 1px solid ${({ done }) => (done === false ? '#9595d9' : '#5c4b8c95')};
-  color: ${({ done }) => (done === false ? '#efeef3' : '#5c4b8c95')};
+  /* color: ${({ done }) => (done === false ? '#efeef3' : '#5c4b8c95')}; */
   border-radius: 17px;
   overflow: auto;
   display: flex;
@@ -105,7 +111,13 @@ export const removeIconStyledCss: ReturnType<typeof css> = css`
 `;
 
 export const itemTextStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
-  opacity: ${({ done }) => (done === false ? '1' : '0.1')};
+  opacity: ${({ done, editable }) => {
+    if (!done) return '1';
+    else {
+      if (!editable) return '0.1';
+      else return '0.3';
+    }
+  }};
   width: 100%;
   margin: 0 10px 0 10px;
   padding: 10px 0 10px 0;

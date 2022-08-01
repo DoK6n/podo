@@ -118,6 +118,7 @@ function PodoteEditorPage() {
               id={uuidv4()}
               editable={editable}
               content={testOnlyContentJSON}
+              editorType={'TEST_PAGE'}
               setTestOnlyContentJSON={setTestOnlyContentJSON}
             />
           </TodoItemBlock>

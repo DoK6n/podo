@@ -39,7 +39,6 @@ function TodoAddItem() {
     const target = e.target as HTMLInputElement;
     if (e.key === 'Enter' && target.value !== '') {
       addItem({ text: target.value });
-      console.log('Added!');
       target.value = '';
     }
   };

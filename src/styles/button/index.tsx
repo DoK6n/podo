@@ -2,18 +2,21 @@ import { css } from 'styled-components';
 import { podoteColorsStyledCss } from 'styles';
 
 export const buttonStyledCss: ReturnType<typeof css> = css`
-  background: #3e2f6767;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 8px;
-  padding: 4px;
-  margin-left: 4px;
-  margin-right: 4px;
+  ${podoteColorsStyledCss}
   cursor: pointer;
-  box-shadow: #2a204667 5px 5px 10px 1px;
+  background: transparent;
+  color: var(--podote-color-normal-text);
+  font-size: 1em;
+  box-shadow: none;
+  border: none;
+  border-radius: 0px;
+  border-left: 1px solid var(--podote-color-dark-2);
+  border-right: 1px solid var(--podote-color-dark-2);
   &:active {
-    background-color: #34275867;
-    box-shadow: #2a204667 -5px -5px 10px 1px;
+    opacity: 0.5;
+  }
+  &:hover {
+    color: #9894a7;
   }
 `;
 

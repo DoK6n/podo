@@ -6,7 +6,7 @@ import { Todo } from 'hooks';
 
 export interface RemovedTodo extends Required<Todo> {} // removedDt를 필수속성값으로 변경
 
-interface TodoTrashStore {
+interface TodoTrashBinStore {
   removedTodos: RemovedTodo[];
   addRemovedTodos: (action: { todo: Todo }) => void;
   findRemovedItemById: (action: { id: string }) => RemovedTodo;
@@ -23,7 +23,7 @@ interface TodoTrashStore {
  *
  * [휴지통] 삭제된 Todo List 관리
  */
-export const useTodoTrashStore = create<TodoTrashStore>()(
+export const useTodoTrashBinStore = create<TodoTrashBinStore>()(
   devtools(
     persist(
       immer((set, get) => ({

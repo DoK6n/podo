@@ -1,7 +1,6 @@
 import { useTodoTrashBinStore } from 'hooks';
 import React from 'react';
 import { PropsWithChildren } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { buttonStyledCss, navStyledCss } from 'styles';
 import { VerticalBarIcon } from 'assets';
@@ -36,11 +35,9 @@ function TrashWrapper({ children }: PropsWithChildren<Props>) {
         }}
       >
         <Nav>
-          <Link to="/">
-            <Button>메인 화면으로</Button>
-          </Link>
           <VerticalBarIcon />
           <Button onClick={onDeleteAll}>휴지통 비우기</Button>
+          <VerticalBarIcon />
         </Nav>
         {children}
       </div>

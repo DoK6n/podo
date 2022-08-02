@@ -1,8 +1,9 @@
 import React from 'react';
 import { buttonStyledCss, headerStyledCss, logoNavStyledCss, navStyledCss } from 'styles';
-import { Logo } from 'assets';
+import { Logo, VerticalBarIcon } from 'assets';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { TbMinusVertical } from 'react-icons/tb';
 
 export const Header = styled.header`
   ${headerStyledCss}
@@ -27,12 +28,18 @@ function MainHeader() {
         <Logo width="150" height="50" />
       </LogoNav>
       <Nav>
+        <Link to="/">
+          <Button>홈</Button>
+        </Link>
+        <VerticalBarIcon />
         <Link to="/trash">
           <Button>휴지통</Button>
         </Link>
+        <VerticalBarIcon />
         <Link to="/editor">
           <Button>Editor demo</Button>
         </Link>
+        <VerticalBarIcon />
         <Link to="/test">
           <Button>MD preview demo</Button>
         </Link>

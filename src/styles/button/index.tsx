@@ -10,8 +10,6 @@ export const buttonStyledCss: ReturnType<typeof css> = css`
   box-shadow: none;
   border: none;
   border-radius: 0px;
-  border-left: 1px solid var(--podote-color-dark-2);
-  border-right: 1px solid var(--podote-color-dark-2);
   &:active {
     opacity: 0.5;
   }

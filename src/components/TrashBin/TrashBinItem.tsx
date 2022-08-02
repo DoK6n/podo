@@ -74,21 +74,6 @@ function TrashBinItem({ id, content, removedDt }: Props) {
         <td>{removedDt}</td>
         <td>
           <Button onClick={onShowModal}>확인</Button>
-          <Dialog dialogRef={dialogRef} editable={false} styleOptions={{ background: '#3b305a', width: '60vw' }}>
-            <TodoTemplateBlock>
-              <TodoListBlock>
-                <TodoItemBlock editable={false} done={false}>
-                  <PodoteEditor
-                    id={id}
-                    editable={false}
-                    content={content}
-                    editorType={'TRASH_VIEW'}
-                    setTestOnlyContentJSON={setTestOnlyContentJSON}
-                  />
-                </TodoItemBlock>
-              </TodoListBlock>
-            </TodoTemplateBlock>
-          </Dialog>
         </td>
         <td>
           <IconButtonWrapper onClick={onRecycleItem}>
@@ -101,6 +86,21 @@ function TrashBinItem({ id, content, removedDt }: Props) {
           </IconButtonWrapper>
         </td>
       </tr>
+      <Dialog dialogRef={dialogRef} editable={false} styleOptions={{ background: '#3b305a', width: '60vw' }}>
+        <TodoTemplateBlock>
+          <TodoListBlock>
+            <TodoItemBlock editable={false} done={false}>
+              <PodoteEditor
+                id={id}
+                editable={false}
+                content={content}
+                editorType={'TEST_PAGE'}
+                setTestOnlyContentJSON={setTestOnlyContentJSON}
+              />
+            </TodoItemBlock>
+          </TodoListBlock>
+        </TodoTemplateBlock>
+      </Dialog>
     </tbody>
   );
 }

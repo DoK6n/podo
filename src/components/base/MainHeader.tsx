@@ -36,12 +36,12 @@ function MainHeader() {
           <Button>휴지통</Button>
         </Link>
         <VerticalBarIcon />
-        <Link to="/editor">
-          <Button>Editor demo</Button>
+        <Link to="/editorplayground">
+          <Button>Editor Playground</Button>
         </Link>
         <VerticalBarIcon />
-        <Link to="/test">
-          <Button>MD preview demo</Button>
+        <Link to="/mdplayground">
+          <Button>Markdown Playground</Button>
         </Link>
       </Nav>
     </Header>

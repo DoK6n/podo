@@ -1,5 +1,5 @@
 import { globalStyledCss } from 'styles';
-import { TodoPage, EditPage, PodoteEditorPage, TrashPage } from 'pages';
+import { TodoPage, MdPlaygroundPage, PodoteEditorPage, TrashPage } from 'pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import { MainHeader } from 'components';
@@ -17,8 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<TodoPage />}></Route>
           <Route path="/trash" element={<TrashPage />}></Route>
-          <Route path="/test" element={<EditPage />}></Route>
-          <Route path="/editor" element={<PodoteEditorPage />}></Route>
+          <Route path="/mdplayground" element={<MdPlaygroundPage />}></Route>
+          <Route path="/editorplayground" element={<PodoteEditorPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

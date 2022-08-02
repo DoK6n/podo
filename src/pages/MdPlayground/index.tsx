@@ -118,7 +118,7 @@ const EditerViewerTestBlock = styled.div`
   }
 `;
 
-function EditPage() {
+function MdPlaygroundPage() {
   const [doc, setDoc] = useState<string>(`${markdown}\n`);
 
   const handleDocChange = useCallback((newDoc: string) => {
@@ -136,4 +136,4 @@ function EditPage() {
   );
 }
 
-export default React.memo(EditPage);
+export default React.memo(MdPlaygroundPage);

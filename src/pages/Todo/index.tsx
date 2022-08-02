@@ -1,10 +1,9 @@
 import React from 'react';
-import { MainHeader, TodoTemplate } from 'components';
+import { TodoTemplate } from 'components';
 
 function TodoPage() {
   return (
     <>
-      <MainHeader />
       <TodoTemplate />
     </>
   );

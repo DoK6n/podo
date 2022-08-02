@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTodoTrashBinStore } from 'hooks';
-import { TrashBinWrapper, TrashBinList, TrashBinItem } from 'components';
+import { TrashBinWrapper, TrashBinList, TrashBinItem, MainHeader } from 'components';
 
 function TrashPage() {
   const { removedTodos } = useTodoTrashBinStore();
 
   return (
     <>
-      <h1>휴지통</h1>
+      <MainHeader />
       <TrashBinWrapper>
         <TrashBinList>
           {removedTodos.map(removedTodo => (

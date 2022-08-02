@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useCallback, useState } from 'react';
-import { MarkdownViewer, MarkdownEditor } from 'components';
+import { MarkdownViewer, MarkdownEditor, MainHeader } from 'components';
 import { Toaster } from 'react-hot-toast';
 import 'github-markdown-css/github-markdown.css';
 
@@ -127,6 +127,7 @@ function EditPage() {
 
   return (
     <>
+      <MainHeader />
       <Toaster position="top-center" reverseOrder={false} />
       <EditerViewerTestBlock>
         <MarkdownEditor onChange={handleDocChange} id={'0'} text={doc} done={false} />

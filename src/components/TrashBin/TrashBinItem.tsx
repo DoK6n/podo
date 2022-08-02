@@ -77,7 +77,7 @@ function TrashBinItem({ id, content, removedDt }: Props) {
         </td>
         <td>
           <IconButtonWrapper onClick={onRecycleItem}>
-            <FaTrashRestore />
+            <FaTrashRestore viewBox="0 -100 448 612" />
           </IconButtonWrapper>
         </td>
         <td>

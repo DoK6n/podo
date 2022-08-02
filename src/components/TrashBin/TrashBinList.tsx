@@ -9,18 +9,21 @@ const Table = styled.table`
   margin-right: 1em;
   & > thead > tr {
     background: #483e6b;
+    border: 1px solid #483e6b;
     & th {
       padding: 0.6em;
       text-align: center;
+      color: #c9d1d9;
     }
   }
   & tbody tr {
-    color: lightgray;
     padding: 0 1em 0 1em;
   }
   & tbody td {
-    border: 1px solid #4f4e4f;
+    border: 1px solid #483e6b;
     text-align: center;
+    padding: 0.3em 0 0.3em 0;
+    color: #c9d1d9;
   }
 `;
 

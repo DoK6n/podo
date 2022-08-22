@@ -8,7 +8,7 @@ import {
 } from 'styles';
 import styled, { TodoStylesProps } from 'styled-components';
 import { Dialog, PodoteEditor } from 'components';
-import { RemovedTodo, useTodoStore, useTodoTrashBinStore } from 'hooks';
+import { RemovedTodo, useTodoStore, useTodoTrashBinStore } from 'lib/stores';
 import { useState } from 'react';
 import { RemirrorJSON } from 'remirror';
 import { FcEmptyTrash } from 'react-icons/fc';

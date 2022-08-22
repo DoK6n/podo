@@ -14,7 +14,7 @@ import { BiEdit } from 'react-icons/bi';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
-import { useTodoStore, useTodoTrashBinStore } from 'hooks';
+import { useTodoStore, useTodoTrashBinStore } from 'lib/stores';
 import styled, { TodoStylesProps } from 'styled-components';
 import { RemirrorJSON } from 'remirror';
 

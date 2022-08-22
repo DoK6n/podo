@@ -12,11 +12,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { FiCopy } from 'react-icons/fi';
 
 import { CopyToClipboardWrapper } from 'components';
-import { markdownViewStyledCss } from 'styles';
+import { mdPlaygroundViewerStyledCss } from 'styles';
 import styled, { css, TodoStylesProps } from 'styled-components';
 
-export const MarkdownViewTheme = styled.div<TodoStylesProps>`
-  ${markdownViewStyledCss}
+export const MDPlaygroundViewerTheme = styled.div<TodoStylesProps>`
+  ${mdPlaygroundViewerStyledCss}
 `;
 
 interface Props {
@@ -25,11 +25,11 @@ interface Props {
   editable: boolean;
 }
 
-function MarkdownViewer({ doc, done, editable }: Props) {
+function MDPlaygroundViewer({ doc, done, editable }: Props) {
   return (
     <div style={{ width: '100%', overflow: 'auto', display: !editable ? 'inline-block' : 'none' }}>
       <Toaster position="top-center" reverseOrder={false} />
-      <MarkdownViewTheme done={done} editable={editable}>
+      <MDPlaygroundViewerTheme done={done} editable={editable}>
         <div className="preview markdown-body">
           <ReactMarkdown
             children={doc}
@@ -86,9 +86,9 @@ function MarkdownViewer({ doc, done, editable }: Props) {
             }}
           />
         </div>
-      </MarkdownViewTheme>
+      </MDPlaygroundViewerTheme>
     </div>
   );
 }
 
-export default MarkdownViewer;
+export default MDPlaygroundViewer;

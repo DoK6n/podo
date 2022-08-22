@@ -2,7 +2,7 @@ import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import dayjs from 'dayjs';
-import { Todo } from 'hooks';
+import { Todo } from 'podote/interfaces';
 
 export interface RemovedTodo extends Required<Todo> {} // removedDt를 필수속성값으로 변경
 

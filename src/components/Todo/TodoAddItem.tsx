@@ -1,6 +1,6 @@
 import React, { KeyboardEvent } from 'react';
 import { todoAddItemInputStyledCss } from 'styles';
-import { useTodoStore } from 'hooks';
+import { useTodoStore } from 'lib/stores';
 import styled from 'styled-components';
 // import { PodoteEditor } from 'components';
 // import { RemirrorJSON } from 'remirror';

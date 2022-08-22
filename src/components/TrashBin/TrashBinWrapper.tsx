@@ -1,4 +1,4 @@
-import { useTodoTrashBinStore } from 'hooks';
+import { useTodoTrashBinStore } from 'lib/stores';
 import React from 'react';
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';

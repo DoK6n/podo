@@ -47,7 +47,8 @@ import {
 import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
-import { useTodoStore, ToggleListItemExtension, CodeMirror6Extension } from 'hooks';
+import { useTodoStore } from 'lib/stores';
+import { ToggleListItemExtension, CodeMirror6Extension } from 'lib/remirror/extensions';
 import { EmojiPickerReact, MenuBar, FloatingLinkToolbar } from 'components';
 import { languages } from '@codemirror/language-data';
 import { history, historyKeymap } from '@codemirror/commands';
@@ -63,7 +64,7 @@ import {
 } from '@codemirror/view';
 import { EditorState as CodeMirrorEditorState } from '@codemirror/state';
 import { autocompletion, completionKeymap } from '@codemirror/autocomplete';
-import { UseEditorType } from 'podote';
+import { UseEditorType } from 'podote/types';
 
 const PodoteTheme = styled.div<TodoStylesProps>`
   ${componentsStyledCss}

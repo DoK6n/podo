@@ -18,7 +18,7 @@ import {
   RiDeleteRow,
 } from 'react-icons/ri';
 import { CalloutBlank, CalloutError, CalloutInfo, CalloutWarn, CalloutSuccess } from 'assets';
-import { CodeMirror6Extension } from 'hooks';
+import { CodeMirror6Extension } from 'lib/remirror/extensions';
 
 const MenuBarWrapper = styled.div`
   ${menuBarStyledCss}

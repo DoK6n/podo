@@ -1,4 +1,4 @@
 export { default as TodoPage } from './Todo';
-export { default as TrashPage } from './Trash';
-export { default as MdPlaygroundPage } from './MdPlayground';
+export { default as TrashBinPage } from './TrashBin';
+export { default as MDPlaygroundPage } from './MDPlayground';
 export { default as PodoteEditorPage } from './PodoteEditor';

@@ -3,7 +3,7 @@ import { TodoItem } from 'components';
 import { todoListBlockStyledCss } from 'styles';
 import { Droppable, DropResult } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useTodoStore } from 'hooks';
+import { useTodoStore } from 'lib/stores';
 import styled from 'styled-components';
 
 const TodoListBlock = styled.article`

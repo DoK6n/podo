@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTodoTrashBinStore } from 'hooks';
+import { useTodoTrashBinStore } from 'lib/stores';
 import { TrashBinWrapper, TrashBinList, TrashBinItem } from 'components';
 
-function TrashPage() {
+function TrashBinPage() {
   const { removedTodos } = useTodoTrashBinStore();
 
   return (
@@ -23,4 +23,4 @@ function TrashPage() {
   );
 }
 
-export default TrashPage;
+export default TrashBinPage;

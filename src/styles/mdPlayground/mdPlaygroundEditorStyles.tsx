@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-export const markdownEditorStyledCss: ReturnType<typeof css> = css`
+export const mdPlaygroundEditorStyledCss: ReturnType<typeof css> = css`
   width: 100%;
   .editor-wrapper {
     height: 100%;
@@ -35,6 +35,7 @@ export const markdownEditorStyledCss: ReturnType<typeof css> = css`
   .cm-activeLine {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+    caret-color: auto;
   }
 
   .cm-focused {

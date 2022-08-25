@@ -12,11 +12,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { FiCopy } from 'react-icons/fi';
 
 import { CopyToClipboardWrapper } from 'components';
-import { mdPlaygroundViewerStyledCss } from 'styles';
+import { markdownPlaygroundViewerStyledCss } from 'styles';
 import styled, { css, TodoStylesProps } from 'styled-components';
 
-export const MDPlaygroundViewerTheme = styled.div<TodoStylesProps>`
-  ${mdPlaygroundViewerStyledCss}
+export const MarkdownPlaygroundViewerTheme = styled.div<TodoStylesProps>`
+  ${markdownPlaygroundViewerStyledCss}
 `;
 
 interface Props {
@@ -25,11 +25,11 @@ interface Props {
   editable: boolean;
 }
 
-function MDPlaygroundViewer({ doc, done, editable }: Props) {
+function MarkdownPlaygroundViewer({ doc, done, editable }: Props) {
   return (
     <div style={{ width: '100%', overflow: 'auto', display: !editable ? 'inline-block' : 'none' }}>
       <Toaster position="top-center" reverseOrder={false} />
-      <MDPlaygroundViewerTheme done={done} editable={editable}>
+      <MarkdownPlaygroundViewerTheme done={done} editable={editable}>
         <div className="preview markdown-body">
           <ReactMarkdown
             children={doc}
@@ -47,12 +47,12 @@ function MDPlaygroundViewer({ doc, done, editable }: Props) {
                         style: {
                           borderRadius: '10px',
                           background: '#483d6b',
-                          color: '#efeef3',
+                          color: '#efeef3'
                         },
                         iconTheme: {
                           primary: '#9595d9',
-                          secondary: '#efeef3',
-                        },
+                          secondary: '#efeef3'
+                        }
                       });
                     }}
                     style={css`
@@ -70,7 +70,7 @@ function MDPlaygroundViewer({ doc, done, editable }: Props) {
                       customStyle={{
                         margin: '-1rem',
                         fontWeight: 'bold',
-                        background: '#483d6b',
+                        background: '#483d6b'
                       }}
                       language={match[1]}
                       PreTag="div"
@@ -82,13 +82,13 @@ function MDPlaygroundViewer({ doc, done, editable }: Props) {
                     {children}
                   </code>
                 );
-              },
+              }
             }}
           />
         </div>
-      </MDPlaygroundViewerTheme>
+      </MarkdownPlaygroundViewerTheme>
     </div>
   );
 }
 
-export default MDPlaygroundViewer;
+export default MarkdownPlaygroundViewer;

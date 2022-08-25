@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useCallback, useState } from 'react';
-import { MDPlaygroundEditor, MDPlaygroundViewer } from 'components';
+import { MarkdownPlaygroundEditor, MarkdownPlaygroundViewer } from 'components';
 import { Toaster } from 'react-hot-toast';
 import 'github-markdown-css/github-markdown.css';
 
@@ -118,7 +118,7 @@ const EditerViewerTestBlock = styled.div`
   }
 `;
 
-function MDPlaygroundPage() {
+function MarkdownPlaygroundPage() {
   const [doc, setDoc] = useState<string>(`${markdown}\n`);
 
   const handleDocChange = useCallback((newDoc: string) => {
@@ -129,11 +129,11 @@ function MDPlaygroundPage() {
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <EditerViewerTestBlock>
-        <MDPlaygroundEditor onChange={handleDocChange} id={'0'} text={doc} done={false} />
-        <MDPlaygroundViewer doc={doc} done={false} editable={false} />
+        <MarkdownPlaygroundEditor onChange={handleDocChange} id={'0'} text={doc} done={false} />
+        <MarkdownPlaygroundViewer doc={doc} done={false} editable={false} />
       </EditerViewerTestBlock>
     </>
   );
 }
 
-export default React.memo(MDPlaygroundPage);
+export default React.memo(MarkdownPlaygroundPage);

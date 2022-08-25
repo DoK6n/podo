@@ -4,7 +4,7 @@ export * from './button';
 export * from './codeBlockTheme';
 export * from './global';
 export * from './todo';
-export * from './mdPlayground';
+export * from './markdownPlayground';
 export * from './podoteEditor';
 export * from './library';
 export * from './accordion';

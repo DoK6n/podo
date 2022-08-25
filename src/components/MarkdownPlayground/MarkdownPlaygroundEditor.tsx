@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { useCodemirror } from 'lib/hooks';
 import { EditorState } from '@codemirror/state';
-import { mdPlaygroundEditorStyledCss } from 'styles';
+import { markdownPlaygroundEditorStyledCss } from 'styles';
 import styled from 'styled-components';
 
 const MDPlaygroundEditorTheme = styled.div`
-  ${mdPlaygroundEditorStyledCss}
+  ${markdownPlaygroundEditorStyledCss}
 `;
 
 interface Props {
@@ -15,17 +15,17 @@ interface Props {
   done: boolean;
 }
 
-function MDPlaygroundEditor({ onChange, id, text, done }: Props) {
+function MarkdownPlaygroundEditor({ onChange, id, text, done }: Props) {
   const handleChange = useCallback(
     (state: EditorState, id: string, done: boolean) => onChange(state.doc.toString(), id, done),
-    [onChange],
+    [onChange]
   );
 
   const [refContainer, editorView] = useCodemirror<HTMLDivElement>({
     initialDoc: text,
     onChange: handleChange,
     id,
-    done,
+    done
   });
 
   useEffect(() => {
@@ -40,4 +40,4 @@ function MDPlaygroundEditor({ onChange, id, text, done }: Props) {
   );
 }
 
-export default React.memo(MDPlaygroundEditor);
+export default React.memo(MarkdownPlaygroundEditor);

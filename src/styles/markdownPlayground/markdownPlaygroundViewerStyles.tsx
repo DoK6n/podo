@@ -1,6 +1,6 @@
 import { css, TodoStylesProps } from 'styled-components';
 
-export const mdPlaygroundViewerStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
+export const markdownPlaygroundViewerStyledCss: ReturnType<typeof css> = css<TodoStylesProps>`
   opacity: ${({ done }) => (done === false ? '1' : '0.1')};
   display: ${({ editable }) => (editable ? 'none' : 'inline-block')};
 

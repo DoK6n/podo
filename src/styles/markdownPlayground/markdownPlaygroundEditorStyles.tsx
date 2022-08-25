@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-export const mdPlaygroundEditorStyledCss: ReturnType<typeof css> = css`
+export const markdownPlaygroundEditorStyledCss: ReturnType<typeof css> = css`
   width: 100%;
   .editor-wrapper {
     height: 100%;

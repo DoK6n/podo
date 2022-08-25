@@ -82,7 +82,8 @@
     "build": "craco build",
     "test": "craco test",
     "deploy": "./deploy.sh",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "codegen:gql": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -103,6 +104,11 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.11.6",
+    "@graphql-codegen/introspection": "2.2.1",
+    "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-operations": "2.5.3",
+    "@graphql-codegen/typescript-react-apollo": "3.3.3",
     "@types/jest": "^27.5.1",
     "@types/node": "^17.0.32",
     "@types/react": "^18.0.9",

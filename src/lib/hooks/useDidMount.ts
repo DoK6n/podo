@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useDidMount() {
+export const useDidMount = () => {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
@@ -8,4 +8,4 @@ export default function useDidMount() {
   }, []);
 
   return didMount;
-}
+};

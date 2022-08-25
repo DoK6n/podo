@@ -3,7 +3,7 @@ import { buttonStyledCss, headerStyledCss, logoNavStyledCss, navStyledCss } from
 import { Logo, VerticalBarIcon } from 'assets';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { TbMinusVertical } from 'react-icons/tb';
+import { AuthGoogleLogin } from 'components';
 
 export const Header = styled.header`
   ${headerStyledCss}
@@ -28,6 +28,8 @@ function MainHeader() {
         <Logo width="150" height="50" />
       </LogoNav>
       <Nav>
+        <AuthGoogleLogin />
+        <VerticalBarIcon />
         <Link to="/">
           <Button>홈</Button>
         </Link>

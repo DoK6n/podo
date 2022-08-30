@@ -171,7 +171,7 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     color: var(--podote-color-heading-text);
   }
   .remirror-editor-wrapper {
-    padding-top: 10px;
+    padding-top: 0;
   }
   .remirror-theme .ProseMirror {
     box-shadow: transparent 0px 0px 0px 0.1em;

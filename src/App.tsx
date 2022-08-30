@@ -15,10 +15,10 @@ function App() {
       <BrowserRouter>
         <MainHeader />
         <Routes>
-          <Route path="/" element={<TodoPage />}></Route>
-          <Route path="/trash" element={<TrashBinPage />}></Route>
+          <Route path="/" element={<PodoteEditorPage />}></Route>
+          <Route path="/todo" element={<TodoPage />}></Route>
+          <Route path="/todo/trash" element={<TrashBinPage />}></Route>
           <Route path="/mdplayground" element={<MDPlaygroundPage />}></Route>
-          <Route path="/editorplayground" element={<PodoteEditorPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

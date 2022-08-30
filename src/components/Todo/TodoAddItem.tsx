@@ -1,30 +1,19 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useEffect, useRef } from 'react';
 import { todoAddItemInputStyledCss } from 'styles';
 import { useTodoStore } from 'lib/stores';
 import styled from 'styled-components';
-// import { PodoteEditor } from 'components';
-// import { RemirrorJSON } from 'remirror';
-// import { v4 as uuidv4 } from 'uuid';
 
 const TodoAddItemInput = styled.input`
   ${todoAddItemInputStyledCss}
 `;
 
-// const TodoAddButton = styled.button`
-//   ${buttonStyledCss}
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   color: #efeef3;
-//   width: 1em;
-//   height: 1em;
-//   font-size: 2em;
-//   margin-top: 0.5em;
-// `;
-
 function TodoAddItem() {
   const { addItem } = useTodoStore();
+  const addItemInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    addItemInputRef?.current?.focus();
+  }, []);
 
   const onAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
     /**
@@ -43,13 +32,12 @@ function TodoAddItem() {
     }
   };
 
-  // const onAddItemClick = (e: MouseEvent<HTMLButtonElement>) => {
-  //   addItem({ text: 'Title' });
-  // };
-
   return (
-    <TodoAddItemInput placeholder="할일을 추가해보세요." onKeyUp={onAddItem} />
-    // <TodoAddButton onClick={onAddItemClick}>+</TodoAddButton>
+    <TodoAddItemInput
+      placeholder="내용 입력 후 Enter를 눌러 할일을 추가 할 수 있어요."
+      onKeyUp={onAddItem}
+      ref={addItemInputRef}
+    />
   );
 }
 

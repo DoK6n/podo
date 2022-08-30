@@ -7,6 +7,7 @@ import { CREATE_USER } from 'lib/graphql/mutation';
 import { GET_USER } from 'lib/graphql/query';
 import dayjs from 'dayjs';
 import { authMode, useAuthStore } from 'lib/stores';
+import { useNavigate } from 'react-router-dom';
 
 const Button = styled.button`
   ${buttonStyledCss}
@@ -18,6 +19,8 @@ export default function AuthGoogleLogin() {
 
   const [addUser] = useMutation(CREATE_USER);
   const [retrieveUserById] = useLazyQuery(GET_USER);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(authService, user => {
@@ -61,6 +64,7 @@ export default function AuthGoogleLogin() {
             lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss')
           });
           updateMode(authMode.LOGIN_MODE);
+          navigate('/todo');
         } else {
           // register code here...
           const createDt = dayjs(user.metadata.creationTime).format('YYYY-MM-DD HH:mm:ss');
@@ -92,11 +96,13 @@ export default function AuthGoogleLogin() {
               lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss')
             });
             updateMode(authMode.LOGIN_MODE);
+            navigate('/todo');
           }
         }
       }
     } else {
       updateMode(authMode.GUEST_MODE);
+      navigate('/');
     }
   };
 
@@ -106,6 +112,7 @@ export default function AuthGoogleLogin() {
         // Sign-out successful.
         userLogout();
         console.log('로그아웃', authService.currentUser);
+        navigate('/');
       })
       .catch(error => {
         // An error happened.
@@ -118,7 +125,7 @@ export default function AuthGoogleLogin() {
       {mode === authMode.LOGIN_MODE ? (
         <Button onClick={onSocialLogoutClick}>Logout</Button>
       ) : (
-        <Button onClick={onSocialClick}>Continue with Google</Button>
+        <Button onClick={onSocialClick}>Google Login</Button>
       )}
     </React.Fragment>
   );

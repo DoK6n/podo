@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import dayjs from 'dayjs';
 import { Todo } from 'podote/interfaces';
@@ -25,35 +25,35 @@ interface TodoTrashBinStore {
  */
 export const useTodoTrashBinStore = create<TodoTrashBinStore>()(
   devtools(
-    persist(
-      immer((set, get) => ({
-        removedTodos: [],
-        addRemovedTodos(action) {
-          // 휴지통에 목록 추가
-          set(({ removedTodos }) => {
-            const removedTodo = { ...action.todo, editable: false, removedDt: dayjs().format('YYYY-MM-DD HH:mm:ss') };
-            removedTodos.push(removedTodo);
-          });
-        },
-        findRemovedItemById(action) {
-          const removeTodo = get().removedTodos.find(removedItem => removedItem.id === action.id)!;
-          return removeTodo;
-        },
-        deleteTodosById(action) {
-          // 휴지통에서 목록 제거
-          set(({ removedTodos }) => {
-            const index = removedTodos.findIndex(removedTodo => removedTodo.id === action.id);
-            removedTodos.splice(index, 1);
-          });
-        },
-        deleteAllTodos() {
-          // 휴지통 비우기
-          set(state => {
-            state.removedTodos = [];
-          });
-        },
-      })),
-      { name: 'todo-trash-storage' },
-    ),
+    // persist(
+    immer((set, get) => ({
+      removedTodos: [],
+      addRemovedTodos(action) {
+        // 휴지통에 목록 추가
+        set(({ removedTodos }) => {
+          const removedTodo = { ...action.todo, editable: false, removedDt: dayjs().format('YYYY-MM-DD HH:mm:ss') };
+          removedTodos.push(removedTodo);
+        });
+      },
+      findRemovedItemById(action) {
+        const removeTodo = get().removedTodos.find(removedItem => removedItem.id === action.id)!;
+        return removeTodo;
+      },
+      deleteTodosById(action) {
+        // 휴지통에서 목록 제거
+        set(({ removedTodos }) => {
+          const index = removedTodos.findIndex(removedTodo => removedTodo.id === action.id);
+          removedTodos.splice(index, 1);
+        });
+      },
+      deleteAllTodos() {
+        // 휴지통 비우기
+        set(state => {
+          state.removedTodos = [];
+        });
+      },
+    })),
+    //   { name: 'todo-trash-storage' },
+    // ),
   ),
 );

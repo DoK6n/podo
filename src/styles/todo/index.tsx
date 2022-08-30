@@ -102,6 +102,7 @@ export const editIconStyledCss: ReturnType<typeof css> = css`
 
 export const removeIconStyledCss: ReturnType<typeof css> = css`
   opacity: 0.1;
+  color: #bfa8ff;
   &:hover {
     cursor: pointer;
     opacity: 1;

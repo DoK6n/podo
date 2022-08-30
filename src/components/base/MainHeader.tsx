@@ -4,6 +4,7 @@ import { Logo, VerticalBarIcon } from 'assets';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { AuthGoogleLogin } from 'components';
+import { authMode, useAuthStore } from 'lib/stores';
 
 export const Header = styled.header`
   ${headerStyledCss}
@@ -22,24 +23,31 @@ const Button = styled.button`
 `;
 
 function MainHeader() {
+  const { currentUserInfo, mode } = useAuthStore();
   return (
     <Header>
       <LogoNav>
         <Logo width="150" height="50" />
       </LogoNav>
       <Nav>
+        {mode === authMode.GUEST_MODE && currentUserInfo === null ? null : (
+          <React.Fragment>
+            <Button>{currentUserInfo?.displayName}</Button>
+            <VerticalBarIcon />
+          </React.Fragment>
+        )}
         <AuthGoogleLogin />
         <VerticalBarIcon />
         <Link to="/">
           <Button>홈</Button>
         </Link>
         <VerticalBarIcon />
-        <Link to="/trash">
-          <Button>휴지통</Button>
+        <Link to="/todo">
+          <Button>todo</Button>
         </Link>
         <VerticalBarIcon />
-        <Link to="/editorplayground">
-          <Button>Editor Playground</Button>
+        <Link to="/todo/trash">
+          <Button>휴지통</Button>
         </Link>
         <VerticalBarIcon />
         <Link to="/mdplayground">

@@ -28,9 +28,9 @@ export const useAuthStore = create<AuthStore>()(
         mode: authMode.GUEST_MODE,
         userLogin: currentUser => set(({ currentUserInfo }) => ({ currentUserInfo: { ...currentUser } })),
         updateMode: currentMode => set(({ mode }) => ({ mode: currentMode })),
-        userLogout: () => set(({ currentUserInfo, mode }) => ({ currentUserInfo: null, mode: authMode.GUEST_MODE })),
+        userLogout: () => set(({ currentUserInfo, mode }) => ({ currentUserInfo: null, mode: authMode.GUEST_MODE }))
       }),
-      { name: 'currentUser' },
-    ),
-  ),
+      { name: 'currentUser' }
+    )
+  )
 );

@@ -3,6 +3,7 @@ declare module 'podote/types' {
 }
 
 declare module 'podote/interfaces' {
+  import { RemirrorJSON } from 'remirror';
   export interface Todo {
     id: string;
     content: RemirrorJSON;

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ProsemirrorNode, RemirrorJSON } from 'remirror';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Extension, ProsemirrorNode, RemirrorEventListenerProps, RemirrorJSON } from 'remirror';
 import { EditorView } from '@remirror/pm/view';
 import { IEmojiData } from 'emoji-picker-react';
 import {
@@ -49,12 +49,11 @@ import styled, { TodoStylesProps } from 'styled-components';
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
 import { useTodoStore } from 'lib/stores';
 import { ToggleListItemExtension, CodeMirror6Extension } from 'lib/remirror/extensions';
-import { EmojiPickerReact, MenuBar, FloatingLinkToolbar } from 'components';
+import { EmojiPickerReact, MenuBar, FloatingLinkToolbar, SaveButton, EditButton, CancleButton } from 'components';
 import { languages } from '@codemirror/language-data';
 import { history, historyKeymap } from '@codemirror/commands';
 import { bracketMatching, foldGutter, foldKeymap } from '@codemirror/language';
 import { defaultKeymap, indentMore, indentLess } from '@codemirror/commands';
-
 import {
   drawSelection,
   highlightActiveLineGutter,
@@ -103,7 +102,8 @@ interface ChildForwardRefObjects {
 
 function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSON }: Props) {
   const [chosenEmoji, setChosenEmoji] = useState<IEmojiData | null>(null);
-  const { editItemText } = useTodoStore();
+  const { findItemById } = useTodoStore();
+
   const childRef = useRef<ChildForwardRefObjects>({
     handleClickEmoji: () => {},
   });
@@ -194,6 +194,12 @@ function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSO
      * ContentEditable이 상속된 HTMLElement로 강제 타입 캐스팅
      */
 
+    // 수정모드인 상태에서 다른 item을 수정모드로 하면 이전 아이템은 읽기 모드 + 수정중이던 내용 취소
+    if (!editable) {
+      const item = findItemById({ id });
+      getContext()?.setContent(item.content);
+    }
+
     const viewDomList = getContext()?.view.dom.children;
     if (viewDomList !== undefined) {
       for (const cmEditor of viewDomList) {
@@ -213,22 +219,27 @@ function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSO
     }
   }, [editable]);
 
-  const onChangeState = (parameter: any) => {
-    // Update the state to the latest value.
-    setState(parameter.state);
-
-    switch (editorType) {
-      case 'TODO_ITEM':
-        editItemText({ id, content: parameter.state.doc }); // main page update content object
-        break;
-      case 'TRASH_VIEW':
-        break;
-      case 'TEST_PAGE':
-        // editor testing page only
-        if (setTestOnlyContentJSON) setTestOnlyContentJSON(parameter.state.doc);
-        break;
-    }
-  };
+  const onChangeState = useCallback(
+    (parameter: RemirrorEventListenerProps<Extension>) => {
+      // Update the state to the latest value.
+      setState(parameter.state);
+      switch (editorType) {
+        case 'TODO_ITEM':
+          // editItemText({ id, content: parameter.state.doc.toJSON() }); // main page update content object
+          break;
+        case 'TRASH_VIEW':
+          break;
+        case 'TEST_PAGE':
+          // editor testing page only
+          if (setTestOnlyContentJSON) {
+            const prosmirrorNodeToRemirrorJson: RemirrorJSON = parameter.state.doc.toJSON();
+            setTestOnlyContentJSON(prosmirrorNodeToRemirrorJson);
+          }
+          break;
+      }
+    },
+    [editorType, setState, setTestOnlyContentJSON],
+  );
 
   return (
     <PodoteTheme editable={editable}>
@@ -252,6 +263,8 @@ function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSO
             />
           ) : null}
           <FloatingLinkToolbar />
+          {editable === true ? <SaveButton id={id} /> : null}
+          {editable === true ? <CancleButton id={id} /> : <EditButton id={id} />}
         </Remirror>
       </ThemeProvider>
     </PodoteTheme>

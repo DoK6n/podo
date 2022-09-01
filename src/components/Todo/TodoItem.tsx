@@ -2,15 +2,12 @@ import React from 'react';
 import {
   checkIconStyledCss,
   dragHandleIconStyledCss,
-  editIconStyledCss,
   itemBlockLeftIconWrapperStyledCss,
   itemTextStyledCss,
   removeIconStyledCss,
   todoItemBlockStyledCss,
 } from 'styles';
 import { PodoteEditor } from 'components';
-import { BiEdit } from 'react-icons/bi';
-import { IoMdCloudDone } from 'react-icons/io';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
@@ -35,10 +32,6 @@ const CheckIcon = styled.span<TodoStylesProps>`
   ${checkIconStyledCss}
 `;
 
-const EditIcon = styled.span`
-  ${editIconStyledCss}
-`;
-
 const RemoveIcon = styled.span`
   ${removeIconStyledCss}
 `;
@@ -56,7 +49,7 @@ interface Props {
 }
 
 function TodoItem({ id, content, done, editable, index }: Props) {
-  const { removeItem, toggleItem, setEditableById, findItemById } = useTodoStore();
+  const { removeItem, toggleItem, findItemById } = useTodoStore();
   const { addRemovedTodos } = useTodoTrashBinStore();
 
   const onRemoveitem = () => {
@@ -66,10 +59,6 @@ function TodoItem({ id, content, done, editable, index }: Props) {
 
   const onToggleItem = () => {
     toggleItem({ id });
-  };
-
-  const onEditItem = () => {
-    setEditableById({ id });
   };
 
   return (
@@ -87,7 +76,6 @@ function TodoItem({ id, content, done, editable, index }: Props) {
           <ItemText done={done} editable={editable}>
             <PodoteEditor id={id} editable={editable} content={content} editorType={'TODO_ITEM'} />
           </ItemText>
-          <EditIcon onClick={onEditItem}>{editable ? <IoMdCloudDone /> : <BiEdit />}</EditIcon>
           {editable ? (
             <RemoveIcon onClick={onRemoveitem}>
               <BsTrashFill />

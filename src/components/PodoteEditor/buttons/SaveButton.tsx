@@ -11,13 +11,11 @@ const EditIcon = styled.span`
 
 export default function SaveButton({ id }: { id: string }) {
   const { setEditableById, editItemText } = useTodoStore();
-  // TODO save 버튼 클릭시만 DB에 저장할것
   const { getJSON } = useHelpers();
 
   const handleClick = useCallback(() => {
     editItemText({ id, content: getJSON() });
     setEditableById({ id });
-    // return alert(JSON.stringify(getJSON()));
   }, [getJSON]);
 
   return (

@@ -11,10 +11,11 @@ import { PodoteEditor } from 'components';
 import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
-import { useTodoStore, useTodoTrashBinStore } from 'lib/stores';
+// import { useTodoStore, useTodoTrashBinStore } from 'lib/stores';
 import styled, { TodoStylesProps } from 'styled-components';
 import { RemirrorJSON } from 'remirror';
 import { BsTrashFill } from 'react-icons/bs';
+import { Todo } from 'podote/interfaces';
 
 const TodoItemBlock = styled.section<TodoStylesProps>`
   ${todoItemBlockStyledCss}
@@ -40,26 +41,16 @@ const ItemText = styled.div<TodoStylesProps>`
   ${itemTextStyledCss}
 `;
 
-interface Props {
-  id: string;
-  content: RemirrorJSON;
-  done: boolean;
-  editable: boolean;
+interface Props extends Omit<Todo, 'removedDt'> {
   index: number;
 }
 
 function TodoItem({ id, content, done, editable, index }: Props) {
-  const { removeItem, toggleItem, findItemById } = useTodoStore();
-  const { addRemovedTodos } = useTodoTrashBinStore();
+  // 휴지통으로 이동
+  const onRemoveitem = () => {};
 
-  const onRemoveitem = () => {
-    addRemovedTodos({ todo: findItemById({ id }) });
-    removeItem({ id });
-  };
-
-  const onToggleItem = () => {
-    toggleItem({ id });
-  };
+  // 완료 여부 토글
+  const onToggleItem = () => {};
 
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>

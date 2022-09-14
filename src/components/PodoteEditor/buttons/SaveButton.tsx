@@ -1,5 +1,6 @@
+import { useMutation } from '@apollo/client';
 import { useHelpers } from '@remirror/react';
-import { useTodoStore } from 'lib/stores';
+// import { useTodoStore } from 'lib/stores';
 import { useCallback } from 'react';
 import { IoMdCloudDone } from 'react-icons/io';
 import styled from 'styled-components';
@@ -10,12 +11,12 @@ const EditIcon = styled.span`
 `;
 
 export default function SaveButton({ id }: { id: string }) {
-  const { setEditableById, editItemText } = useTodoStore();
+  // const { setEditableById, editItemText } = useTodoStore();
   const { getJSON } = useHelpers();
-
+  // TODO Update Todo
   const handleClick = useCallback(() => {
-    editItemText({ id, content: getJSON() });
-    setEditableById({ id });
+    // editItemText({ id, content: getJSON() });
+    // setEditableById({ id });
   }, [getJSON]);
 
   return (

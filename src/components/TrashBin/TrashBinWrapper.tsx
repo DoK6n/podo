@@ -1,4 +1,4 @@
-import { useTodoTrashBinStore } from 'lib/stores';
+// import { useTodoTrashBinStore } from 'lib/stores';
 import React from 'react';
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
@@ -19,10 +19,10 @@ export const Nav = styled.nav`
 `;
 
 function TrashWrapper({ children }: PropsWithChildren<Props>) {
-  const { deleteAllTodos } = useTodoTrashBinStore();
+  // const { deleteAllTodos } = useTodoTrashBinStore();
 
   const onDeleteAll = () => {
-    deleteAllTodos();
+    // deleteAllTodos();
   };
 
   return (

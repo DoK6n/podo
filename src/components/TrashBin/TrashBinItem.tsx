@@ -8,11 +8,12 @@ import {
 } from 'styles';
 import styled, { TodoStylesProps } from 'styled-components';
 import { Dialog, PodoteEditor } from 'components';
-import { RemovedTodo, useTodoStore, useTodoTrashBinStore } from 'lib/stores';
+// import { RemovedTodo } from 'lib/stores';
 import { useState } from 'react';
 import { RemirrorJSON } from 'remirror';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { FaTrashRestore } from 'react-icons/fa';
+import { Todo } from 'podote/interfaces';
 
 const Button = styled.button`
   ${buttonStyledCss}
@@ -35,11 +36,19 @@ const TodoTemplateBlock = styled.main`
   ${todoTemplateStyledCss}
 `;
 
-interface Props extends Omit<RemovedTodo, 'editable' | 'done'> {}
+// 옵셔널 속성을 필수 속성으로 변경하는 타입
+// type WithRequiredProperty<T, K extends keyof T> = T & {
+//   [P in K]-?: T[P];
+// };
+// 특정 옵셔널 속성값을 필수값으로 변경한 타입
+// interface RemovedTodoWithRequired extends WithRequiredProperty<RemovedTodo, 'removedDt'> {}
+
+export interface RemovedTodo extends Required<Todo> {} // removedDt를 필수속성값으로 변경
+
+// 필수로 변경한 타입에서 특정 속성들을 제거한 타입
+interface Props extends Omit<RemovedTodo, 'editable' | 'done' | 'orderKey'> {}
 
 function TrashBinItem({ id, content, removedDt }: Props) {
-  const { findRemovedItemById, deleteTodosById } = useTodoTrashBinStore();
-  const { recycleItem } = useTodoStore();
   const [testOnlyContentJSON, setTestOnlyContentJSON] = useState<RemirrorJSON>({
     type: 'doc',
   });
@@ -54,17 +63,12 @@ function TrashBinItem({ id, content, removedDt }: Props) {
     dialogRef.current.showModal();
   };
 
-  const onRecycleItem = () => {
-    const removeTodo = findRemovedItemById({
-      id,
-    });
-    recycleItem({ todo: removeTodo });
-    deleteTodosById({ id });
-  };
+  // 할일 항목 복원
+  const onRecycleItem = () => {};
 
-  const onDeleteItem = () => {
-    deleteTodosById({ id });
-  };
+  // 할일 항목 영구삭제
+  const onDeleteItem = () => {};
+
   return (
     <tbody>
       <tr>

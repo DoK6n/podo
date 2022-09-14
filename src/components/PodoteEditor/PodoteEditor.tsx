@@ -47,7 +47,7 @@ import {
 import styled, { TodoStylesProps } from 'styled-components';
 
 import { extensionCalloutStyledCss, extensionCountStyledCss, podoteThemeStyledCss, gruvBox } from 'styles';
-import { useTodoStore } from 'lib/stores';
+// import { useTodoStore } from 'lib/stores';
 import { ToggleListItemExtension, CodeMirror6Extension } from 'lib/remirror/extensions';
 import { EmojiPickerReact, MenuBar, FloatingLinkToolbar, SaveButton, EditButton, CancleButton } from 'components';
 import { languages } from '@codemirror/language-data';
@@ -102,7 +102,7 @@ interface ChildForwardRefObjects {
 
 function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSON }: Props) {
   const [chosenEmoji, setChosenEmoji] = useState<IEmojiData | null>(null);
-  const { findItemById } = useTodoStore();
+  // const { findItemById } = useTodoStore();
 
   const childRef = useRef<ChildForwardRefObjects>({
     handleClickEmoji: () => {},
@@ -196,8 +196,8 @@ function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSO
 
     // 수정모드인 상태에서 다른 item을 수정모드로 하면 이전 아이템은 읽기 모드 + 수정중이던 내용 취소
     if (!editable) {
-      const item = findItemById({ id });
-      getContext()?.setContent(item.content);
+      // const item = findItemById({ id });
+      // getContext()?.setContent(item.content);
     }
 
     const viewDomList = getContext()?.view.dom.children;

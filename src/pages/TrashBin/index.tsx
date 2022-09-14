@@ -1,14 +1,14 @@
 import React from 'react';
-import { useTodoTrashBinStore } from 'lib/stores';
+// import { useTodoTrashBinStore } from 'lib/stores';
 import { TrashBinWrapper, TrashBinList, TrashBinItem } from 'components';
 
 function TrashBinPage() {
-  const { removedTodos } = useTodoTrashBinStore();
+  // const { removedTodos } = useTodoTrashBinStore();
 
   return (
     <>
       <TrashBinWrapper>
-        <TrashBinList>
+        {/* <TrashBinList>
           {removedTodos.map(removedTodo => (
             <TrashBinItem
               id={removedTodo.id}
@@ -17,7 +17,7 @@ function TrashBinPage() {
               key={removedTodo.id}
             />
           ))}
-        </TrashBinList>
+        </TrashBinList> */}
       </TrashBinWrapper>
     </>
   );

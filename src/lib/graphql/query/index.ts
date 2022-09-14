@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 /**
  * ### 특정 유저의 모든 할일 목록 조회
@@ -8,16 +8,18 @@ import gql from 'graphql-tag';
  * @headers uid
  */
 export const GET_USER_ALL_TODOS = gql`
-  query {
+  query retrieveAllTodos {
     retrieveAllTodos {
       id
       content
-      isInactive
+      done
+      editable
       isRemoved
       userId
       createdDt
       updatedDt
       removedDt
+      orderKey
     }
   }
 `;
@@ -33,11 +35,13 @@ export const GET_USER_TODO = gql`
   query retrieveTodo($id: String!) {
     retrieveTodo(id: $id) {
       content
-      isInactive
+      done
+      editable
       isRemoved
       createdDt
       updatedDt
       removedDt
+      orderKey
     }
   }
 `;
@@ -50,16 +54,17 @@ export const GET_USER_TODO = gql`
  * @headers uid
  */
 export const GET_USER_ALL_REMOVED_TODOS = gql`
-  query {
+  query retrieveAllRemovedTodo {
     retrieveAllRemovedTodo {
       id
       userId
       content
-      isInactive
+      done
+      editable
       isRemoved
       createdDt
-      # updatedDt,
       removedDt
+      orderKey
     }
   }
 `;
@@ -76,11 +81,13 @@ export const GET_USER_REMOVED_TODO = gql`
     retrieveRemovedTodo(id: $id) {
       userId
       content
-      isInactive
+      done
+      editable
       isRemoved
       createdDt
       updatedDt
       removedDt
+      orderKey
     }
   }
 `;
@@ -93,7 +100,7 @@ export const GET_USER_REMOVED_TODO = gql`
  * @headers uid
  */
 export const GET_USER = gql`
-  query {
+  query retrieveUserById {
     retrieveUserById {
       id
       email

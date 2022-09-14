@@ -1,21 +1,42 @@
 import React, { KeyboardEvent, useEffect, useRef } from 'react';
 import { todoAddItemInputStyledCss } from 'styles';
-import { useTodoStore } from 'lib/stores';
+import { useAuthStore } from 'lib/stores';
 import styled from 'styled-components';
+import { ADD_NEW_TODO } from 'lib/graphql/mutation';
+import { useMutation } from '@apollo/client';
+import { GET_USER_ALL_TODOS } from 'lib/graphql/query';
+import { RemirrorJSON } from 'remirror';
 
 const TodoAddItemInput = styled.input`
   ${todoAddItemInputStyledCss}
 `;
 
+const contentNormalTextFormat = (text: string): RemirrorJSON => ({
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      content: [
+        {
+          type: 'text',
+          text: text,
+        },
+      ],
+    },
+  ],
+});
+
 function TodoAddItem() {
-  const { addItem } = useTodoStore();
+  const { currentUserInfo, mode } = useAuthStore();
   const addItemInputRef = useRef<HTMLInputElement>(null);
+  const [addNewTodo] = useMutation(ADD_NEW_TODO);
 
   useEffect(() => {
     addItemInputRef?.current?.focus();
   }, []);
 
-  const onAddItem = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onAddItem = async (e: KeyboardEvent<HTMLInputElement>) => {
     /**
      * e : KeyboardEvent<HTMLInputElement>
      * -> 위처럼 지정시 e.target.value 사용 불가
@@ -27,17 +48,42 @@ function TodoAddItem() {
      */
     const target = e.target as HTMLInputElement;
     if (e.key === 'Enter' && target.value !== '') {
-      addItem({ text: target.value });
+      if (!currentUserInfo || mode === 'GUEST_MODE') return;
+
+      await addNewTodo({
+        variables: {
+          data: {
+            content: contentNormalTextFormat(target.value),
+          },
+        },
+        context: {
+          headers: {
+            uid: currentUserInfo?.uid,
+          },
+        },
+        refetchQueries: [
+          {
+            query: GET_USER_ALL_TODOS,
+            context: {
+              headers: {
+                uid: currentUserInfo?.uid,
+              },
+            },
+          },
+        ],
+      });
       target.value = '';
     }
   };
 
   return (
-    <TodoAddItemInput
-      placeholder="내용 입력 후 Enter를 눌러 할일을 추가 할 수 있어요."
-      onKeyUp={onAddItem}
-      ref={addItemInputRef}
-    />
+    <React.Fragment>
+      <TodoAddItemInput
+        placeholder="내용 입력 후 Enter를 눌러 할일을 추가 할 수 있어요."
+        onKeyUp={onAddItem}
+        ref={addItemInputRef}
+      />
+    </React.Fragment>
   );
 }
 

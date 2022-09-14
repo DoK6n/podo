@@ -1,5 +1,5 @@
 import { useRemirrorContext } from '@remirror/react';
-import { useTodoStore } from 'lib/stores';
+// import { useTodoStore } from 'lib/stores';
 import { MdCancel } from 'react-icons/md';
 import styled from 'styled-components';
 import { editIconStyledCss } from 'styles';
@@ -12,12 +12,12 @@ interface CancleButtonProps {
   id: string;
 }
 export default function Canclebutton({ id }: CancleButtonProps) {
-  const { setEditableById, findItemById } = useTodoStore();
+  // const { setEditableById, findItemById } = useTodoStore();
   const context = useRemirrorContext();
 
   const onCancleItem = () => {
-    context.setContent(findItemById({ id }).content);
-    setEditableById({ id });
+    // context.setContent(findItemById({ id }).content);
+    // setEditableById({ id });
   };
 
   return (

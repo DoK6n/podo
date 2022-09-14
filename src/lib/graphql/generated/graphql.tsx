@@ -11,9 +11,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
 
@@ -33,10 +31,12 @@ export type Mutation = {
   addNewTodo?: Maybe<Todo>;
   addUser: User;
   deleteAllRemovedTodos?: Maybe<Array<Todo>>;
-  deleteRemovedTodo?: Maybe<Todo>;
+  deleteRemovedTodo?: Maybe<Array<Todo>>;
   editTodoContent?: Maybe<Todo>;
+  editTodoDone?: Maybe<Todo>;
   recycleRemovedTodo?: Maybe<Todo>;
   removeTodo?: Maybe<Todo>;
+  switchTodoOrder: Array<Todo>;
 };
 
 
@@ -51,7 +51,7 @@ export type MutationAddUserArgs = {
 
 
 export type MutationDeleteRemovedTodoArgs = {
-  id: Scalars['String'];
+  data: TodoIdInput;
 };
 
 
@@ -60,13 +60,23 @@ export type MutationEditTodoContentArgs = {
 };
 
 
+export type MutationEditTodoDoneArgs = {
+  data: UpdateTodoDoneInput;
+};
+
+
 export type MutationRecycleRemovedTodoArgs = {
-  id: Scalars['String'];
+  data: TodoIdInput;
 };
 
 
 export type MutationRemoveTodoArgs = {
-  id: Scalars['String'];
+  data: TodoIdInput;
+};
+
+
+export type MutationSwitchTodoOrderArgs = {
+  data: UpdateTodoOrderkeyInput;
 };
 
 export type Query = {
@@ -76,7 +86,7 @@ export type Query = {
   retrieveAllUsers?: Maybe<Array<User>>;
   retrieveRemovedTodo?: Maybe<Todo>;
   retrieveTodo?: Maybe<Todo>;
-  retrieveUserById?: Maybe<UserWithSnsType>;
+  retrieveUserById: UserWithSnsType;
   snsType: SnsType;
 };
 
@@ -105,18 +115,38 @@ export type Todo = {
   __typename?: 'Todo';
   content?: Maybe<Scalars['JSON']>;
   createdDt: Scalars['DateTime'];
+  done: Scalars['Boolean'];
+  editable: Scalars['Boolean'];
   id: Scalars['String'];
-  isInactive: Scalars['Boolean'];
   isRemoved: Scalars['Boolean'];
+  orderKey: Scalars['Float'];
   removedDt?: Maybe<Scalars['DateTime']>;
   updatedDt?: Maybe<Scalars['DateTime']>;
   user: User;
   userId: Scalars['String'];
 };
 
+export type TodoIdInput = {
+  id: Scalars['String'];
+};
+
+export type TodoIdOrderKey = {
+  id: Scalars['String'];
+  orderKey: Scalars['Float'];
+};
+
 export type UpdateTodoContentInput = {
   content?: InputMaybe<Scalars['JSON']>;
   id: Scalars['String'];
+};
+
+export type UpdateTodoDoneInput = {
+  done: Scalars['Boolean'];
+  id: Scalars['String'];
+};
+
+export type UpdateTodoOrderkeyInput = {
+  TodoIdOrderKey: Array<TodoIdOrderKey>;
 };
 
 export type User = {

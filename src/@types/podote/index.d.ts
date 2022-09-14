@@ -10,5 +10,6 @@ declare module 'podote/interfaces' {
     done: boolean;
     editable: boolean;
     removedDt?: string;
+    orderKey: number;
   }
 }

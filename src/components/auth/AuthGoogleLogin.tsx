@@ -46,9 +46,9 @@ export default function AuthGoogleLogin() {
       const { loading, data } = await retrieveUserById({
         context: {
           headers: {
-            uid: user.uid
-          }
-        }
+            uid: user.uid,
+          },
+        },
       });
 
       if (!loading) {
@@ -61,7 +61,7 @@ export default function AuthGoogleLogin() {
             email: user.email,
             photoURL: user.photoURL,
             providerId: user.providerData[0].providerId,
-            lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss')
+            lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss'),
           });
           updateMode(authMode.LOGIN_MODE);
           navigate('/todo');
@@ -74,14 +74,14 @@ export default function AuthGoogleLogin() {
                 email: user.email,
                 name: user.displayName,
                 snsTypeName: user.providerData[0].providerId,
-                createDt: createDt
-              }
+                createDt: createDt,
+              },
             },
             context: {
               headers: {
-                uid: user.uid
-              }
-            }
+                uid: user.uid,
+              },
+            },
           });
 
           if (data && data.addUser) {
@@ -93,7 +93,7 @@ export default function AuthGoogleLogin() {
               email: user.email,
               photoURL: user.photoURL,
               providerId: user.providerData[0].providerId,
-              lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss')
+              lastLoginAt: dayjs(user.metadata.lastSignInTime).format('YYYY-MM-DD HH:mm:ss'),
             });
             updateMode(authMode.LOGIN_MODE);
             navigate('/todo');

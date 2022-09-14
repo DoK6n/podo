@@ -79,12 +79,12 @@
     "zustand": "^4.1.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "npm run codegen --watch && craco start",
     "build": "craco build",
     "test": "craco test",
     "deploy": "./deploy.sh",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "codegen:gql": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [

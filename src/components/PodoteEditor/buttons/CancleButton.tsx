@@ -1,6 +1,7 @@
 import { useRemirrorContext } from '@remirror/react';
-// import { useTodoStore } from 'lib/stores';
+import { useClientCacheTodoEditable } from 'lib/hooks';
 import { MdCancel } from 'react-icons/md';
+import { RemirrorJSON } from 'remirror';
 import styled from 'styled-components';
 import { editIconStyledCss } from 'styles';
 
@@ -10,14 +11,15 @@ const EditIcon = styled.span`
 
 interface CancleButtonProps {
   id: string;
+  content: RemirrorJSON;
 }
-export default function Canclebutton({ id }: CancleButtonProps) {
-  // const { setEditableById, findItemById } = useTodoStore();
+export default function Canclebutton({ id, content }: CancleButtonProps) {
   const context = useRemirrorContext();
+  const { setUnEditable } = useClientCacheTodoEditable();
 
   const onCancleItem = () => {
-    // context.setContent(findItemById({ id }).content);
-    // setEditableById({ id });
+    context.setContent(content);
+    setUnEditable(id);
   };
 
   return (

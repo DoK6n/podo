@@ -264,7 +264,7 @@ function PodoteEditor({ id, editable, content, editorType, setTestOnlyContentJSO
           ) : null}
           <FloatingLinkToolbar />
           {editable === true ? <SaveButton id={id} /> : null}
-          {editable === true ? <CancleButton id={id} /> : <EditButton id={id} />}
+          {editable === true ? <CancleButton id={id} content={content} /> : <EditButton id={id} />}
         </Remirror>
       </ThemeProvider>
     </PodoteTheme>

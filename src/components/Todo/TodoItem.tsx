@@ -1,17 +1,14 @@
 import React from 'react';
 import {
-  checkIconStyledCss,
   dragHandleIconStyledCss,
   itemBlockLeftIconWrapperStyledCss,
   itemTextStyledCss,
   removeIconStyledCss,
   todoItemBlockStyledCss,
 } from 'styles';
-import { PodoteEditor } from 'components';
-import { IoWaterOutline, IoWaterSharp } from 'react-icons/io5';
+import { PodoteEditor, ToggleButton } from 'components';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
-// import { useTodoStore, useTodoTrashBinStore } from 'lib/stores';
 import styled, { TodoStylesProps } from 'styled-components';
 import { RemirrorJSON } from 'remirror';
 import { BsTrashFill } from 'react-icons/bs';
@@ -27,10 +24,6 @@ const ItemBlockLeftIconWrapper = styled.div`
 
 const DragHandleIcon = styled.span`
   ${dragHandleIconStyledCss}
-`;
-
-const CheckIcon = styled.span<TodoStylesProps>`
-  ${checkIconStyledCss}
 `;
 
 const RemoveIcon = styled.span`
@@ -60,9 +53,7 @@ function TodoItem({ id, content, done, editable, index }: Props) {
             <DragHandleIcon {...provided.dragHandleProps}>
               <MdDragIndicator />
             </DragHandleIcon>
-            <CheckIcon onClick={onToggleItem} done={done}>
-              {done === false ? <IoWaterOutline size={25} /> : <IoWaterSharp size={25} />}
-            </CheckIcon>
+            <ToggleButton id={id} done={done} />
           </ItemBlockLeftIconWrapper>
           <ItemText done={done} editable={editable}>
             <PodoteEditor id={id} editable={editable} content={content} editorType={'TODO_ITEM'} />

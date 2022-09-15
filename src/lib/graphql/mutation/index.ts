@@ -93,6 +93,7 @@ export const EDIT_TODO_CONTENT = gql`
 export const EDIT_TODO_DONE = gql`
   mutation editTodoDone($data: UpdateTodoDoneInput!) {
     editTodoDone(data: $data) {
+      id
       content
       done
       isRemoved

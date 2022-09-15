@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { TodoItem } from 'components';
 import { todoListBlockStyledCss } from 'styles';
 import { Droppable, DropResult } from 'react-beautiful-dnd';
@@ -33,10 +33,6 @@ function TodoList() {
   const cacheTodo = client.readQuery<Query>({
     query: GET_USER_ALL_TODOS,
   });
-
-  useEffect(() => {
-    console.log('cache', cacheTodo?.retrieveAllTodos);
-  }, [cacheTodo]);
 
   // 서버에서 Todos 데이터 조회
   const { loading, data } = useQuery<AllTodosQuery>(GET_USER_ALL_TODOS, {

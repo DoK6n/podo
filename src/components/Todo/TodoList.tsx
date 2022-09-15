@@ -93,8 +93,8 @@ function TodoList() {
       <Droppable droppableId="list">
         {provided => (
           <TodoListBlock {...provided.droppableProps} ref={provided.innerRef}>
-            {cacheTodo && cacheTodo.retrieveAllTodos
-              ? cacheTodo.retrieveAllTodos.map((todo, index) => (
+            {data && data.retrieveAllTodos
+              ? data.retrieveAllTodos.map((todo, index) => (
                   <TodoItem
                     id={todo.id}
                     content={todo.content}

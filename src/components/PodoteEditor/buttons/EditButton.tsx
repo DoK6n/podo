@@ -1,6 +1,3 @@
-// import { useTodoStore } from 'lib/stores';
-import { gql, useApolloClient } from '@apollo/client';
-import { GET_USER_ALL_TODOS } from 'lib/graphql/query';
 import { useClientCacheTodoEditable } from 'lib/hooks';
 import { BiEdit } from 'react-icons/bi';
 import styled from 'styled-components';

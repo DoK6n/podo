@@ -1,27 +1,53 @@
 import { useMutation } from '@apollo/client';
 import { useHelpers } from '@remirror/react';
-// import { useTodoStore } from 'lib/stores';
+import { EDIT_TODO_CONTENT } from 'lib/graphql/mutation';
+import { useAuthStore } from 'lib/stores';
 import { useCallback } from 'react';
 import { IoMdCloudDone } from 'react-icons/io';
 import styled from 'styled-components';
 import { editIconStyledCss } from 'styles';
+import { Mutation, MutationEditTodoContentArgs } from 'lib/graphql/generated/graphql';
+import { GET_USER_ALL_TODOS } from 'lib/graphql/query';
 
-const EditIcon = styled.span`
+const SaveIcon = styled.span`
   ${editIconStyledCss}
 `;
 
 export default function SaveButton({ id }: { id: string }) {
-  // const { setEditableById, editItemText } = useTodoStore();
+  const { currentUserInfo } = useAuthStore();
+  const [editTodoContent] = useMutation<Pick<Mutation, 'editTodoContent'>, MutationEditTodoContentArgs>(
+    EDIT_TODO_CONTENT,
+  );
   const { getJSON } = useHelpers();
-  // TODO Update Todo
   const handleClick = useCallback(() => {
-    // editItemText({ id, content: getJSON() });
-    // setEditableById({ id });
+    editTodoContent({
+      variables: {
+        data: {
+          id: id,
+          content: getJSON(),
+        },
+      },
+      context: {
+        headers: {
+          uid: currentUserInfo?.uid,
+        },
+      },
+      refetchQueries: [
+        {
+          query: GET_USER_ALL_TODOS,
+          context: {
+            headers: {
+              uid: currentUserInfo?.uid,
+            },
+          },
+        },
+      ],
+    });
   }, [getJSON]);
 
   return (
-    <EditIcon onMouseDown={event => event.preventDefault()} onClick={handleClick}>
+    <SaveIcon onClick={handleClick}>
       <IoMdCloudDone />
-    </EditIcon>
+    </SaveIcon>
   );
 }

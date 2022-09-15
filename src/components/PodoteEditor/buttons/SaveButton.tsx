@@ -19,8 +19,8 @@ export default function SaveButton({ id }: { id: string }) {
     EDIT_TODO_CONTENT,
   );
   const { getJSON } = useHelpers();
-  const handleClick = useCallback(() => {
-    editTodoContent({
+  const handleClick = useCallback(async () => {
+    await editTodoContent({
       variables: {
         data: {
           id: id,

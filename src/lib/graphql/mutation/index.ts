@@ -77,6 +77,7 @@ export const EDIT_TODO_CONTENT = gql`
       done
       isRemoved
       updatedDt
+      userId
     }
   }
 `;
@@ -95,6 +96,7 @@ export const EDIT_TODO_DONE = gql`
       done
       isRemoved
       updatedDt
+      userId
     }
   }
 `;
@@ -111,6 +113,7 @@ export const SWITCH_TODO_ORDER = gql`
     switchTodoOrder(data: $data) {
       id
       orderKey
+      userId
     }
   }
 `;
@@ -125,13 +128,13 @@ export const SWITCH_TODO_ORDER = gql`
 export const REMOVE_TODO = gql`
   mutation removeTodo($data: TodoIdInput!) {
     removeTodo(data: $data) {
-      userId
       content
       done
       isRemoved
       createdDt
       updatedDt
       removedDt
+      userId
     }
   }
 `;
@@ -170,6 +173,7 @@ export const DELETE_REMOVED_TODO = gql`
       createdDt
       updatedDt
       removedDt
+      userId
     }
   }
 `;

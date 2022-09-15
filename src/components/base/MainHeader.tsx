@@ -32,7 +32,15 @@ function MainHeader() {
       <Nav>
         {mode === authMode.GUEST_MODE && currentUserInfo === null ? null : (
           <React.Fragment>
-            <Button>{currentUserInfo?.displayName}</Button>
+            <Button>{currentUserInfo?.displayName} 님</Button>
+            <VerticalBarIcon />
+            <Link to="/todo">
+              <Button>Todo</Button>
+            </Link>
+            <VerticalBarIcon />
+            <Link to="/todo/trash">
+              <Button>휴지통</Button>
+            </Link>
             <VerticalBarIcon />
           </React.Fragment>
         )}
@@ -40,14 +48,6 @@ function MainHeader() {
         <VerticalBarIcon />
         <Link to="/">
           <Button>홈</Button>
-        </Link>
-        <VerticalBarIcon />
-        <Link to="/todo">
-          <Button>todo</Button>
-        </Link>
-        <VerticalBarIcon />
-        <Link to="/todo/trash">
-          <Button>휴지통</Button>
         </Link>
         <VerticalBarIcon />
         <Link to="/mdplayground">

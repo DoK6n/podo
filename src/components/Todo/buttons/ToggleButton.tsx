@@ -11,13 +11,16 @@ const CheckIcon = styled.span<TodoStylesProps>`
   ${checkIconStyledCss}
 `;
 
+type EditTodoDone = Pick<Mutation, 'editTodoDone'>;
+
 interface ToggleButtonProps {
   id: string;
   done: boolean;
 }
+
 export default function Togglebutton({ id, done }: ToggleButtonProps) {
   const { currentUserInfo } = useAuthStore();
-  const [editTodoDone] = useMutation<Pick<Mutation, 'editTodoDone'>, MutationEditTodoDoneArgs>(EDIT_TODO_DONE);
+  const [editTodoDone] = useMutation<EditTodoDone, MutationEditTodoDoneArgs>(EDIT_TODO_DONE);
 
   // 완료 여부 토글
   const onToggleItem = () => {

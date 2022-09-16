@@ -4,6 +4,7 @@ import { MutableRefObject, PropsWithChildren } from 'react';
 interface DialogStyledProps {
   background?: string;
   width?: string;
+  textAlign?: string;
 }
 
 const DialogStyled = styled.dialog<DialogStyledProps>`
@@ -11,6 +12,7 @@ const DialogStyled = styled.dialog<DialogStyledProps>`
   border-radius: 10px;
   background: ${props => (props.background ? props.background : null)};
   width: ${props => (props.width ? props.width : null)};
+  text-align: ${props => (props.textAlign ? props.textAlign : null)};
   & > .dialog-contents {
     margin: -1em;
     border: 1px solid;

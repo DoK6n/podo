@@ -3,14 +3,12 @@ import {
   dragHandleIconStyledCss,
   itemBlockLeftIconWrapperStyledCss,
   itemTextStyledCss,
-  removeIconStyledCss,
   todoItemBlockStyledCss,
 } from 'styles';
-import { PodoteEditor, ToggleButton } from 'components';
+import { PodoteEditor, RemoveButton, ToggleButton } from 'components';
 import { MdDragIndicator } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
 import styled, { TodoStylesProps } from 'styled-components';
-import { RemirrorJSON } from 'remirror';
 import { BsTrashFill } from 'react-icons/bs';
 import { Todo } from 'podote/interfaces';
 
@@ -26,10 +24,6 @@ const DragHandleIcon = styled.span`
   ${dragHandleIconStyledCss}
 `;
 
-const RemoveIcon = styled.span`
-  ${removeIconStyledCss}
-`;
-
 const ItemText = styled.div<TodoStylesProps>`
   ${itemTextStyledCss}
 `;
@@ -39,12 +33,6 @@ interface Props extends Omit<Todo, 'removedDt'> {
 }
 
 function TodoItem({ id, content, done, editable, index }: Props) {
-  // 휴지통으로 이동
-  const onRemoveitem = () => {};
-
-  // 완료 여부 토글
-  const onToggleItem = () => {};
-
   return (
     <Draggable key={id} draggableId={`${id}`} index={index}>
       {provided => (
@@ -58,11 +46,7 @@ function TodoItem({ id, content, done, editable, index }: Props) {
           <ItemText done={done} editable={editable}>
             <PodoteEditor id={id} editable={editable} content={content} editorType={'TODO_ITEM'} />
           </ItemText>
-          {editable ? (
-            <RemoveIcon onClick={onRemoveitem}>
-              <BsTrashFill />
-            </RemoveIcon>
-          ) : null}
+          {editable ? <RemoveButton id={id} /> : null}
         </TodoItemBlock>
       )}
     </Draggable>

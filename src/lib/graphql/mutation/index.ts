@@ -52,13 +52,13 @@ export const ADD_NEW_TODO = gql`
     addNewTodo(data: $data) {
       id
       content
-      userId
+      done
+      isRemoved
+      editable
       createdDt
       updatedDt
       removedDt
-      done
-      editable
-      isRemoved
+      userId
     }
   }
 `;
@@ -130,6 +130,7 @@ export const SWITCH_TODO_ORDER = gql`
 export const REMOVE_TODO = gql`
   mutation removeTodo($data: TodoIdInput!) {
     removeTodo(data: $data) {
+      id
       content
       done
       isRemoved
@@ -150,13 +151,14 @@ export const REMOVE_TODO = gql`
 export const RECYCLE_REMOVED_TODO = gql`
   mutation recycleRemovedTodo($data: TodoIdInput!) {
     recycleRemovedTodo(data: $data) {
-      userId
+      id
       content
       done
       isRemoved
       createdDt
       updatedDt
       removedDt
+      userId
     }
   }
 `;
@@ -170,6 +172,7 @@ export const RECYCLE_REMOVED_TODO = gql`
 export const DELETE_REMOVED_TODO = gql`
   mutation deleteRemovedTodo($data: TodoIdInput!) {
     deleteRemovedTodo(data: $data) {
+      id
       content
       isRemoved
       createdDt

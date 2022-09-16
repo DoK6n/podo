@@ -23,8 +23,8 @@ export default function Togglebutton({ id, done }: ToggleButtonProps) {
   const [editTodoDone] = useMutation<EditTodoDone, MutationEditTodoDoneArgs>(EDIT_TODO_DONE);
 
   // 완료 여부 토글
-  const onToggleItem = () => {
-    editTodoDone({
+  const onToggleItem = async () => {
+    await editTodoDone({
       variables: {
         data: {
           id: id,

@@ -11,7 +11,7 @@ const CheckIcon = styled.span<TodoStylesProps>`
   ${checkIconStyledCss}
 `;
 
-type EditTodoDone = Pick<Mutation, 'editTodoDone'>;
+type EditTodoDoneType = Pick<Mutation, 'editTodoDone'>;
 
 interface ToggleButtonProps {
   id: string;
@@ -20,7 +20,7 @@ interface ToggleButtonProps {
 
 export default function Togglebutton({ id, done }: ToggleButtonProps) {
   const { currentUserInfo } = useAuthStore();
-  const [editTodoDone] = useMutation<EditTodoDone, MutationEditTodoDoneArgs>(EDIT_TODO_DONE);
+  const [editTodoDone] = useMutation<EditTodoDoneType, MutationEditTodoDoneArgs>(EDIT_TODO_DONE);
 
   // 완료 여부 토글
   const onToggleItem = async () => {

@@ -12,14 +12,14 @@ const RemoveIcon = styled.span`
   ${removeIconStyledCss}
 `;
 
-type RemoveTodo = Pick<Mutation, 'removeTodo'>;
+type RemoveTodoType = Pick<Mutation, 'removeTodo'>;
 
 interface RemoveButtonProps {
   id: string;
 }
 
 export default function RemoveButton({ id }: RemoveButtonProps) {
-  const [removeTodo] = useMutation<RemoveTodo, MutationRemoveTodoArgs>(REMOVE_TODO);
+  const [removeTodo] = useMutation<RemoveTodoType, MutationRemoveTodoArgs>(REMOVE_TODO);
   const { currentUserInfo } = useAuthStore();
   // 휴지통으로 이동
   const onRemoveitem = async () => {

@@ -1,23 +1,38 @@
 import React from 'react';
-// import { useTodoTrashBinStore } from 'lib/stores';
 import { TrashBinWrapper, TrashBinList, TrashBinItem } from 'components';
+import { useQuery } from '@apollo/client';
+import { GET_USER_ALL_REMOVED_TODOS } from 'lib/graphql/query';
+import { useAuthStore } from 'lib/stores';
+import { Query } from 'lib/graphql/generated/graphql';
+
+type RetrieveAllRemovedTodoType = Pick<Query, 'retrieveAllRemovedTodo'>;
 
 function TrashBinPage() {
-  // const { removedTodos } = useTodoTrashBinStore();
+  const { currentUserInfo } = useAuthStore();
+
+  const { loading, data, error } = useQuery<RetrieveAllRemovedTodoType>(GET_USER_ALL_REMOVED_TODOS, {
+    context: {
+      headers: {
+        uid: currentUserInfo?.uid,
+      },
+    },
+  });
 
   return (
     <>
       <TrashBinWrapper>
-        {/* <TrashBinList>
-          {removedTodos.map(removedTodo => (
-            <TrashBinItem
-              id={removedTodo.id}
-              content={removedTodo.content}
-              removedDt={removedTodo.removedDt}
-              key={removedTodo.id}
-            />
-          ))}
-        </TrashBinList> */}
+        <TrashBinList>
+          {data && data.retrieveAllRemovedTodo
+            ? data.retrieveAllRemovedTodo.map(removedTodo => (
+                <TrashBinItem
+                  id={removedTodo.id}
+                  content={removedTodo.content}
+                  removedDt={removedTodo.removedDt}
+                  key={removedTodo.id}
+                />
+              ))
+            : null}
+        </TrashBinList>
       </TrashBinWrapper>
     </>
   );

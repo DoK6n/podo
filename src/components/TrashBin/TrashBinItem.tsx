@@ -1,28 +1,16 @@
 import React, { useRef } from 'react';
-import {
-  buttonStyledCss,
-  removeIconStyledCss,
-  todoItemBlockStyledCss,
-  todoListBlockStyledCss,
-  todoTemplateStyledCss,
-} from 'styles';
+import { buttonStyledCss, todoItemBlockStyledCss, todoListBlockStyledCss, todoTemplateStyledCss } from 'styles';
 import styled, { TodoStylesProps } from 'styled-components';
 import { Dialog, PodoteEditor } from 'components';
-// import { RemovedTodo } from 'lib/stores';
 import { useState } from 'react';
 import { RemirrorJSON } from 'remirror';
-import { FcEmptyTrash } from 'react-icons/fc';
-import { FaTrashRestore } from 'react-icons/fa';
 import { Todo } from 'podote/interfaces';
 import dayjs from 'dayjs';
+import { DeleteButton, RecycleButton } from './buttons';
 
 const Button = styled.button`
   ${buttonStyledCss}
   color: #abb2bf;
-`;
-
-const IconButtonWrapper = styled.div`
-  ${removeIconStyledCss}
 `;
 
 const TodoItemBlock = styled.section<TodoStylesProps>`
@@ -64,17 +52,11 @@ function TrashBinItem({ id, content, removedDt }: Props) {
     dialogRef.current.showModal();
   };
 
-  // 할일 항목 복원
-  const onRecycleItem = () => {};
-
-  // 할일 항목 영구삭제
-  const onDeleteItem = () => {};
-
   return (
     <tbody>
       <tr>
         <td>
-          <b>{id.slice(0, 4)}</b> <span style={{ opacity: '50%' }}>({id})</span>
+          <b>{id.slice(0, 7)}</b>
         </td>
         <td>{dayjs(removedDt).format('YYYY-MM-DD HH:mm:ss')}</td>
         <td>
@@ -100,14 +82,10 @@ function TrashBinItem({ id, content, removedDt }: Props) {
           </Dialog>
         </td>
         <td>
-          <IconButtonWrapper onClick={onRecycleItem}>
-            <FaTrashRestore viewBox="0 -100 448 612" />
-          </IconButtonWrapper>
+          <RecycleButton id={id} />
         </td>
         <td>
-          <IconButtonWrapper onClick={onDeleteItem}>
-            <FcEmptyTrash />
-          </IconButtonWrapper>
+          <DeleteButton id={id} />
         </td>
       </tr>
     </tbody>

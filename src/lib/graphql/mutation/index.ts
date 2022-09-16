@@ -193,6 +193,7 @@ export const DELETE_ALL_REMOVED_TODOS = gql`
   mutation deleteAllRemovedTodos {
     deleteAllRemovedTodos {
       id
+      userId
     }
   }
 `;

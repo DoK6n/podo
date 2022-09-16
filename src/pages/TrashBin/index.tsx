@@ -19,22 +19,20 @@ function TrashBinPage() {
   });
 
   return (
-    <>
-      <TrashBinWrapper>
-        <TrashBinList>
-          {data && data.retrieveAllRemovedTodo
-            ? data.retrieveAllRemovedTodo.map(removedTodo => (
-                <TrashBinItem
-                  id={removedTodo.id}
-                  content={removedTodo.content}
-                  removedDt={removedTodo.removedDt}
-                  key={removedTodo.id}
-                />
-              ))
-            : null}
-        </TrashBinList>
-      </TrashBinWrapper>
-    </>
+    <TrashBinWrapper>
+      <TrashBinList>
+        {data && data.retrieveAllRemovedTodo
+          ? data.retrieveAllRemovedTodo.map(removedTodo => (
+              <TrashBinItem
+                id={removedTodo.id}
+                content={removedTodo.content}
+                removedDt={removedTodo.removedDt}
+                key={removedTodo.id}
+              />
+            ))
+          : null}
+      </TrashBinList>
+    </TrashBinWrapper>
   );
 }
 

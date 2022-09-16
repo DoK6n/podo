@@ -14,6 +14,7 @@ import { RemirrorJSON } from 'remirror';
 import { FcEmptyTrash } from 'react-icons/fc';
 import { FaTrashRestore } from 'react-icons/fa';
 import { Todo } from 'podote/interfaces';
+import dayjs from 'dayjs';
 
 const Button = styled.button`
   ${buttonStyledCss}
@@ -75,10 +76,14 @@ function TrashBinItem({ id, content, removedDt }: Props) {
         <td>
           <b>{id.slice(0, 4)}</b> <span style={{ opacity: '50%' }}>({id})</span>
         </td>
-        <td>{removedDt}</td>
+        <td>{dayjs(removedDt).format('YYYY-MM-DD HH:mm:ss')}</td>
         <td>
           <Button onClick={onShowModal}>확인</Button>
-          <Dialog dialogRef={dialogRef} editable={false} styleOptions={{ background: '#3b305a', width: '60vw' }}>
+          <Dialog
+            dialogRef={dialogRef}
+            editable={false}
+            styleOptions={{ background: '#3b305a', width: '60vw', textAlign: 'start' }}
+          >
             <TodoTemplateBlock>
               <TodoListBlock>
                 <TodoItemBlock editable={false} done={false}>

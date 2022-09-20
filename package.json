@@ -79,7 +79,8 @@
     "zustand": "^4.1.1"
   },
   "scripts": {
-    "start": "npm run codegen --watch && craco start",
+    "start:codegen": "npm run codegen --watch && craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "deploy": "./deploy.sh",

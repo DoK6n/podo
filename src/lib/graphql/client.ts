@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat } from '@apollo/client';
 
-const httpLink = new HttpLink({ uri: 'http://localhost:3001/graphql' });
+const httpLink = new HttpLink({ uri: `${process.env.REACT_APP_SERVER_URL}/graphql` });
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
 
@@ -14,7 +14,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 export const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Todo: {
@@ -22,5 +22,4 @@ export const client = new ApolloClient({
       },
     },
   }),
-  link: concat(authMiddleware, httpLink),
 });

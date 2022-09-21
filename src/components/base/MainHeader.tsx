@@ -1,6 +1,9 @@
 import React from 'react';
 import { buttonStyledCss, headerStyledCss, logoNavStyledCss, navStyledCss } from 'styles';
 import { Logo, VerticalBarIcon } from 'assets';
+import { IoLogoMarkdown } from 'react-icons/io';
+import { FiHome } from 'react-icons/fi';
+import { BsCardChecklist, BsTrashFill } from 'react-icons/bs';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { AuthGoogleLogin } from 'components';
@@ -35,11 +38,15 @@ function MainHeader() {
             <Button>{currentUserInfo?.displayName} 님</Button>
             <VerticalBarIcon />
             <Link to="/todo">
-              <Button>Todo</Button>
+              <Button>
+                <BsCardChecklist />
+              </Button>
             </Link>
             <VerticalBarIcon />
             <Link to="/todo/trash">
-              <Button>휴지통</Button>
+              <Button>
+                <BsTrashFill />
+              </Button>
             </Link>
             <VerticalBarIcon />
           </React.Fragment>
@@ -47,11 +54,15 @@ function MainHeader() {
         <AuthGoogleLogin />
         <VerticalBarIcon />
         <Link to="/">
-          <Button>홈</Button>
+          <Button>
+            <FiHome />
+          </Button>
         </Link>
         <VerticalBarIcon />
         <Link to="/mdplayground">
-          <Button>Markdown Playground</Button>
+          <Button>
+            <IoLogoMarkdown />
+          </Button>
         </Link>
       </Nav>
     </Header>

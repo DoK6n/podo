@@ -8,6 +8,8 @@ import { GET_USER } from 'lib/graphql/query';
 import dayjs from 'dayjs';
 import { authMode, useAuthStore } from 'lib/stores';
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineLogout } from 'react-icons/hi';
+import { FcGoogle } from 'react-icons/fc';
 
 const Button = styled.button`
   ${buttonStyledCss}
@@ -115,9 +117,13 @@ export default function AuthGoogleLogin() {
   return (
     <React.Fragment>
       {mode === authMode.LOGIN_MODE ? (
-        <Button onClick={onSocialLogoutClick}>Logout</Button>
+        <Button onClick={onSocialLogoutClick}>
+          <HiOutlineLogout />
+        </Button>
       ) : (
-        <Button onClick={onSocialClick}>Google Login</Button>
+        <Button onClick={onSocialClick}>
+          <FcGoogle />
+        </Button>
       )}
     </React.Fragment>
   );

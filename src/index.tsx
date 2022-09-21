@@ -13,13 +13,13 @@ const root = ReactDOM.createRoot(rootElement as HTMLElement);
 firebase();
 
 root.render(
-  // <React.StrictMode>
-  <ApolloProvider client={client}>
-    <StyledEngineProvider injectFirst>
-      <App />
-    </StyledEngineProvider>
-  </ApolloProvider>,
-  // </React.StrictMode>
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <StyledEngineProvider injectFirst>
+        <App />
+      </StyledEngineProvider>
+    </ApolloProvider>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

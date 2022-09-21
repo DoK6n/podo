@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://localhost:3001/graphql'
+schema: 'https://api.podote.click/graphql'
 documents: null
 generates:
   ./src/lib/graphql/generated/graphql.tsx:

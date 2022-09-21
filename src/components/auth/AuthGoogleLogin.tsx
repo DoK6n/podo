@@ -39,10 +39,6 @@ export default function AuthGoogleLogin() {
 
     const { user } = await signInWithPopup(authService, provider);
     if (user) {
-      console.log(authService.currentUser);
-
-      // graphql query code here...
-
       const { loading, data } = await retrieveUserById({
         context: {
           headers: {
@@ -53,8 +49,7 @@ export default function AuthGoogleLogin() {
 
       if (!loading) {
         if (data && data.retrieveUserById) {
-          // login code here...
-          // To Update AuthMode(login, guest) of authStore, you need to call it here....
+          // login
           userLogin({
             uid: user.uid,
             displayName: user.displayName,
@@ -66,7 +61,7 @@ export default function AuthGoogleLogin() {
           updateMode(authMode.LOGIN_MODE);
           navigate('/todo');
         } else {
-          // register code here...
+          // register
           const createDt = dayjs(user.metadata.creationTime).format('YYYY-MM-DD HH:mm:ss');
           const { data } = await addUser({
             variables: {
@@ -109,13 +104,10 @@ export default function AuthGoogleLogin() {
   const onSocialLogoutClick = () => {
     signOut(authService)
       .then(() => {
-        // Sign-out successful.
         userLogout();
-        console.log('로그아웃', authService.currentUser);
         navigate('/');
       })
       .catch(error => {
-        // An error happened.
         console.error({ code: error.code, message: error.message });
       });
   };

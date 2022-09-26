@@ -10,13 +10,16 @@ type RetrieveAllRemovedTodoType = Pick<Query, 'retrieveAllRemovedTodo'>;
 function TrashBinPage() {
   const { currentUserInfo } = useAuthStore();
 
-  const { loading, data, error } = useQuery<RetrieveAllRemovedTodoType>(GET_USER_ALL_REMOVED_TODOS, {
+  const { data, loading, error } = useQuery<RetrieveAllRemovedTodoType>(GET_USER_ALL_REMOVED_TODOS, {
     context: {
       headers: {
         uid: currentUserInfo?.uid,
       },
     },
   });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
 
   return (
     <TrashBinWrapper>

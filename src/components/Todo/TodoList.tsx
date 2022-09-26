@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { TodoItem } from 'components';
 import { todoListBlockStyledCss } from 'styles';
 import { Droppable, DropResult } from 'react-beautiful-dnd';
@@ -19,6 +19,8 @@ interface AllTodosQuery {
   retrieveAllTodos: Todo[] | null;
 }
 
+type RetrieveAllTodosType = Pick<Query, 'retrieveAllTodos'>;
+
 interface TodoIdOrderKey {
   id: string;
   orderKey: number;
@@ -29,13 +31,13 @@ interface SwitchTodoOrderQueryInput {
 
 function TodoList() {
   const { currentUserInfo } = useAuthStore();
-  const client = useApolloClient();
-  const cacheTodo = client.readQuery<Query>({
-    query: GET_USER_ALL_TODOS,
-  });
+  // const client = useApolloClient();
+  // const cacheTodo = client.readQuery<Query>({
+  //   query: GET_USER_ALL_TODOS,
+  // });
 
   // 서버에서 Todos 데이터 조회
-  const { loading, data } = useQuery<AllTodosQuery>(GET_USER_ALL_TODOS, {
+  const { loading, error, data } = useQuery<RetrieveAllTodosType>(GET_USER_ALL_TODOS, {
     context: {
       headers: {
         uid: currentUserInfo?.uid,
@@ -87,6 +89,8 @@ function TodoList() {
       ],
     });
   };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

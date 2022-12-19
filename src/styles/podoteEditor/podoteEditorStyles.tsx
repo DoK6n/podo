@@ -183,6 +183,10 @@ export const podoteThemeStyledCss: ReturnType<typeof css> = css`
     --rmr-color-selection-caret: inherit;
   }
 
+  .remirror-editor.ProseMirror {
+    overflow-y: hidden;
+  }
+  
   .remirror-theme .remirror-editor-wrapper .remirror-editor code {
     background: var(--podote-color-dark-4);
     padding: 0.2em 0.4em;

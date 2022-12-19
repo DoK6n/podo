@@ -64,25 +64,6 @@ const initialContent: RemirrorJSON = {
       ],
     },
     {
-      type: 'paragraph',
-      content: [
-        {
-          type: 'image',
-          attrs: {
-            alt: '',
-            crop: null,
-            height: 160,
-            width: 400,
-            rotate: null,
-            src: proxySrc,
-            title: '',
-            fileName: null,
-            resizable: false,
-          },
-        },
-      ],
-    },
-    {
       type: 'codeMirror',
       attrs: {
         language: 'tsx',

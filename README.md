@@ -52,6 +52,18 @@ const [isComposing, setIsComposing] = useState(false)
   onKeyUp={handleAddItem}
 </Input>
 ```
+<br />
+<br />
+
+## 상태관리 라이브러리 고민
+
+상태관리는 Recoil과 Zustand 중에서 고민하였는데  
+다음과 같은 이유로 Zustand를 선택하였습니다.
+
+- Redux devtools를 연동해서 사용할 수 있다.
+- 라이브러리 원본소스양이 적어서 문제가 생겨 원본소스를 봐야할 때 좋을 것 같아서
+- 다양한 미들웨어 (로컬 스토리지, 상태 변화 구독, immer 지원 등)
+
 
 <br />
 <br />

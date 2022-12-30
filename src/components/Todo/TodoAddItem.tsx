@@ -31,14 +31,13 @@ function TodoAddItem() {
   const { currentUserInfo, mode } = useAuthStore();
   const addItemInputRef = useRef<HTMLInputElement>(null);
   const [addNewTodo] = useMutation(ADD_NEW_TODO);
-  const [isComposing, setIsComposing] = useState(false);
 
   useEffect(() => {
     addItemInputRef?.current?.focus();
   }, []);
 
   const onAddItem = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (isComposing) return;
+    if (e.nativeEvent.isComposing) return;
     /**
      * e : KeyboardEvent<HTMLInputElement>
      * -> 위처럼 지정시 e.target.value 사용 불가
@@ -81,10 +80,8 @@ function TodoAddItem() {
   return (
     <React.Fragment>
       <TodoAddItemInput
-        onCompositionStart={() => setIsComposing(true)}
-        onCompositionEnd={() => setIsComposing(false)}
         placeholder="내용 입력 후 Enter를 눌러 할일을 추가 할 수 있어요."
-        onKeyUp={onAddItem}
+        onKeyDown={onAddItem}
         ref={addItemInputRef}
       />
     </React.Fragment>

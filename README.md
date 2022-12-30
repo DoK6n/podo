@@ -33,20 +33,6 @@ Apollo Client는 쿼리와 데이터들을 캐싱하여 클라이언트단에서
 <br />
 <br />
 
-## Keyboard Event 한글 두번 입력되는 이슈
-Input에 할일을 입력해 엔터로 추가하는 과정에서 두번 입력되는 이슈가 있었습니다.
-
-onKeyDown: keycode 값, 키를 누르고 떼는 동작 자체에 반응, Enter 인식
-onKeyPress: ASCII 값, 문자가 실제로 입력됐을 때 반응, Enter 인식 불가
-
-onKeyPress를 주면 해결 되나 deprecated인 관계로 다른 방법을 모색하던 중 KeyboardEvent.nativeEvent.isComposing에 대해 알게되었습니다.
-한글은 영어와 달리 한 글자가 영어보다 많은 정보를 담고있기 때문에
-키를 입력한 순간부터 입력완료 까지 시간이 걸리고, 이는 keyUp/Down 이벤트가 이미 발생되고 난 후에도 진행중일 수 있다는 것을 의미하며 그 상태를 isCompsing 이란 event 객체 속성값으로 확인 할 수 있습니다. 
-
-
-<br />
-<br />
-
 ## 상태관리 라이브러리 고민
 
 상태관리는 Recoil과 Zustand 중에서 고민하였는데  
